@@ -5,6 +5,25 @@ require_once 'database.php';
 session_start();
 
 //================================================================================================
+// Log exception errors of unknown cause
+//================================================================================================
+function logErrors($logPath, $error)
+{
+  $requestTime = date(c,$_SERVER['REQUEST_TIME']);
+  $requestContent = $_POST ?? $_GET;
+  $errorOrigin = $_SERVER['PHP_SELF'];
+
+  $errorMessage = [
+    $requestTime,
+    $requestContent,
+    $errorOrigin,
+    $error
+  ];
+
+  file_put_contents($logPath, $errorMessage, FILE_APPEND);
+}
+
+//================================================================================================
 // Check user login status and start session
 //================================================================================================
 function checkLogin()
@@ -29,7 +48,7 @@ function checkLogin()
 //================================================================================================
 function validateString($string)
 {
-  return filter_var($string, FILTER_SANITIZE_STRING, FILTER_FLAG_STRIP_HIGH);
+  return filter_var($string, FILTER_SANITIZE_STRING, FILTER_FLAG_STRIP_HIGH | FILTER_FLAG_ENCODE_AMP);
 }
 
 //================================================================================================
