@@ -10,7 +10,14 @@
 
   <input type="submit" class="login submit" value="Sign in">
 
+  <?php
+    if (isset($loginError)) {
+      echo '<h5 class="error">'.$loginError.'</h5>';
+    }
+  ?>
+
 </form>
+
 <form action="resources/lib/register.php" class="registerForm">
 
   <h2>Register here:</h2>
@@ -28,5 +35,11 @@
   <input type="password" class="register passwordReenter">
 
   <input type="submit" class="register registerSubmit" value="Sign up">
+
+  <?php
+    if (isset($registerError)) {
+      echo '<h5 class="error">'.$registerError.'</h5>';
+    }
+  ?>
 
 </form>
