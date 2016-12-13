@@ -37,7 +37,6 @@ if ($dbConnection->query("SELECT email FROM users WHERE email = '$emailSanitized
 // Check if both password fields match
 if ($passwordSanitized !== $passwordReenterSanitized) {
   $_SESSION['registerError'] = 'Password fields do not match. Please try again.';
-  die(var_dump($_SESSION));
   header('Location: ../../');
   die();
 }
