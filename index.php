@@ -1,6 +1,9 @@
 <?php
   // Get all the functions
   require_once 'resources/lib/functions.php';
+
+  $currentUser = checkLogin();
+
 ?>
 
 <!DOCTYPE html>
