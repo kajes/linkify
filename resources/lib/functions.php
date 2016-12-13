@@ -2,12 +2,13 @@
 
 require_once 'database.php';
 
+session_start();
+
 //================================================================================================
 // Check user login status and start session
 //================================================================================================
 function checkLogin()
 {
-  session_start();
 
   // Check if user already authenticated with login form
   if (!isset($_SESSION['currentUser'])) {
