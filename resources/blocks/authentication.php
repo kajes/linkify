@@ -2,11 +2,11 @@
 
   <h2>Sign in to Linkify:</h2>
 
-  <h4 class="formLabel">Email or username:</h4>
-  <input type="text" class="login username" required>
+  <h4 class="formLabel">Email:</h4>
+  <input type="text" class="login email" name="email" required>
 
   <h4 class="formLabel">Password:</h4>
-  <input type="password" class="login password" required>
+  <input type="password" class="login password" name="password" required>
 
   <input type="submit" class="login submit" value="Sign in">
 

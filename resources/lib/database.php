@@ -17,7 +17,7 @@ try {
 }
 
 //================================================================================================
-// Register  and change user data
+// Register and change user data
 //================================================================================================
 // TODO: More fields for bio and avatar
 $registerUserQuery = <<<EOT
@@ -38,6 +38,6 @@ WHERE email = :email
 LIMIT 1
 EOT;
 
-$userRow = $dbConnection->prepare($loginQuery);
+$userVerify = $dbConnection->prepare($loginQuery);
 
 // TODO: Queries for creating and updating posts and comments

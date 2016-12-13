@@ -5,7 +5,7 @@ require_once 'database.php';
 session_start();
 
 //================================================================================================
-// Log exception errors of unknown cause
+// Log exception errors of unknown cause to log file
 //================================================================================================
 function logErrors($logPath, $error)
 {
@@ -24,7 +24,7 @@ function logErrors($logPath, $error)
 }
 
 //================================================================================================
-// Check user login status and start session
+// Check user login status
 //================================================================================================
 function checkLogin()
 {
@@ -39,7 +39,10 @@ function checkLogin()
 
   }
 
-  return true;
+  $currentUser = $_SESSION['currentUser'];
+  $_SESSION = [];
+
+  return $currentUser;
 
 }
 
@@ -58,3 +61,5 @@ function validateEmail($email)
 {
   return filter_var($email, FILTER_VALIDATE_EMAIL, FILTER_SANITIZE_EMAIL);
 }
+
+// TODO: Bake remember me cookie function

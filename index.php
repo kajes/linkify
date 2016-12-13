@@ -2,7 +2,7 @@
   // Get all the functions
   require_once 'resources/lib/functions.php';
 
-  $currentUser = checkLogin();
+  // $currentUser = checkLogin();
 
 ?>
 
@@ -20,10 +20,10 @@
       require_once 'resources/blocks/components/header.php';
 
       echo '<section class="mainContent">';
-      if (isset($loggedIn)) {
-        require_once 'resources/blocks/home.php';
-      } else {
+      if (!isset($currentUser)) {
         require_once 'resources/blocks/authentication.php';
+      } else {
+        require_once 'resources/blocks/home.php';
       }
       echo '</section>';
 
