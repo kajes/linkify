@@ -1,9 +1,3 @@
-<?php
-  // die(var_dump($_SESSION));
-  $loginError = $_SESSION['loginError'] ?? '';
-  $registerError = $_SESSION['registerError'] ?? '';
-?>
-
 <form action="resources/lib/login.php" class="loginForm" method="POST">
 
   <h2>Sign in to Linkify:</h2>
@@ -17,9 +11,9 @@
   <input type="submit" class="login submit" value="Sign in">
 
   <?php
-    if ($loginError !== '') {
-      echo '<h5 class="error">'.$loginError.'</h5>';
-      unset($loginError);
+    if (isset($_SESSION['loginError'])) {
+      echo '<h5 class="error">'.$_SESSION['loginError'].'</h5>';
+      $_SESSION = [];
     }
   ?>
 
@@ -44,9 +38,9 @@
   <input type="submit" class="register registerSubmit" value="Sign up">
 
   <?php
-    if ($registerError !== '') {
-      echo '<h5 class="error">'.$registerError.'</h5>';
-      unset($registerError);
+    if (isset($_SESSION['registerError'])) {
+      echo '<h5 class="error">'.$_SESSION['registerError'].'</h5>';
+      $_SESSION = [];
     }
   ?>
 
