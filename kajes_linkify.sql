@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Värd: 127.0.0.1
--- Tid vid skapande: 13 dec 2016 kl 18:26
+-- Tid vid skapande: 14 dec 2016 kl 12:15
 -- Serverversion: 10.1.16-MariaDB
 -- PHP-version: 7.0.9
 
@@ -19,6 +19,22 @@ SET time_zone = "+00:00";
 --
 -- Databas: `kajes_linkify`
 --
+CREATE DATABASE IF NOT EXISTS `kajes_linkify` DEFAULT CHARACTER SET utf8 COLLATE utf8_general_ci;
+USE `kajes_linkify`;
+
+-- --------------------------------------------------------
+
+--
+-- Tabellstruktur `tokens`
+--
+
+CREATE TABLE `tokens` (
+  `cookieID` int(10) UNSIGNED NOT NULL,
+  `uid` int(10) UNSIGNED NOT NULL,
+  `first` varchar(128) DEFAULT NULL,
+  `second` varchar(256) DEFAULT NULL,
+  `expire` datetime DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
 
@@ -41,6 +57,13 @@ CREATE TABLE `users` (
 --
 
 --
+-- Index för tabell `tokens`
+--
+ALTER TABLE `tokens`
+  ADD PRIMARY KEY (`cookieID`),
+  ADD KEY `uid` (`uid`);
+
+--
 -- Index för tabell `users`
 --
 ALTER TABLE `users`
@@ -51,10 +74,25 @@ ALTER TABLE `users`
 --
 
 --
+-- AUTO_INCREMENT för tabell `tokens`
+--
+ALTER TABLE `tokens`
+  MODIFY `cookieID` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+--
 -- AUTO_INCREMENT för tabell `users`
 --
 ALTER TABLE `users`
-  MODIFY `uid` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
+  MODIFY `uid` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+--
+-- Restriktioner för dumpade tabeller
+--
+
+--
+-- Restriktioner för tabell `tokens`
+--
+ALTER TABLE `tokens`
+  ADD CONSTRAINT `tokens_ibfk_1` FOREIGN KEY (`uid`) REFERENCES `users` (`uid`);
+
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
