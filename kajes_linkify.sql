@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Värd: 127.0.0.1
--- Tid vid skapande: 14 dec 2016 kl 12:15
+-- Tid vid skapande: 14 dec 2016 kl 13:13
 -- Serverversion: 10.1.16-MariaDB
 -- PHP-version: 7.0.9
 
@@ -77,12 +77,12 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT för tabell `tokens`
 --
 ALTER TABLE `tokens`
-  MODIFY `cookieID` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `cookieID` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
 --
 -- AUTO_INCREMENT för tabell `users`
 --
 ALTER TABLE `users`
-  MODIFY `uid` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `uid` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
 --
 -- Restriktioner för dumpade tabeller
 --

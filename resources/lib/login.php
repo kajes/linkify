@@ -44,7 +44,7 @@ if (!$userData) {
 }
 
 // Verify the password if user exists
-if (!password_verify($password, $userData[0]['password'])) {
+if (!password_verify($password, $userData['password'])) {
   $_SESSION['loginError'] = $loginError;
   header('Location: ../../');
   die();
@@ -52,10 +52,10 @@ if (!password_verify($password, $userData[0]['password'])) {
 
 // Bake cookie if remember me option is checked
 if (isset($_POST['rememberMe'])) {
-  bakeCookie($userData[0]['uid'], $oven);
+  bakeCookie($userData['uid'], $oven);
 }
 
 // Remember user in session and redirect to landing page
-$_SESSION['currentUser'] = $userData[0]['uid'];
+$_SESSION['currentUser'] = $userData['uid'];
 header('Location: ../../');
 die;
