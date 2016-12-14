@@ -57,8 +57,8 @@ try {
 } catch (PDOException $e) {
   $_SESSION['registerError'] = 'Failed to register user. Please contact the site administrator for help registering.';
   logErrors('../logs/errorlog.txt', $e->getMessage());
-  header('Location: ../../');
-  die();
 }
-header('Location: ..7..7');
+
+// Redirect back to landing page on success or failure
+header('Location: ../../');
 die;
