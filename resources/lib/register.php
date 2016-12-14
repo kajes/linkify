@@ -19,27 +19,28 @@ if (!isset($_POST['fullName']) || !isset($_POST['email']) || !isset($_POST['pass
   die();
 }
 
+// Validate email
+if (!filter_var($_POST['email'], FILTER_VALIDATE_EMAIL)) {
+  $_SESSION['registerError'] = 'The email adress you entered is not valid.';
+  header('Location: ../../');
+  die();
+}
+
 // Assign variables
 $fullName = $_POST['fullName'];
 $email = $_POST['email'];
 $password = $_POST['password'];
 $passwordReenter = $_POST['password_reenter'];
 
-// Validate and escape all fields
-$fullNameSanitized = filter_var($fullName, FILTER_SANITIZE_STRING, FILTER_FLAG_ENCODE_AMP);
-$emailSanitized = validateEmail($email);
-$passwordSanitized = validateString($password);
-$passwordReenterSanitized = validateString($passwordReenter);
-
 // Check if email already exists in database
-if ($dbConnection->query("SELECT email FROM users WHERE email = '$emailSanitized' LIMIT 1")->fetch()) {
+if ($dbConnection->query("SELECT email FROM users WHERE email = '$email' LIMIT 1")->fetch()) {
   $_SESSION['registerError'] = 'Email is already registered. Please try another email adress.';
   header('Location: ../../');
   die();
 }
 
 // Check if both password fields match
-if ($passwordSanitized !== $passwordReenterSanitized) {
+if ($password !== $passwordReenter) {
   $_SESSION['registerError'] = 'Password fields do not match. Please try again.';
   header('Location: ../../');
   die();
@@ -50,9 +51,9 @@ if ($passwordSanitized !== $passwordReenterSanitized) {
 //================================================================================================
 try {
   $registerUser->execute([
-    ':name' => $fullNameSanitized,
-    ':email' => $emailSanitized,
-    ':password' => password_hash($passwordSanitized, PASSWORD_BCRYPT)
+    ':name' => $fullName,
+    ':email' => $email,
+    ':password' => password_hash($password, PASSWORD_BCRYPT)
   ]);
 } catch (PDOException $e) {
   $_SESSION['registerError'] = 'Failed to register user. Please contact the site administrator for help registering.';

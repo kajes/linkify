@@ -8,6 +8,9 @@
   <h4 class="formLabel">Password:</h4>
   <input type="password" class="login password" name="password" required>
 
+  <label for="rememberMe">Remember me</label>
+  <input type="checkbox" name="rememberMe" value="1">
+
   <input type="submit" class="login submit" value="Sign in">
 
   <?php

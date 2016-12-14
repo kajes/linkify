@@ -41,3 +41,13 @@ EOT;
 $userVerify = $dbConnection->prepare($loginQuery);
 
 // TODO: Queries for creating and updating posts and comments
+
+//================================================================================================
+// Prepare ingredients for baking cookie
+//================================================================================================
+$bowl = <<<EOT
+INSERT INTO tokens (uid, first, second, expire)
+VALUES (:uid, :first, :second, :expire)
+EOT;
+
+$oven = $dbConnection->prepare($bowl);

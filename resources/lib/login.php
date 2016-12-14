@@ -20,8 +20,8 @@ if (!isset($_POST['email']) || !isset($_POST['password'])) {
 }
 
 // Validate login form fields
-$validEmail = validateEmail($_POST['email']);
-$validPassword = validateString($_POST['password']);
+$email = $_POST['email'];
+$password = $_POST['password'];
 
 //================================================================================================
 // All seems fine for actual login validation
@@ -32,7 +32,7 @@ $loginError = 'Wrong email or password';
 
 // Execute prepared query (see 32-41 in database)
 $userVerify->execute([
-  ':email' => $validEmail
+  ':email' => $email
 ]);
 $userData = $userVerify->fetchAll(PDO::FETCH_ASSOC);
 
@@ -44,12 +44,18 @@ if (!$userData) {
 }
 
 // Verify the password if user exists
-if (!password_verify($validPassword, $userData[0]['password'])) {
+if (!password_verify($password, $userData[0]['password'])) {
   $_SESSION['loginError'] = $loginError;
   header('Location: ../../');
   die();
 }
 
+// Bake cookie if remember me option is checked
+if (isset($_POST['rememberMe'])) {
+  bakeCookie($userData[0]['uid'], $oven);
+}
+
+// Remember user in session and redirect to landing page
 $_SESSION['currentUser'] = $userData[0]['uid'];
 header('Location: ../../');
 die;

@@ -14,14 +14,47 @@ function logErrors($logPath, $error)
   $errorOrigin = $_SERVER['PHP_SELF'];
 
   $errorMessage = [
+    '--- START ---',
     $requestTime,
     $requestContent,
     $errorOrigin,
-    $error
+    $error,
+    '--- END ---'
   ];
 
   file_put_contents($logPath, $errorMessage, FILE_APPEND);
 }
+
+//================================================================================================
+// Bake remember me cookie
+//================================================================================================
+function bakeCookie($uid, $query)
+{
+  // Set cookie ingredients
+  $first = bin2hex(random_bytes(64));
+  $second = bin2hex(random_bytes(128));
+  $cookie = "$first|$uid|$second";
+  $timestamp = time() + 60 * 60 * 24 * 30;
+  $expire = date('Y-m-d H:i:s', $timestamp);
+
+  // Put in cookie oven
+  try {
+    $query->execute([
+      ':uid' => $uid,
+      ':first' => $first,
+      ':second' => $second,
+      ':expire' => $expire
+    ]);
+  } catch (PDOException $e) {
+    logErrors('../../', $e->getMessage());
+  }
+
+  // Bake cookie in browser
+  setcookie('kajes_linkify', $cookie, $timestamp, '/', '', false, true);
+
+}
+
+// TODO: Function for validating cookie
 
 //================================================================================================
 // Check user login status
@@ -39,26 +72,6 @@ function checkLogin()
 
   }
 
-  $currentUser = $_SESSION['currentUser'];
-
-  return $currentUser;
+  return $_SESSION['currentUser'];
 
 }
-
-//================================================================================================
-// String escape and validation function
-//================================================================================================
-function validateString($string)
-{
-  return filter_var($string, FILTER_SANITIZE_STRING, FILTER_FLAG_STRIP_HIGH | FILTER_FLAG_ENCODE_AMP);
-}
-
-//================================================================================================
-// Validate and escape email
-//================================================================================================
-function validateEmail($email)
-{
-  return filter_var($email, FILTER_VALIDATE_EMAIL, FILTER_SANITIZE_EMAIL);
-}
-
-// TODO: Bake remember me cookie function
