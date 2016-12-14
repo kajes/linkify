@@ -2,7 +2,7 @@
   // Get all the functions
   require_once 'resources/lib/functions.php';
 
-  $currentUser = checkLogin();
+  $currentUser = checkLogin($hand);
   // die(var_dump($_SESSION));
 
 ?>

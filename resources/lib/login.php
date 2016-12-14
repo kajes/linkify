@@ -34,7 +34,7 @@ $loginError = 'Wrong email or password';
 $userVerify->execute([
   ':email' => $email
 ]);
-$userData = $userVerify->fetchAll(PDO::FETCH_ASSOC);
+$userData = $userVerify->fetch(PDO::FETCH_ASSOC);
 
 // Return error message if user does not exist
 if (!$userData) {

@@ -54,12 +54,33 @@ function bakeCookie($uid, $query)
 
 }
 
-// TODO: Function for validating cookie
+//================================================================================================
+// Function for eating (validating) cookie
+//================================================================================================
+function eatCookie($query)
+{
+  $values = explode('|', $_COOKIE['kajes_linkify']);
+
+  $query->execute([
+    ':uid' => $values[1],
+    ':first' => $values[0],
+    ':second' => $values[2]
+  ]);
+  $entry = $query->fetch(PDO::FETCH_ASSOC);
+
+  if (!$entry || $entry['expire'] < date('Y-m-d H:i:s')) {
+    return false;
+  }
+
+  return $entry['uid'];
+
+}
+
 
 //================================================================================================
 // Check user login status
 //================================================================================================
-function checkLogin()
+function checkLogin($query)
 {
 
   // Check if user already authenticated with login form
@@ -70,8 +91,12 @@ function checkLogin()
       return false;
     }
 
+    // Return value of eatCookie function if cookie exists
+    return eatCookie($query);
+
   }
 
+  // Return uid if session variable is set
   return $_SESSION['currentUser'];
 
 }

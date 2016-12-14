@@ -51,3 +51,16 @@ VALUES (:uid, :first, :second, :expire)
 EOT;
 
 $oven = $dbConnection->prepare($bowl);
+
+//================================================================================================
+// Set table for eating cookie
+//================================================================================================
+$plate = <<<EOT
+SELECT * FROM tokens
+WHERE uid = :uid
+AND first = :first
+AND second = :second
+LIMIT 1
+EOT;
+
+$hand = $dbConnection->prepare($plate);
