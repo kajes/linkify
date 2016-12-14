@@ -43,7 +43,6 @@ if (!$userData) {
   die();
 }
 
-// FIXME: Password verification is not working :(
 // Verify the password if user exists
 if (!password_verify($validPassword, $userData[0]['password'])) {
   $_SESSION['loginError'] = $loginError;
@@ -52,3 +51,5 @@ if (!password_verify($validPassword, $userData[0]['password'])) {
 }
 
 $_SESSION['currentUser'] = $userData[0]['uid'];
+header('Location: ../../');
+die;

@@ -60,3 +60,5 @@ try {
   header('Location: ../../');
   die();
 }
+header('Location: ..7..7');
+die;

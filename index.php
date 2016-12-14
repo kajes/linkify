@@ -2,7 +2,8 @@
   // Get all the functions
   require_once 'resources/lib/functions.php';
 
-  // $currentUser = checkLogin();
+  $currentUser = checkLogin();
+  // die(var_dump($_SESSION));
 
 ?>
 
@@ -20,7 +21,7 @@
       require_once 'resources/blocks/components/header.php';
 
       echo '<section class="mainContent">';
-      if (!isset($currentUser)) {
+      if (!$currentUser) {
         require_once 'resources/blocks/authentication.php';
       } else {
         require_once 'resources/blocks/home.php';

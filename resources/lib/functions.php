@@ -40,7 +40,6 @@ function checkLogin()
   }
 
   $currentUser = $_SESSION['currentUser'];
-  $_SESSION = [];
 
   return $currentUser;
 
