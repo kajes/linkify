@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Värd: 127.0.0.1
--- Tid vid skapande: 14 dec 2016 kl 13:13
+-- Tid vid skapande: 15 dec 2016 kl 15:40
 -- Serverversion: 10.1.16-MariaDB
 -- PHP-version: 7.0.9
 
@@ -21,6 +21,22 @@ SET time_zone = "+00:00";
 --
 CREATE DATABASE IF NOT EXISTS `kajes_linkify` DEFAULT CHARACTER SET utf8 COLLATE utf8_general_ci;
 USE `kajes_linkify`;
+
+-- --------------------------------------------------------
+
+--
+-- Tabellstruktur `posts`
+--
+
+CREATE TABLE `posts` (
+  `postID` int(10) UNSIGNED NOT NULL,
+  `authorID` int(10) UNSIGNED NOT NULL,
+  `post_title` varchar(255) DEFAULT NULL,
+  `post_content` text,
+  `posted_on` datetime DEFAULT NULL,
+  `updated_on` datetime DEFAULT NULL,
+  `comment_on` int(11) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
 
@@ -57,6 +73,13 @@ CREATE TABLE `users` (
 --
 
 --
+-- Index för tabell `posts`
+--
+ALTER TABLE `posts`
+  ADD PRIMARY KEY (`postID`),
+  ADD KEY `authorID` (`authorID`);
+
+--
 -- Index för tabell `tokens`
 --
 ALTER TABLE `tokens`
@@ -74,6 +97,11 @@ ALTER TABLE `users`
 --
 
 --
+-- AUTO_INCREMENT för tabell `posts`
+--
+ALTER TABLE `posts`
+  MODIFY `postID` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
+--
 -- AUTO_INCREMENT för tabell `tokens`
 --
 ALTER TABLE `tokens`
@@ -86,6 +114,12 @@ ALTER TABLE `users`
 --
 -- Restriktioner för dumpade tabeller
 --
+
+--
+-- Restriktioner för tabell `posts`
+--
+ALTER TABLE `posts`
+  ADD CONSTRAINT `posts_ibfk_1` FOREIGN KEY (`authorID`) REFERENCES `users` (`uid`);
 
 --
 -- Restriktioner för tabell `tokens`
