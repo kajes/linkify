@@ -19,9 +19,9 @@ if (!isset($_POST['email']) || !isset($_POST['password'])) {
   die();
 }
 
-// Validate login form fields
+// Addign variables to form inputs and sanitize the password
 $email = $_POST['email'];
-$password = $_POST['password'];
+$password = filter_var($_POST['password'], FILTER_SANITIZE_STRING);
 
 //================================================================================================
 // All seems fine for actual login validation

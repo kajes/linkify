@@ -1,1 +1,11 @@
-<h1>You are logged in!</h1>
+<section class="mainContent">
+  <?php
+
+  if (!$currentUser) {
+    require_once 'components/authentication.php';
+  } else {
+    require_once 'components/userMenu.php';
+  }
+
+  ?>
+</section>

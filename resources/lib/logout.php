@@ -9,4 +9,3 @@ if (isset($_COOKIE['kajes_linkify'])) {
 }
 header('Location: ../../');
 die;
-// TODO: Unset cookie on logout
