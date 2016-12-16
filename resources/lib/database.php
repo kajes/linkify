@@ -41,6 +41,15 @@ EOT;
 $userVerify = $dbConnection->prepare($loginQuery);
 
 // TODO: Queries for creating and updating posts and comments
+//================================================================================================
+// Post create and update prepares
+//================================================================================================
+$postCreateQuery = <<<EOT
+INSERT INTO posts (authorID, post_title, post_content, posted_on, updated_on, comment_on)
+VALUES (:authorID, :post_title, :post_content, :posted_on, :updated_on, :comment_on)
+EOT;
+
+$createPost = $dbConnection->prepare($postCreateQuery);
 
 //================================================================================================
 // Prepare ingredients for baking cookie
