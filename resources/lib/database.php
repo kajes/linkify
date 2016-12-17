@@ -76,6 +76,8 @@ EOT;
 $hand = $dbConnection->prepare($plate);
 
 //================================================================================================
-// Query for getting posts
+// Query for getting posts and users
 //================================================================================================
 $postGet = $dbConnection->query("SELECT * FROM posts ORDER BY posted_on DESC")->fetchAll(PDO::FETCH_ASSOC);
+
+$userGet = $dbConnection->prepare("SELECT * FROM users WHERE uid = :authorID LIMIT 1");
