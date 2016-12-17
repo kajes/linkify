@@ -40,7 +40,6 @@ EOT;
 
 $userVerify = $dbConnection->prepare($loginQuery);
 
-// TODO: Queries for creating and updating posts and comments
 //================================================================================================
 // Post create and update prepares
 //================================================================================================
@@ -50,6 +49,8 @@ VALUES (:authorID, :post_title, :post_content, :posted_on, :updated_on, :comment
 EOT;
 
 $createPost = $dbConnection->prepare($postCreateQuery);
+
+// TODO: Query for updating posts
 
 //================================================================================================
 // Prepare ingredients for baking cookie
@@ -73,3 +74,8 @@ LIMIT 1
 EOT;
 
 $hand = $dbConnection->prepare($plate);
+
+//================================================================================================
+// Query for getting posts
+//================================================================================================
+$postGet = $dbConnection->query("SELECT * FROM posts ORDER BY posted_on DESC")->fetchAll(PDO::FETCH_ASSOC);

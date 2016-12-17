@@ -1,1 +1,0 @@
---- START ---2016-12-16T15:12:00+01:00Array/linkify/resources/lib/createPost.phpSQLSTATE[23000]: Integrity constraint violation: 1048 Column 'authorID' cannot be null--- END ---
