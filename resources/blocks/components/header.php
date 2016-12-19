@@ -1,5 +1,5 @@
 <header class="mainHeader">
-  <h1>Linkify</h1>
+  <h1><a href="/">Linkify</a></h1>
   <?php if ($currentUser) { ?>
     <section class="userMenu">
       <button class="newPost">New post</button>

@@ -25,18 +25,27 @@
 
     <h3 class="postTitle"><?= $post['post_title']; ?></h3>
     <p class="postContent"><?= $post['post_content']; ?></p>
+    <div class="postVoteWrap">
+      <a title="Vote Up" class="voteUp">Vote Up</a>
+      <span class="voteCount">0</span>
+      <a title="Vote Down" class="voteDown">Vote Down</a>
+    </div>
 
     <div class="postMeta">
       <span class="postedOn"><?= $post['posted_on']; ?></span>
       <?php if ($post['posted_on'] !== $post['updated_on']) { ?>
         <span class="updatedOn"><?= $post['updated_on']; ?></span>
       <?php } ?>
-      <?php if ($_SESSION['currentUser'] === $post['authorID']) { ?>
+      <?php if (isset($_SESSION['currentUser']) && $_SESSION['currentUser'] === $post['authorID']) { ?>
         <span class="postEdit">Edit post</span>
       <?php } else { ?>
-        <span class="postComment">Comment on post</span>
+        <span class="postComment">Comment</span>
       <?php } ?>
     </div>
+
+    <?php
+
+    ?>
 
   <?php } ?>
 </section>

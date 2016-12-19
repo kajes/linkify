@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Värd: 127.0.0.1
--- Tid vid skapande: 15 dec 2016 kl 15:40
+-- Tid vid skapande: 19 dec 2016 kl 13:40
 -- Serverversion: 10.1.16-MariaDB
 -- PHP-version: 7.0.9
 
@@ -35,7 +35,8 @@ CREATE TABLE `posts` (
   `post_content` text,
   `posted_on` datetime DEFAULT NULL,
   `updated_on` datetime DEFAULT NULL,
-  `comment_on` int(11) DEFAULT NULL
+  `comment_on` int(11) DEFAULT NULL,
+  `voteCount` int(11) DEFAULT '0'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
@@ -65,7 +66,8 @@ CREATE TABLE `users` (
   `email` varchar(255) NOT NULL,
   `password` varchar(60) NOT NULL,
   `bio` mediumtext,
-  `avatarID` varchar(100) DEFAULT NULL
+  `avatarID` varchar(100) DEFAULT NULL,
+  `votedOn` text
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --

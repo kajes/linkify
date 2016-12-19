@@ -7,5 +7,5 @@ session_destroy();
 if (isset($_COOKIE['kajes_linkify'])) {
   setcookie('kajes_linkify', "", time(), '/');
 }
-header('Location: ../../');
+header('Location: /');
 die;

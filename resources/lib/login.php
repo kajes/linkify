@@ -8,14 +8,14 @@ require_once 'functions.php';
 
 // Check if user made post request, otherwise send back to landing page
 if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
-  header('Location: ../../');
+  header('Location: /');
   die();
 }
 
 // Check if all required fields are entered, otherwise display errormessage
 if (!isset($_POST['email']) || !isset($_POST['password'])) {
   $_SESSION['loginError'] = 'Please enter all required fields.';
-  header('Location: ../../');
+  header('Location: /');
   die();
 }
 
@@ -39,14 +39,14 @@ $userData = $userVerify->fetch(PDO::FETCH_ASSOC);
 // Return error message if user does not exist
 if (!$userData) {
   $_SESSION['loginError'] = $loginError;
-  header('Location: ../../');
+  header('Location: /');
   die();
 }
 
 // Verify the password if user exists
 if (!password_verify($password, $userData['password'])) {
   $_SESSION['loginError'] = $loginError;
-  header('Location: ../../');
+  header('Location: /');
   die();
 }
 
@@ -57,5 +57,5 @@ if (isset($_POST['rememberMe'])) {
 
 // Remember user in session and redirect to landing page
 $_SESSION['currentUser'] = $userData['uid'];
-header('Location: ../../');
+header('Location: /');
 die;

@@ -25,5 +25,6 @@
       require_once 'resources/blocks/components/footer.php';
     ?>
   </main>
+  <script src="resources/js/main.js" charset="utf-8"></script>
 </body>
 </html>

@@ -4,14 +4,14 @@ require_once 'functions.php';
 
 // Check if post request has been made, else send back to home
 if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
-  header('Location: ../../');
+  header('Location: /');
   die;
 }
 
 // Check if all mandatory fields are entered, else send back with error
 if (!isset($_POST['postTitle']) || !isset($_POST['postContent'])) {
   $_SESSION['postError'] = 'All mandatory fields must be entered before publishing';
-  header('Location: ../../');
+  header('Location: /');
   die;
 }
 
@@ -32,5 +32,5 @@ try {
   $_SESSION['postError'] = 'Failed to publish post. Please contact the site administrator for help publishing post.';
   logErrors('../logs/errorlog.txt', $e->getMessage());
 }
-header('Location: ../../');
+header('Location: /');
 die;

@@ -46,7 +46,7 @@ function bakeCookie($uid, $query)
       ':expire' => $expire
     ]);
   } catch (PDOException $e) {
-    logErrors('../../', $e->getMessage());
+    logErrors('/', $e->getMessage());
   }
 
   // Bake cookie in browser
