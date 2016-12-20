@@ -16,7 +16,7 @@ if (!isset($_POST['postTitle']) || !isset($_POST['postContent'])) {
 }
 
 // Do check to see if post is comment on other post
-$checkComment = $_SESSION['isComment'] ?? NULL;
+$checkComment = $_SESSION['commentOn'] ?? NULL;
 
 // All seems fine, so trying to input post into database
 try {

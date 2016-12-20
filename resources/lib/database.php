@@ -76,8 +76,13 @@ EOT;
 $hand = $dbConnection->prepare($plate);
 
 //================================================================================================
-// Query for getting posts and users
+// Query for getting posts, comments and their users
 //================================================================================================
-$postGet = $dbConnection->query("SELECT * FROM posts ORDER BY posted_on DESC")->fetchAll(PDO::FETCH_ASSOC);
+// Get posts that are not comments on other posts
+$postGet = $dbConnection->query("SELECT * FROM posts WHERE comment_on IS NULL ORDER BY posted_on DESC")->fetchAll(PDO::FETCH_ASSOC);
 
+// Get comments on other posts
+$commentGet = $dbConnection->prepare("SELECT * FROM posts WHERE comment_on = :comment_on ORDER BY posted_on DESC");
+
+// Get post authors
 $userGet = $dbConnection->prepare("SELECT * FROM users WHERE uid = :authorID LIMIT 1");

@@ -9,6 +9,12 @@
       ]);
       $postAuthor = $userGet->fetch(PDO::FETCH_ASSOC);
 
+      // Get all comments for post
+      $commentGet->execute([
+        ':comment_on' => $post['postID']
+      ]);
+      $postComment = $commentGet->fetchAll(PDO::FETCH_ASSOC);
+
     ?>
 
     <!-- Output appropriate fields for each part of post -->
@@ -27,7 +33,7 @@
     <p class="postContent"><?= $post['post_content']; ?></p>
     <div class="postVoteWrap">
       <a title="Vote Up" class="voteUp">Vote Up</a>
-      <span class="voteCount">0</span>
+      <span class="voteCount"><?= $post['voteCount']; ?></span>
       <a title="Vote Down" class="voteDown">Vote Down</a>
     </div>
 
@@ -39,7 +45,7 @@
       <?php if (isset($_SESSION['currentUser']) && $_SESSION['currentUser'] === $post['authorID']) { ?>
         <span class="postEdit">Edit post</span>
       <?php } else { ?>
-        <span class="postComment">Comment</span>
+        <span class="postComment">Comment (<?= count($postComment); ?>)</span>
       <?php } ?>
     </div>
 
