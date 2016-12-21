@@ -25,12 +25,11 @@ try {
     ':post_title' => $_POST['postTitle'],
     ':post_content' => $_POST['postContent'],
     ':posted_on' => date('Y-m-d H:i:s'),
-    ':updated_on' => date('Y-m-d H:i:s'),
-    ':comment_on' => $checkComment
+    ':updated_on' => date('Y-m-d H:i:s')
   ]);
 } catch (PDOException $e) {
   $_SESSION['postError'] = 'Failed to publish post. Please contact the site administrator for help publishing post.';
-  logErrors('../logs/errorlog.txt', $e->getMessage());
+  logErrors($e->getMessage());
 }
 header('Location: /');
 die;

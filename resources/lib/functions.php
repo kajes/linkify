@@ -7,7 +7,7 @@ session_start();
 //================================================================================================
 // Log exception errors of unknown cause to log file
 //================================================================================================
-function logErrors($logPath, $error)
+function logErrors($error)
 {
   $requestTime = date(c,$_SERVER['REQUEST_TIME']);
   $requestContent = $_POST ?? $_GET;
@@ -22,7 +22,7 @@ function logErrors($logPath, $error)
     '--- END ---'
   ];
 
-  file_put_contents($logPath, $errorMessage, FILE_APPEND);
+  file_put_contents('/resources/logs/errorlog.txt', $errorMessage, FILE_APPEND);
 }
 
 //================================================================================================

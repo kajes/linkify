@@ -11,7 +11,7 @@
 
       // Get all comments for post
       $commentGet->execute([
-        ':comment_on' => $post['postID']
+        ':postID' => $post['postID']
       ]);
       $postComment = $commentGet->fetchAll(PDO::FETCH_ASSOC);
 
@@ -21,9 +21,9 @@
     <div class="postAuthorBox">
       <?php
         if ($postAuthor['avatarID'] !== NULL) {
-          echo '<img src="resources/img/avatars/'.$postAuthor['avatarID'].'.jpg" alt="'.$postAuthor['name'].'">';
+          echo '<img src="/resources/img/avatars/'.$postAuthor['avatarID'].'.jpg" alt="'.$postAuthor['name'].'">';
         } else {
-          echo '<img src="resources/img/avatars/0.jpg" alt="'.$postAuthor['name'].'">';
+          echo '<img src="/resources/img/avatars/0.jpg" alt="'.$postAuthor['name'].'">';
         }
       ?>
       <span class="postedBy"><?= $postAuthor['name']; ?></span>
@@ -49,9 +49,20 @@
       <?php } ?>
     </div>
 
-    <?php
-
-    ?>
+    <div class="postComment">
+      <form action="/resources/lib/createComment.php" method="POST">
+        <input type="hidden" name="postID" value="<?= $post['postID']; ?>">
+        <textarea name="commentField"></textarea>
+        <input type="submit" value="Submit Comment">
+      </form>
+      <?php
+        if ($postComment) {
+          echo "<h4>".$postComment[0]['content']."</h4>";
+          // TODO: Proper way to display comments
+          // renderComments($postComment);
+        }
+      ?>
+    </div>
 
   <?php } ?>
 </section>

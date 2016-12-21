@@ -44,13 +44,25 @@ $userVerify = $dbConnection->prepare($loginQuery);
 // Post create and update prepares
 //================================================================================================
 $postCreateQuery = <<<EOT
-INSERT INTO posts (authorID, post_title, post_content, posted_on, updated_on, comment_on)
-VALUES (:authorID, :post_title, :post_content, :posted_on, :updated_on, :comment_on)
+INSERT INTO posts (authorID, post_title, post_content, posted_on, updated_on)
+VALUES (:authorID, :post_title, :post_content, :posted_on, :updated_on)
 EOT;
 
 $createPost = $dbConnection->prepare($postCreateQuery);
 
 // TODO: Query for updating posts
+
+//================================================================================================
+// Comment create and update
+//================================================================================================
+$commentCreateQuery = <<<EOT
+INSERT INTO comments (parentID, authorID, content, commentDate, editDate)
+VALUES (:parentID, :authorID, :content, :commentDate, :editDate)
+EOT;
+
+$createComment = $dbConnection->prepare($commentCreateQuery);
+
+// TODO: Query for updating comments
 
 //================================================================================================
 // Prepare ingredients for baking cookie
@@ -79,10 +91,10 @@ $hand = $dbConnection->prepare($plate);
 // Query for getting posts, comments and their users
 //================================================================================================
 // Get posts that are not comments on other posts
-$postGet = $dbConnection->query("SELECT * FROM posts WHERE comment_on IS NULL ORDER BY posted_on DESC")->fetchAll(PDO::FETCH_ASSOC);
+$postGet = $dbConnection->query("SELECT * FROM posts ORDER BY posted_on DESC")->fetchAll(PDO::FETCH_ASSOC);
 
 // Get comments on other posts
-$commentGet = $dbConnection->prepare("SELECT * FROM posts WHERE comment_on = :comment_on ORDER BY posted_on DESC");
+$commentGet = $dbConnection->prepare("SELECT * FROM comments WHERE parentID = :postID ORDER BY commentDate DESC");
 
 // Get post authors
 $userGet = $dbConnection->prepare("SELECT * FROM users WHERE uid = :authorID LIMIT 1");

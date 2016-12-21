@@ -57,7 +57,7 @@ try {
   ]);
 } catch (PDOException $e) {
   $_SESSION['registerError'] = 'Failed to register user. Please contact the site administrator for help registering.';
-  logErrors('../logs/errorlog.txt', $e->getMessage());
+  logErrors($e->getMessage());
 }
 
 // Redirect back to landing page on success or failure
