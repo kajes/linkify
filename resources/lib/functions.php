@@ -100,3 +100,27 @@ function checkLogin($query)
   return $_SESSION['currentUser'];
 
 }
+
+//================================================================================================
+// Recursive function for presenting posts and comments
+//================================================================================================
+function postDisplay($postQuery, $parentID=0, $level=0)
+{
+  // Get the base posts
+  $postQuery->execute([
+    ':parentID' => $parentID
+  ]);
+  $posts = $postQuery->fetchAll(PDO::FETCH_ASSOC);
+
+  echo "<ul>";
+  foreach ($posts as $key => $post) {
+    $output = "<li>";
+    $output .= '<h4>'.$post['post_title'].'</h4>';
+    $output .= '<p>'.$post['post_content'].'</p>';
+    $output .= "</li>";
+    echo $output;
+    postDisplay($postQuery, $post['postID'], $level+1);
+  }
+  echo "</ul>";
+
+}
