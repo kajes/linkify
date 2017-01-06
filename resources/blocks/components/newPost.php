@@ -1,5 +1,6 @@
 <section class="newPostWrap">
   <form class="newPostForm" action="resources/lib/createPost.php" method="POST">
+    <input type="hidden" name="posted_on" value="0">
     <input type="text" name="postTitle" placeholder="Title or link" required>
     <textarea name="postContent" required></textarea>
     <input type="submit" name="createPostExecute" value="Publish post">

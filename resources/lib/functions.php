@@ -117,6 +117,11 @@ function postDisplay($postQuery, $parentID=0, $level=0)
     $output = "<li>";
     $output .= '<h4>'.$post['post_title'].'</h4>';
     $output .= '<p>'.$post['post_content'].'</p>';
+    $output .= '<form class="newCommentForm" action="resources/lib/createPost.php" method="POST">';
+    $output .= '<input type="hidden" name="parent_id" value="'.$post['postID'].'">';
+    $output .= '<textarea name="postContent" required></textarea>';
+    $output .= '<input type="submit" name="createPostExecute" value="Publish comment">';
+    $output .= '</form>';
     $output .= "</li>";
     echo $output;
     postDisplay($postQuery, $post['postID'], $level+1);

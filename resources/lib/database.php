@@ -44,25 +44,13 @@ $userVerify = $dbConnection->prepare($loginQuery);
 // Post create and update prepares
 //================================================================================================
 $postCreateQuery = <<<EOT
-INSERT INTO posts (authorID, post_title, post_content, posted_on, updated_on)
-VALUES (:authorID, :post_title, :post_content, :posted_on, :updated_on)
+INSERT INTO posts (authorID, post_title, post_content, posted_on, updated_on, parent_id)
+VALUES (:authorID, :post_title, :post_content, :posted_on, :updated_on, :parent_id)
 EOT;
 
 $createPost = $dbConnection->prepare($postCreateQuery);
 
 // TODO: Query for updating posts
-
-//================================================================================================
-// Comment create and update
-//================================================================================================
-$commentCreateQuery = <<<EOT
-INSERT INTO comments (parentID, authorID, content, commentDate, editDate)
-VALUES (:parentID, :authorID, :content, :commentDate, :editDate)
-EOT;
-
-$createComment = $dbConnection->prepare($commentCreateQuery);
-
-// TODO: Query for updating comments
 
 //================================================================================================
 // Prepare ingredients for baking cookie
