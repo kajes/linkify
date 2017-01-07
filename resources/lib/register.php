@@ -8,19 +8,19 @@ require_once 'functions.php';
 
 // Check if user made post request, otherwise send back to landing page
 if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
-  return();
+  returnDie();
 }
 
 // Check if all registration fields are entered, else return to landing page and display error message
 if (!isset($_POST['firstName']) || !isset($_POST['lastName']) || !isset($_POST['email']) || !isset($_POST['password']) || !isset($_POST['password_reenter'])) {
   $_SESSION['registerError'] = 'Please fill in all fields.';
-  return();
+  returnDie();
 }
 
 // Validate email
 if (!filter_var($_POST['email'], FILTER_VALIDATE_EMAIL)) {
   $_SESSION['registerError'] = 'The email adress you entered is not valid.';
-  return();
+  returnDie();
 }
 
 // Assign variables and sanitize
@@ -32,13 +32,13 @@ $passwordReenter = filter_var($_POST['password_reenter'], FILTER_SANITIZE_STRING
 // Check if email already exists in database
 if ($dbConnection->query("SELECT email FROM users WHERE email = '$email' LIMIT 1")->fetch()) {
   $_SESSION['registerError'] = 'Email is already registered. Please try another email adress.';
-  return();
+  returnDie();
 }
 
 // Check if both password fields match
 if ($password !== $passwordReenter) {
   $_SESSION['registerError'] = 'Password fields do not match. Please try again.';
-  return();
+  returnDie();
 }
 
 //================================================================================================
@@ -56,4 +56,4 @@ try {
 }
 
 // Redirect back to landing page on success or failure
-return();
+returnDie();

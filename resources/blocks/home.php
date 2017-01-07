@@ -6,13 +6,12 @@
     } else {
       require_once 'components/userMenu.php';
     }
+
+    if (!isset($_GET['postID'])) {
+      require_once 'components/basePosts.php';
+    } else {
+      require_once 'components/singlePost.php';
+    }
   ?>
-
-  <section class="postContent">
-
-    <!-- Get all posts and comments in database and output in html -->
-    <?php postDisplay($postGet); ?>
-
-  </section>
 
 </section>

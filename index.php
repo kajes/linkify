@@ -1,4 +1,19 @@
 <?php
+
+// Todo list
+// TODO: Edit account email, password and information
+// TODO: Upload avatar
+// TODO: Edit links and posts
+// TODO: Delete links and posts
+// TODO: Up and downvote posts
+
+// Extra features
+// TODO: Delete comments
+// TODO: Reset password with email
+
+?>
+
+<?php
   // Get all the functions
   require_once 'resources/lib/functions.php';
 

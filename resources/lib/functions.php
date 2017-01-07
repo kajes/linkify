@@ -28,7 +28,7 @@ function logErrors($error)
 //================================================================================================
 // Simple Return Function
 //================================================================================================
-function return()
+function returnDie()
 {
   header('Location: /');
   die;
@@ -113,7 +113,7 @@ function checkLogin($query)
 //================================================================================================
 // Recursive function for presenting posts and comments
 //================================================================================================
-function postDisplay($postQuery, $parentID=0, $level=0)
+function postDisplay($userQuery, $postQuery, $parentID=0, $level=0)
 {
 
   // Get the base posts
@@ -124,11 +124,22 @@ function postDisplay($postQuery, $parentID=0, $level=0)
 
   echo "<ul>";
   foreach ($posts as $key => $post) {
+
+    // Get users from db
+    $userQuery->execute([
+      ':authorID' => $post['authorID']
+    ]);
+    $postAuthor = $userQuery->fetch(PDO::FETCH_ASSOC);
+
     $output = "<li>";
 
     // TODO: Vote count box here
 
     // TODO: Author box here
+    $output .= '<div class="authorBox">';
+    $output .= '<img src="/resources/img/avatars/1.jpg" class="userAvatar" height="75px" width="75px">';
+    $output .= '<p class="userName"><a href="/?userID='.$post['authorID'].'">'.$postAuthor['name'].'</a></p>';
+    $output .= '</div>';
 
     // Output link text on base posts only
     if ($post['parent_id'] === '0') {
@@ -152,7 +163,15 @@ function postDisplay($postQuery, $parentID=0, $level=0)
       $output .= '<input type="hidden" name="parent_id" value="'.$post['postID'].'">';
       $output .= '<textarea name="postContent" required></textarea>';
       $output .= '<input type="submit" name="createCommentExecute" value="Comment">';
+
+      if (isset($_SESSION['postError'])) {
+        $output .= '<h5 class="error">'.$_SESSION['postError'].'</h5>';
+        unset($_SESSION['postError']);
+      }
+
       $output .= '</form>';
+
+
     } else {
       $output .= 'You must log in to comment. Log in or register <span class="loginLink">here</span>.';
     }
@@ -160,7 +179,7 @@ function postDisplay($postQuery, $parentID=0, $level=0)
     $output .= "</li>";
     echo $output;
 
-    postDisplay($postQuery, $post['postID'], $level+1);
+    postDisplay($userQuery, $postQuery, $post['postID'], $level+1);
   }
   echo "</ul>";
 

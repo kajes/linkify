@@ -4,7 +4,7 @@ require_once 'functions.php';
 
 // Check if post request has been made, else send back to home
 if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
-  return();
+  returnDie();
 }
 
 // Typecast the parentID because it makes sense
@@ -15,12 +15,12 @@ if ($parentID === 0) {
   // Check if all mandatory fields are entered, else send back with error
   if (!isset($_POST['postTitle']) || !isset($_POST['postContent'])) {
     $_SESSION['postError'] = 'All mandatory fields must be entered before publishing';
-    return();
+    returnDie();
   }
 } elseif ($parentID < 0) {
   if (!isset($_POST['postContent'])) {
     $_SESSION['postError'] = 'All mandatory fields must be entered before publishing';
-    return();
+    returnDie();
   }
 }
 
@@ -42,4 +42,4 @@ try {
   $_SESSION['postError'] = 'Failed to publish post. Please contact the site administrator for help publishing post.';
   logErrors($e->getMessage());
 }
-return();
+returnDie();
