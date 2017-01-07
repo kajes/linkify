@@ -1,9 +1,10 @@
 <section class="newPostWrap">
   <form class="newPostForm" action="resources/lib/createPost.php" method="POST">
-    <input type="hidden" name="posted_on" value="0">
-    <input type="text" name="postTitle" placeholder="Title or link" required>
+    <input type="hidden" name="parent_id" value="0">
+    <input type="text" name="postTitle" placeholder="Title" required>
+    <input type="text" name="postLink" placeholder="Link here">
     <textarea name="postContent" required></textarea>
-    <input type="submit" name="createPostExecute" value="Publish post">
+    <input type="submit" name="createPostExecute" value="Post">
     <?php
       if (isset($_SESSION['postError'])) {
         echo '<h5 class="error">'.$_SESSION['postError'].'</h5>';

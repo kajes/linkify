@@ -27,11 +27,15 @@ if ($parentID === 0) {
   }
 }
 
+// Need to set the postlink to a value so it doesn't get saved as an empty string in db if it's empty
+$postLink = ($_POST['postLink'] !== "") ? $_POST['postLink'] : NULL;
+
 // All seems fine, so trying to input post into database
 try {
   $createPost->execute([
     ':authorID' => $_SESSION['currentUser'],
     ':post_title' => $_POST['postTitle'],
+    ':post_link' => $postLink,
     ':post_content' => $_POST['postContent'],
     ':posted_on' => date('Y-m-d H:i:s'),
     ':updated_on' => date('Y-m-d H:i:s'),

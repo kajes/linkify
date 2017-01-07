@@ -44,8 +44,8 @@ $userVerify = $dbConnection->prepare($loginQuery);
 // Post create and update prepares
 //================================================================================================
 $postCreateQuery = <<<EOT
-INSERT INTO posts (authorID, post_title, post_content, posted_on, updated_on, parent_id)
-VALUES (:authorID, :post_title, :post_content, :posted_on, :updated_on, :parent_id)
+INSERT INTO posts (authorID, post_title, post_link, post_content, posted_on, updated_on, parent_id)
+VALUES (:authorID, :post_title, :post_link, :post_content, :posted_on, :updated_on, :parent_id)
 EOT;
 
 $createPost = $dbConnection->prepare($postCreateQuery);
@@ -79,7 +79,7 @@ $hand = $dbConnection->prepare($plate);
 // Query for getting posts, comments and their users
 //================================================================================================
 // Get posts
-$postGet = $dbConnection->prepare("SELECT * FROM posts WHERE parent_id = :parentID ORDER BY posted_on DESC");
+$postGet = $dbConnection->prepare("SELECT * FROM posts WHERE parent_id = :parentID ORDER BY voteCount DESC, posted_on DESC");
 
 // Get post authors
 $userGet = $dbConnection->prepare("SELECT * FROM users WHERE uid = :authorID LIMIT 1");
