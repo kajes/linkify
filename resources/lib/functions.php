@@ -26,6 +26,15 @@ function logErrors($error)
 }
 
 //================================================================================================
+// Simple Return Function
+//================================================================================================
+function return()
+{
+  header('Location: /');
+  die;
+}
+
+//================================================================================================
 // Bake remember me cookie
 //================================================================================================
 function bakeCookie($uid, $query)
@@ -106,54 +115,53 @@ function checkLogin($query)
 //================================================================================================
 function postDisplay($postQuery, $parentID=0, $level=0)
 {
-  if ($level <= 2) {
-    // Get the base posts
-    $postQuery->execute([
-      ':parentID' => $parentID
-    ]);
-    $posts = $postQuery->fetchAll(PDO::FETCH_ASSOC);
 
-    echo "<ul>";
-    foreach ($posts as $key => $post) {
-      $output = "<li>";
+  // Get the base posts
+  $postQuery->execute([
+    ':parentID' => $parentID
+  ]);
+  $posts = $postQuery->fetchAll(PDO::FETCH_ASSOC);
 
-      // TODO: Vote count box here
+  echo "<ul>";
+  foreach ($posts as $key => $post) {
+    $output = "<li>";
 
-      // TODO: Author box here
+    // TODO: Vote count box here
 
-      // Output link text on base posts only
-      if ($post['parent_id'] === '0') {
-        $output .= '<h3>';
+    // TODO: Author box here
 
-        // Output post title as link if link exists, else only output title
-        if ($post['post_link'] !== NULL) {
-          $output .= '<a href="'.$post['post_link'].'" target="_blank" rel="noopener">'.$post['post_title'].'</a>';
-        } else {
-          $output .= $post['post_title'];
-        }
+    // Output link text on base posts only
+    if ($post['parent_id'] === '0') {
+      $output .= '<h3>';
 
-        $output .= '</h3>';
-      }
-
-      $output .= '<p>'.$post['post_content'].'</p>';
-
-      // Render commenting field only if user is logged in
-      if (isset($_SESSION['currentUser'])) {
-        $output .= '<form class="newCommentForm" action="resources/lib/createPost.php" method="POST">';
-        $output .= '<input type="hidden" name="parent_id" value="'.$post['postID'].'">';
-        $output .= '<textarea name="postContent" required></textarea>';
-        $output .= '<input type="submit" name="createCommentExecute" value="Comment">';
-        $output .= '</form>';
+      // Output post title as link if link exists, else only output title
+      if ($post['post_link'] !== NULL) {
+        $output .= '<a href="'.$post['post_link'].'" target="_blank" rel="noopener">'.$post['post_title'].'</a>';
       } else {
-        $output .= 'You must log in to comment. Log in or register <span class="loginLink">here</span>.';
+        $output .= $post['post_title'];
       }
 
-      $output .= "</li>";
-      echo $output;
-
-      postDisplay($postQuery, $post['postID'], $level+1);
+      $output .= '</h3>';
     }
-    echo "</ul>";
+
+    $output .= '<p>'.$post['post_content'].'</p>';
+
+    // Render commenting field only if user is logged in
+    if (isset($_SESSION['currentUser'])) {
+      $output .= '<form class="newCommentForm" action="resources/lib/createPost.php" method="POST">';
+      $output .= '<input type="hidden" name="parent_id" value="'.$post['postID'].'">';
+      $output .= '<textarea name="postContent" required></textarea>';
+      $output .= '<input type="submit" name="createCommentExecute" value="Comment">';
+      $output .= '</form>';
+    } else {
+      $output .= 'You must log in to comment. Log in or register <span class="loginLink">here</span>.';
+    }
+
+    $output .= "</li>";
+    echo $output;
+
+    postDisplay($postQuery, $post['postID'], $level+1);
   }
+  echo "</ul>";
 
 }
