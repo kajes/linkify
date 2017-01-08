@@ -131,7 +131,7 @@ function postDisplay($userQuery, $postQuery, $parentID=0, $level=0)
     ]);
     $postAuthor = $userQuery->fetch(PDO::FETCH_ASSOC);
 
-    $output = "<li>";
+    $output = '<div class="comment child">';
 
     // TODO: Vote count box here
 
@@ -176,7 +176,7 @@ function postDisplay($userQuery, $postQuery, $parentID=0, $level=0)
       $output .= 'You must log in to comment. Log in or register <span class="loginLink">here</span>.';
     }
 
-    $output .= "</li>";
+    $output .= "</div>";
     echo $output;
 
     postDisplay($userQuery, $postQuery, $post['postID'], $level+1);

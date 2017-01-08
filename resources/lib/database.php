@@ -81,5 +81,7 @@ $hand = $dbConnection->prepare($plate);
 // Get posts
 $postGet = $dbConnection->prepare("SELECT * FROM posts WHERE parent_id = :parentID ORDER BY voteCount DESC, posted_on DESC");
 
+$postGetSingle = $dbConnection->prepare("SELECT * FROM posts WHERE postID = :postID");
+
 // Get post authors
 $userGet = $dbConnection->prepare("SELECT * FROM users WHERE uid = :authorID LIMIT 1");

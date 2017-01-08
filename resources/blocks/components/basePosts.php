@@ -25,29 +25,43 @@
       ]);
       $commentCount = count($postGet->fetchAll());
 
+      if ($user['avatarID'] === NULL) {
+        $avatar = '/resources/img/avatars/0.jpg';
+      } else {
+        $avatar = '/resources/img/avatars/'.$user['avatarID'].'.jpg';
+      }
+
     ?>
 
       <div class="contentBox">
+        <div class="authorBox">'
+          <img src="<?= $avatar ?>" class="userAvatar" height="75px" width="75px">'
+          <p class="userName">By: <a href="/?userID='.$post['authorID'].'"><?= $user['name'] ?></a></p>
+        </div>
+
         <div class="voteBox">
 
         </div>
+
         <h2>
           <?php if ($post['post_link'] !== NULL) { ?>
             <a href="<?= $post['post_link'] ?>" target="_blank" rel="noopener"><?= $post['post_title'] ?></a>
-            <span>(<a href="<?= $post['post_link'] ?>"><?= $post['post_link'] ?></a>)</span>
+            <span>(<a href="<?= $post['post_link'] ?>" target="_blank" rel="noopener"><?= $post['post_link'] ?></a>)</span>
           <?php } else {
             echo $post['post_title'];
           } ?>
         </h2>
+
         <p><?= $post['post_content'] ?></p>
+
         <div class="contentMetaBox">
           <span>Posted on: <?= $postDate ?></span>
-          <span>By: <a href="/?userID=<?= $user['uid'] ?>"><?= $user['name'] ?></a></span>
           <?php if ($postDate !== $updateDate) { ?>
             <span>| Updated on: <?= $updateDate ?></span>
           <?php } ?>
           <p class="commentsLink"><a href="?postID=<?= $post['postID'] ?>"><?= $commentCount ?> Comments</a></p>
         </div>
+
       </div>
 
     <?php } // End Foreach ?>
