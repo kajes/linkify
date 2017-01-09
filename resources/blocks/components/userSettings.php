@@ -32,17 +32,35 @@
       <input type="password" name="newPassword">
       <label for="oldPassword">Old password:</label>
       <input type="password" name="oldPassword">
+      <?php
+        if (isset($_SESSION['passwordError'])) {
+          echo '<h5 class="error">'.$_SESSION['passwordError'].'</h5>';
+          unset($_SESSION['passwordError']);
+        }
+      ?>
     </div>
 
     <div class="fieldset userBio">
       <label for="userBio">Biography:</label>
       <textarea name="userBio"></textarea>
+      <?php
+        if (isset($_SESSION['passwordError'])) {
+          echo '<h5 class="error">'.$_SESSION['bioError'].'</h5>';
+          unset($_SESSION['bioError']);
+        }
+      ?>
     </div>
 
     <div class="fieldset avatar">
       <label for="avatarInput">Change avatar:</label>
       <input type="file" name="avatar" accept="image/jpeg image/png">
       <div class="placeholder avatar" id="avatarPlaceholder" style="background: url(<?= $avatar ?>) no-repeat center center; background-size: cover;"></div>
+      <?php
+        if (isset($_SESSION['avatarError'])) {
+          echo '<h5 class="error">'.$_SESSION['avatarError'].'</h5>';
+          unset($_SESSION['avatarError']);
+        }
+      ?>
     </div>
 
     <input type="submit" value="Save settings">
