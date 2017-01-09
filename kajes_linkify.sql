@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Värd: 127.0.0.1
--- Tid vid skapande: 05 jan 2017 kl 11:01
+-- Tid vid skapande: 09 jan 2017 kl 12:16
 -- Serverversion: 10.1.16-MariaDB
 -- PHP-version: 7.0.9
 
@@ -32,6 +32,7 @@ CREATE TABLE `posts` (
   `postID` int(10) UNSIGNED NOT NULL,
   `authorID` int(10) UNSIGNED NOT NULL,
   `post_title` varchar(255) DEFAULT NULL,
+  `post_link` varchar(255) DEFAULT NULL,
   `post_content` text,
   `posted_on` datetime DEFAULT NULL,
   `updated_on` datetime DEFAULT NULL,
@@ -102,17 +103,17 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT för tabell `posts`
 --
 ALTER TABLE `posts`
-  MODIFY `postID` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `postID` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
 --
 -- AUTO_INCREMENT för tabell `tokens`
 --
 ALTER TABLE `tokens`
-  MODIFY `cookieID` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `cookieID` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
 --
 -- AUTO_INCREMENT för tabell `users`
 --
 ALTER TABLE `users`
-  MODIFY `uid` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `uid` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
 --
 -- Restriktioner för dumpade tabeller
 --
