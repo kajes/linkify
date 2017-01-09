@@ -36,7 +36,7 @@ if (isset($_POST['newPassword'])) {
 
 }
 
-
+// TODO: Insert avatar
 
 //================================================================================================
 // All fine so let's update user
