@@ -1,13 +1,9 @@
 <?php
 
-  $userGet->execute([':authorID' => (int)$_SESSION['currentUser']]);
-  $user = $userGet->fetch(PDO::FETCH_ASSOC);
+  $user = $dbConnection->query("SELECT * FROM users WHERE uid = {$_SESSION['currentUser']}")->fetch(PDO::FETCH_ASSOC);
 
-  if ($user['avatarID'] === NULL) {
-    $avatar = '/resources/img/avatars/0.jpg';
-  } else {
-    $avatar = '/resources/img/avatars/'.$user['avatarID'].'.jpg';
-  }
+  $userBio = ($user['bio'] !== NULL) ? $user['bio'] : '';
+  $avatar = ($user['avatarID'] !== NULL) ? $user['avatarID'] : '0';
 
 ?>
 <section class="userSettingsWrapper">
@@ -42,9 +38,9 @@
 
     <div class="fieldset userBio">
       <label for="userBio">Biography:</label>
-      <textarea name="userBio"></textarea>
+      <textarea name="userBio"><?= $userBio ?></textarea>
       <?php
-        if (isset($_SESSION['passwordError'])) {
+        if (isset($_SESSION['bioError'])) {
           echo '<h5 class="error">'.$_SESSION['bioError'].'</h5>';
           unset($_SESSION['bioError']);
         }

@@ -29,7 +29,7 @@ $registerUser = $dbConnection->prepare($registerUserQuery);
 // TODO: Prepare query for user row update
 $updateUserQuery = <<<EOT
 UPDATE users
-SET (email = :email, password = :password)
+SET (email = :email, password = :password, bio = :userBio)
 WHERE uid = :uid
 EOT;
 
