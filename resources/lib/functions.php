@@ -30,6 +30,11 @@ function logErrors($error)
 //================================================================================================
 function returnDie()
 {
+  // TODO: Check for accept header for json ajax
+  // TODO: If accept header is json, return json errors
+  if (condition) {
+    # code...
+  }
   header('Location: /');
   die;
 }

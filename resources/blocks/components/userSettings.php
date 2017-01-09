@@ -19,6 +19,12 @@
     <div class="fieldset email">
       <label for="emailInput">Email:</label>
       <input type="email" name="emailInput">
+      <?php
+        if (isset($_SESSION['emailError'])) {
+          echo '<h5 class="error">'.$_SESSION['emailError'].'</h5>';
+          unset($_SESSION['emailError']);
+        }
+      ?>
     </div>
 
     <div class="fieldset password">
