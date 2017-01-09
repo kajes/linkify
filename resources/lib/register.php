@@ -56,4 +56,5 @@ try {
 }
 
 // Redirect back to landing page on success or failure
+$_SESSION['currentUser'] = (int)$dbConnection->query("SELECT uid FROM users WHERE email = '{$email}' LIMIT 1")->fetch(PDO::FETCH_ASSOC)['uid'];
 returnDie();

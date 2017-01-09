@@ -35,3 +35,23 @@ if (isset($_POST['newPassword'])) {
   }
 
 }
+
+//================================================================================================
+// All fine so let's update user
+//================================================================================================
+
+// Assign variables
+$email = (isset($_POST['emailInput']) ? $_POST['emailInput'] : $user['email']);
+$password = (isset($_POST['newPassword'])) ? password_hash($_POST['newPassword'], PASSWORD_BCRYPT) : $user['password'];
+
+// Try to update user row with new information
+try {
+  $updateUser->execute([
+    ':email' => $email,
+    ':password' => $password,
+    ':uid' => $user['uid']
+  ]);
+} catch (PDOException $e) {
+  $_SESSION['updateUserError'] = "Failed to update account information. Please contact the site administrator.";
+  logErrors($e->getMessage());
+}

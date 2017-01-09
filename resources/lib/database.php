@@ -19,7 +19,6 @@ try {
 //================================================================================================
 // Register and change user data
 //================================================================================================
-// TODO: More fields for bio and avatar
 $registerUserQuery = <<<EOT
 INSERT INTO users (name, email, password)
 VALUES (:name, :email, :password)
@@ -28,6 +27,13 @@ EOT;
 $registerUser = $dbConnection->prepare($registerUserQuery);
 
 // TODO: Prepare query for user row update
+$updateUserQuery = <<<EOT
+UPDATE users
+SET (email = :email, password = :password)
+WHERE uid = :uid
+EOT;
+
+$updateUser = $dbConnection->prepare($updateUserQuery);
 
 //================================================================================================
 // User sign in

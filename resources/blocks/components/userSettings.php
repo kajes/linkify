@@ -1,6 +1,6 @@
 <?php
 
-  $userGet->execute([':authorID' => $_SESSION['currentUser']]);
+  $userGet->execute([':authorID' => (int)$_SESSION['currentUser']]);
   $user = $userGet->fetch(PDO::FETCH_ASSOC);
 
   if ($user['avatarID'] === NULL) {

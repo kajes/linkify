@@ -140,7 +140,6 @@ function postDisplay($userQuery, $postQuery, $parentID=0, $level=0)
 
     // TODO: Vote count box here
 
-    // TODO: Author box here
     $output .= '<div class="authorBox">';
     $output .= '<img src="/resources/img/avatars/1.jpg" class="userAvatar" height="75px" width="75px">';
     $output .= '<p class="userName"><a href="/?userID='.$post['authorID'].'">'.$postAuthor['name'].'</a></p>';
