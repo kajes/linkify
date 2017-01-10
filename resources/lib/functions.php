@@ -116,6 +116,21 @@ function checkLogin($query)
 }
 
 //================================================================================================
+// Validate and Get image content type function
+//================================================================================================
+function getImageContentType($image)
+{
+  // die(var_dump(exif_imagetype($image)));
+  // if (exif_imagetype($image) !== 2 && exif_imagetype($image) !== 3) {
+  if (!in_array(exif_imagetype($image), [2, 3])) {
+    return false;
+  } else {
+    return (exif_imagetype($image) == 2) ? "jpg" : "png";
+  }
+
+}
+
+//================================================================================================
 // Recursive function for presenting posts and comments
 //================================================================================================
 function postDisplay($userQuery, $postQuery, $parentID=0, $level=0)

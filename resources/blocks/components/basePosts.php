@@ -28,7 +28,7 @@
       if ($user['avatarID'] === NULL) {
         $avatar = '/resources/img/avatars/0.jpg';
       } else {
-        $avatar = '/resources/img/avatars/'.$user['avatarID'].'.jpg';
+        $avatar = '/resources/img/avatars/'.$user['avatarID'].'.'.$user['avatarImageType'];
       }
 
     ?>

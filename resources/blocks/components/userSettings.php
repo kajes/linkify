@@ -3,7 +3,7 @@
   $user = $dbConnection->query("SELECT * FROM users WHERE uid = {$_SESSION['currentUser']}")->fetch(PDO::FETCH_ASSOC);
 
   $userBio = ($user['bio'] !== NULL) ? $user['bio'] : '';
-  $avatar = ($user['avatarID'] !== NULL) ? $user['avatarID'] : '0';
+  $avatar = ($user['avatarID'] !== NULL) ? $user['avatarID'].'.'.$user['avatarImageType'] : '0.jpg';
 
 ?>
 <section class="userSettingsWrapper">
@@ -14,7 +14,7 @@
 
     <div class="fieldset email">
       <label for="emailInput">Email:</label>
-      <input type="email" name="emailInput">
+      <input type="email" name="emailInput" value="<?= $user['email'] ?>">
       <?php
         if (isset($_SESSION['emailError'])) {
           echo '<h5 class="error">'.$_SESSION['emailError'].'</h5>';
@@ -50,7 +50,7 @@
     <div class="fieldset avatar">
       <label for="avatarInput">Change avatar:</label>
       <input type="file" name="avatar" accept="image/jpeg image/png">
-      <div class="placeholder avatar" id="avatarPlaceholder" style="background: url(<?= $avatar ?>) no-repeat center center; background-size: cover;"></div>
+      <div class="placeholder avatar" id="avatarPlaceholder" style="background: url(/resources/img/avatars/<?= $avatar ?>) no-repeat center center; background-size: cover; height: 75px; width: 75px;"></div>
       <?php
         if (isset($_SESSION['avatarError'])) {
           echo '<h5 class="error">'.$_SESSION['avatarError'].'</h5>';

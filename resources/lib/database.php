@@ -26,10 +26,9 @@ EOT;
 
 $registerUser = $dbConnection->prepare($registerUserQuery);
 
-// TODO: Prepare query for user row update
 $updateUserQuery = <<<EOT
 UPDATE users
-SET (email = :email, password = :password, bio = :userBio)
+SET email = :email, password = :password, bio = :userBio, avatarID = :avatarID, avatarImageType = :avatarImageType
 WHERE uid = :uid
 EOT;
 
