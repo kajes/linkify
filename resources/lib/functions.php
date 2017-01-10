@@ -9,34 +9,35 @@ session_start();
 //================================================================================================
 function logErrors($error)
 {
-  $requestTime = date(c,$_SERVER['REQUEST_TIME']);
-  $requestContent = $_POST ?? $_GET;
-  $errorOrigin = $_SERVER['PHP_SELF'];
-
-  $errorMessage = [
-    '--- START ---',
-    $requestTime,
-    $requestContent,
-    $errorOrigin,
-    $error,
-    '--- END ---'
-  ];
-
-  file_put_contents('/resources/logs/errorlog.txt', $errorMessage, FILE_APPEND);
+  file_put_contents($_SERVER['DOCUMENT_ROOT']."resources/logs/errorlog.txt", $error."\n\n", FILE_APPEND);
 }
 
 //================================================================================================
-// Simple Return Function
+// Return and error handling function
 //================================================================================================
 function returnDie()
 {
   // TODO: Check for accept header for json ajax
   // TODO: If accept header is json, return json errors
-  if (condition) {
+
+  if (strpos($_SERVER['HTTP_ACCEPT'], "application/json") !== FALSE) {
     # code...
   }
+
   header('Location: /');
   die;
+}
+
+//================================================================================================
+// Required fields validation
+//================================================================================================
+function validateFields(array $array): bool
+{
+  if (in_array("", $array)) {
+    return false;
+  }
+
+  return true;
 }
 
 //================================================================================================
@@ -142,7 +143,7 @@ function postDisplay($userQuery, $postQuery, $parentID=0, $level=0)
   ]);
   $posts = $postQuery->fetchAll(PDO::FETCH_ASSOC);
 
-  echo "<ul>";
+  echo '<div class="comment child">';
   foreach ($posts as $key => $post) {
 
     // Get users from db
@@ -151,11 +152,10 @@ function postDisplay($userQuery, $postQuery, $parentID=0, $level=0)
     ]);
     $postAuthor = $userQuery->fetch(PDO::FETCH_ASSOC);
 
-    $output = '<div class="comment child">';
 
     // TODO: Vote count box here
 
-    $output .= '<div class="authorBox">';
+    $output = '<div class="authorBox">';
     $output .= '<img src="/resources/img/avatars/1.jpg" class="userAvatar" height="75px" width="75px">';
     $output .= '<p class="userName"><a href="/?userID='.$post['authorID'].'">'.$postAuthor['name'].'</a></p>';
     $output .= '</div>';
@@ -195,11 +195,11 @@ function postDisplay($userQuery, $postQuery, $parentID=0, $level=0)
       $output .= 'You must log in to comment. Log in or register <span class="loginLink">here</span>.';
     }
 
-    $output .= "</div>";
     echo $output;
-
     postDisplay($userQuery, $postQuery, $post['postID'], $level+1);
+
+    echo "</div>";
+
   }
-  echo "</ul>";
 
 }

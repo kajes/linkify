@@ -12,8 +12,8 @@ if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
 }
 
 // Check if all registration fields are entered, else return to landing page and display error message
-if (!isset($_POST['firstName']) || !isset($_POST['lastName']) || !isset($_POST['email']) || !isset($_POST['password']) || !isset($_POST['password_reenter'])) {
-  $_SESSION['registerError'] = 'Please fill in all fields.';
+if (!validateFields([$_POST['firstName'], $_POST['lastName'], $_POST['email'], $_POST['password'], $_POST['password_reenter']])) {
+  $_SESSION['registerError'] = 'Please fill in all required fields.';
   returnDie();
 }
 
@@ -23,14 +23,14 @@ if (!filter_var($_POST['email'], FILTER_VALIDATE_EMAIL)) {
   returnDie();
 }
 
-// Assign variables and sanitize
-$fullName = filter_var($_POST['firstName'], FILTER_SANITIZE_STRING).' '.filter_var($_POST['lastName'], FILTER_SANITIZE_STRING);
+// Assign variables
+$fullName = $_POST['firstName'].' '.$_POST['lastName'];
 $email = $_POST['email'];
-$password = filter_var($_POST['password'], FILTER_SANITIZE_STRING);
-$passwordReenter = filter_var($_POST['password_reenter'], FILTER_SANITIZE_STRING);
+$password = $_POST['password'];
+$passwordReenter = $_POST['password_reenter'];
 
 // Check if email already exists in database
-if ($dbConnection->query("SELECT email FROM users WHERE email = '$email' LIMIT 1")->fetch()) {
+if ($dbConnection->query("SELECT email FROM users WHERE email = '{$email}' LIMIT 1")->fetch()) {
   $_SESSION['registerError'] = 'Email is already registered. Please try another email adress.';
   returnDie();
 }

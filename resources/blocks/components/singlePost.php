@@ -12,6 +12,12 @@
   ]);
   $user = $userGet->fetch(PDO::FETCH_ASSOC);
 
+  if ($user['avatarID'] !== NULL) {
+    $avatar = $user['avatarID'].'.'.$user['avatarImageType'];
+  } else {
+    $avatar = '0.jpg';
+  }
+
   // Format the date for each post
   $postDate = date('l jS \o\f F, Y', strtotime($basePost['posted_on']));
   $updateDate = date('l jS \o\f F, Y', strtotime($basePost['updated_on']));
@@ -20,9 +26,9 @@
 <section class="postContent">
 
   <div class="contentBox">
-    <div class="authorBox">'
-      <img src="/resources/img/avatars/1.jpg" class="userAvatar" height="75px" width="75px">'
-      <p class="userName">By: <a href="/?userID='.$post['authorID'].'"><?= $user['name'] ?></a></p>
+    <div class="authorBox">
+      <img src="/resources/img/avatars/<?= $avatar ?>" class="userAvatar" height="75px" width="75px">
+      <p class="userName">By: <a href="/?userID='<?= $post['authorID'] ?>"><?= $user['name'] ?></a></p>
     </div>
 
     <div class="voteBox">
@@ -48,6 +54,16 @@
         <span>| Updated on: <?= $updateDate ?></span>
       <?php } ?>
     </div>
+
+    <form class="newCommentForm" action="resources/lib/createPost.php" method="POST">
+      <input type="hidden" name="parent_id" value="<?= $basePost['postID'] ?>">
+      <textarea name="postContent" required></textarea>
+      <input type="submit" name="createCommentExecute" value="Comment">
+      <?php if (isset($_POST['postError'])) { ?>
+        <h5 class="error"><?= $_SESSION['postError'] ?></h5>
+        <?php unset($_SESSION['postError']) ?>
+      <?php } ?>
+    </form>
 
     <!-- Recurse to get all comments -->
     <?php postDisplay($userGet, $postGet, $basePost['postID']) ?>

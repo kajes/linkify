@@ -13,13 +13,13 @@ $parentID = (int)$_POST['parent_id'];
 // Do check to see if post is comment or a base level post. Other fields are required depending on which
 if ($parentID === 0) {
   // Check if all mandatory fields are entered, else send back with error
-  if (!isset($_POST['postTitle']) || !isset($_POST['postContent'])) {
-    $_SESSION['postError'] = 'All mandatory fields must be entered before publishing';
+  if (!validateFields([$_POST['postTitle'], $_POST['postContent']])) {
+    $_SESSION['postError'] = 'All required fields must be entered before publishing';
     returnDie();
   }
 } elseif ($parentID < 0) {
-  if (!isset($_POST['postContent'])) {
-    $_SESSION['postError'] = 'All mandatory fields must be entered before publishing';
+  if (!validateFields([$_POST['postContent']])) {
+    $_SESSION['postError'] = 'All required fields must be entered before publishing';
     returnDie();
   }
 }

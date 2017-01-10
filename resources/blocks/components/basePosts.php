@@ -34,8 +34,8 @@
     ?>
 
       <div class="contentBox">
-        <div class="authorBox">'
-          <img src="<?= $avatar ?>" class="userAvatar" height="75px" width="75px">'
+        <div class="authorBox">
+          <img src="<?= $avatar ?>" class="userAvatar" height="75px" width="75px">
           <p class="userName">By: <a href="/?userID='.$post['authorID'].'"><?= $user['name'] ?></a></p>
         </div>
 
@@ -60,6 +60,11 @@
             <span>| Updated on: <?= $updateDate ?></span>
           <?php } ?>
           <p class="commentsLink"><a href="?postID=<?= $post['postID'] ?>"><?= $commentCount ?> Comments</a></p>
+          <?php if ($user['uid'] === $_SESSION['currentUser']) { ?>
+            <?php // TODO: Post edit and delete here ?>
+            <button class="postEdit">Edit post</button>
+            <button class="Remove post">Remove post</button>
+          <?php } ?>
         </div>
 
       </div>

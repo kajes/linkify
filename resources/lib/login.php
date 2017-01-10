@@ -12,7 +12,7 @@ if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
 }
 
 // Check if all required fields are entered, otherwise display errormessage
-if (!isset($_POST['email']) || !isset($_POST['password'])) {
+if (!validateFields([$_POST['email'], $_POST['password']])) {
   $_SESSION['loginError'] = 'Please enter all required fields.';
   returnDie();
 }

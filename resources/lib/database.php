@@ -13,7 +13,7 @@ try {
   $dbConnection->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 } catch (PDOException $e) {
   echo '<h1 style="text-align: center;">Unable to connect to database.</h1>';
-  die($e->getMessage());
+  file_put_contents($_SERVER['DOCUMENT_ROOT']."resources/logs/errorlog.txt", $e->getMessage()."\n", FILE_APPEND);
 }
 
 //================================================================================================
