@@ -134,78 +134,34 @@ function getImageContentType($image)
 //================================================================================================
 // Recursive function for presenting posts and comments
 //================================================================================================
-function postDisplay($userQuery, $postQuery, $parentID=0, $level=0)
+function postDisplay($dbConnection, $parentID=0, $level=0)
 {
 
   // Get the base posts
-  $postQuery->execute([
-    ':parentID' => $parentID
-  ]);
-  $posts = $postQuery->fetchAll(PDO::FETCH_ASSOC);
+  $posts = $dbConnection->query("SELECT * FROM posts WHERE parent_id = {$parentID} ORDER BY voteCount DESC, posted_on DESC")->fetchAll(PDO::FETCH_ASSOC);
 
   echo '<div class="comment child">';
   foreach ($posts as $key => $post) {
 
+    $commentCount = count($dbConnection->query("SELECT * FROM posts WHERE parent_id = {$post['postID']}")->fetchAll(PDO::FETCH_ASSOC));
+    $hasComments = ($commentCount >= 1) ? true:false;
+
     // Get users from db
-    $userQuery->execute([
-      ':authorID' => $post['authorID']
-    ]);
-    $postAuthor = $userQuery->fetch(PDO::FETCH_ASSOC);
+    $user = $dbConnection->query("SELECT * FROM users WHERE uid = {$post['authorID']} LIMIT 1")->fetch(PDO::FETCH_ASSOC);
 
-    // Author box
-    $output = '<div class="authorBox">';
-    $output .= '<img src="/resources/img/avatars/1.jpg" class="userAvatar" height="75px" width="75px">';
-    $output .= '<p class="userName"><a href="/?userID='.$post['authorID'].'">'.$postAuthor['name'].'</a></p>';
-    $output .= '</div>';
-
-    // Vote Counter
-    $output .=
-    '<div class="voteBox">
-      <i class="fa fa-thumbs-up voteUp" aria-hidden="true"></i>
-      <h4 class="voteCount" data-postID="'.$post['postID'].'">'.$post['voteCount'].'</h4>
-      <i class="fa fa-thumbs-down voteDown" aria-hidden="true"></i>
-    </div>';
-
-    // Output link text on base posts only
-    if ($post['parent_id'] === '0') {
-      $output .= '<h3>';
-
-      // Output post title as link if link exists, else only output title
-      if ($post['post_link'] !== NULL) {
-        $output .= '<a href="'.$post['post_link'].'" target="_blank" rel="noopener">'.$post['post_title'].'</a>';
-      } else {
-        $output .= $post['post_title'];
-      }
-
-      $output .= '</h3>';
-    }
-
-    $output .= '<p>'.$post['post_content'].'</p>';
-
-    // Render commenting field only if user is logged in
-    if (isset($_SESSION['currentUser'])) {
-      $output .= '<form class="newCommentForm" action="resources/lib/createPost.php" method="POST">';
-      $output .= '<input type="hidden" name="parent_id" value="'.$post['postID'].'">';
-      $output .= '<textarea name="postContent" required></textarea>';
-      $output .= '<input type="submit" name="createCommentExecute" value="Comment">';
-
-      if (isset($_SESSION['postError'])) {
-        $output .= '<h5 class="error">'.$_SESSION['postError'].'</h5>';
-        unset($_SESSION['postError']);
-      }
-
-      $output .= '</form>';
-
-
+    if ($user['avatarID'] === NULL) {
+      $avatar = '0.jpg';
     } else {
-      $output .= 'You must log in to comment. Log in or register <span class="loginLink">here</span>.';
+      $avatar = $user['avatarID'].'.'.$user['avatarImageType'];
     }
 
-    echo $output;
-    postDisplay($userQuery, $postQuery, $post['postID'], $level+1);
+    require 'resources/blocks/components/post.php';
 
-    echo "</div>";
+    if ($hasComments) {
+      postDisplay($dbConnection, (int)$post['postID'], $level+1);
+    }
 
   }
+  echo "</div>";
 
 }

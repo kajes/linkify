@@ -1,78 +1,32 @@
 <section class="postContent">
 
-  <div>
-
-    <?php
-    $postGet->execute([
-      ':parentID' => 0
-    ]);
-    $posts = $postGet->fetchAll(PDO::FETCH_ASSOC);
+  <?php
+    $posts = $dbConnection->query("SELECT * FROM posts WHERE parent_id = 0")->fetchAll(PDO::FETCH_ASSOC);
 
     foreach ($posts as $key => $post) {
 
       // Get user for each post
-      $userGet->execute([
-        ':authorID' => $post['authorID']
-      ]);
-      $user = $userGet->fetch(PDO::FETCH_ASSOC);
+      $user = $dbConnection->query("SELECT * FROM users WHERE uid = {$post['authorID']} LIMIT 1")->fetch(PDO::FETCH_ASSOC);
 
       // Format the date for each post
       $postDate = date('l jS \o\f F, Y', strtotime($post['posted_on']));
       $updateDate = date('l jS \o\f F, Y', strtotime($post['updated_on']));
 
-      $postGet->execute([
-        ':parentID' => $post['postID']
-      ]);
-      $commentCount = count($postGet->fetchAll());
+      // Count comments and set bool for comments
+      $commentCount = count($dbConnection->query("SELECT * FROM posts WHERE parent_id = {$post['postID']}")->fetchAll());
+      $hasComments = ($commentCount >= 1) ? true:false;
 
+      // Set the avatar path
       if ($user['avatarID'] === NULL) {
-        $avatar = '/resources/img/avatars/0.jpg';
+        $avatar = '0.jpg';
       } else {
-        $avatar = '/resources/img/avatars/'.$user['avatarID'].'.'.$user['avatarImageType'];
+        $avatar = $user['avatarID'].'.'.$user['avatarImageType'];
       }
 
-    ?>
+      require 'post.php';
 
-      <div class="contentBox">
-        <div class="authorBox">
-          <img src="<?= $avatar ?>" class="userAvatar" height="75px" width="75px">
-          <p class="userName">By: <a href="/?userID='.$post['authorID'].'"><?= $user['name'] ?></a></p>
-        </div>
+    } // End Foreach
 
-        <div class="voteBox">
-          <i class="fa fa-thumbs-up voteUp" aria-hidden="true"></i>
-          <h4 class="voteCount" data-postID="<?= $post['postID'] ?>"><?= $post['voteCount'] ?></h4>
-          <i class="fa fa-thumbs-down voteDown" aria-hidden="true"></i>
-        </div>
-
-        <h2>
-          <?php if ($post['post_link'] !== NULL) { ?>
-            <a href="<?= $post['post_link'] ?>" target="_blank" rel="noopener"><?= $post['post_title'] ?></a>
-            <span>(<a href="<?= $post['post_link'] ?>" target="_blank" rel="noopener"><?= $post['post_link'] ?></a>)</span>
-          <?php } else {
-            echo $post['post_title'];
-          } ?>
-        </h2>
-
-        <p><?= $post['post_content'] ?></p>
-
-        <div class="contentMetaBox">
-          <span>Posted on: <?= $postDate ?></span>
-          <?php if ($postDate !== $updateDate) { ?>
-            <span>| Updated on: <?= $updateDate ?></span>
-          <?php } ?>
-          <p class="commentsLink"><a href="?postID=<?= $post['postID'] ?>"><?= $commentCount ?> Comments</a></p>
-          <!-- <?php if ($user['uid'] === $_SESSION['currentUser']) { ?>
-            <?php // TODO: Post edit and delete here ?>
-            <button class="postEdit">Edit post</button>
-            <button class="Remove post">Remove post</button>
-          <?php } ?> -->
-        </div>
-
-      </div>
-
-    <?php } // End Foreach ?>
-
-  </div>
+  ?>
 
 </section>
