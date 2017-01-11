@@ -152,13 +152,19 @@ function postDisplay($userQuery, $postQuery, $parentID=0, $level=0)
     ]);
     $postAuthor = $userQuery->fetch(PDO::FETCH_ASSOC);
 
-
-    // TODO: Vote count box here
-
+    // Author box
     $output = '<div class="authorBox">';
     $output .= '<img src="/resources/img/avatars/1.jpg" class="userAvatar" height="75px" width="75px">';
     $output .= '<p class="userName"><a href="/?userID='.$post['authorID'].'">'.$postAuthor['name'].'</a></p>';
     $output .= '</div>';
+
+    // Vote Counter
+    $output .=
+    '<div class="voteBox">
+      <i class="fa fa-thumbs-up voteUp" aria-hidden="true"></i>
+      <h4 class="voteCount">'.$post['voteCount'].'</h4>
+      <i class="fa fa-thumbs-down voteDown" aria-hidden="true"></i>
+    </div>';
 
     // Output link text on base posts only
     if ($post['parent_id'] === '0') {

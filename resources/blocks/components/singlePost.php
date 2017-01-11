@@ -28,11 +28,13 @@
   <div class="contentBox">
     <div class="authorBox">
       <img src="/resources/img/avatars/<?= $avatar ?>" class="userAvatar" height="75px" width="75px">
-      <p class="userName">By: <a href="/?userID='<?= $post['authorID'] ?>"><?= $user['name'] ?></a></p>
+      <p class="userName">By: <a href="/?userID='<?= $basePost['authorID'] ?>"><?= $user['name'] ?></a></p>
     </div>
 
     <div class="voteBox">
-
+      <i class="fa fa-thumbs-up voteUp" aria-hidden="true"></i>
+      <h4 class="voteCount"><?= $basePost['voteCount'] ?></h4>
+      <i class="fa fa-thumbs-down voteDown" aria-hidden="true"></i>
     </div>
 
     <div class="contentBox">

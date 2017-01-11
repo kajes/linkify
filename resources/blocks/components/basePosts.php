@@ -40,7 +40,9 @@
         </div>
 
         <div class="voteBox">
-
+          <i class="fa fa-thumbs-up voteUp" aria-hidden="true"></i>
+          <h4 class="voteCount"><?= $post['voteCount'] ?></h4>
+          <i class="fa fa-thumbs-down voteDown" aria-hidden="true"></i>
         </div>
 
         <h2>

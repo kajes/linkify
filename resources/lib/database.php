@@ -58,6 +58,17 @@ $createPost = $dbConnection->prepare($postCreateQuery);
 // TODO: Query for updating posts
 
 //================================================================================================
+// Voting update
+//================================================================================================
+$voteQuery = <<<EOT
+UPDATE posts
+SET voteCount = voteCount + (:vote)
+WHERE postID = :postID
+EOT;
+
+$registerVote = $dbConnection->prepare($voteQuery);
+
+//================================================================================================
 // Prepare ingredients for baking cookie
 //================================================================================================
 $bowl = <<<EOT
