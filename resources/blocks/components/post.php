@@ -1,8 +1,4 @@
 <div class="contentBox">
-  <div class="authorBox">
-    <img src="/resources/img/avatars/<?= $avatar ?>" class="userAvatar" height="75px" width="75px">
-    <p class="userName">By: <a href="/?userID='.$post['authorID'].'"><?= $user['name'] ?></a></p>
-  </div>
 
   <div class="voteBox">
     <i class="fa fa-thumbs-up voteUp" aria-hidden="true"></i>
@@ -10,7 +6,12 @@
     <i class="fa fa-thumbs-down voteDown" aria-hidden="true"></i>
   </div>
 
-  <h2>
+  <div class="authorBox">
+    <img src="/resources/img/avatars/<?= $avatar ?>" class="userAvatar" height="75px" width="75px">
+    <p class="userName">By: <a href="/?userID='.$post['authorID'].'"><?= $user['name'] ?></a></p>
+  </div>
+
+  <h2 class="postTitle">
     <?php if ($post['post_link'] !== NULL) { ?>
       <a href="<?= $post['post_link'] ?>" target="_blank" rel="noopener"><?= $post['post_title'] ?></a>
       <span>(<a href="<?= $post['post_link'] ?>" target="_blank" rel="noopener"><?= $post['post_link'] ?></a>)</span>
@@ -19,7 +20,7 @@
     } ?>
   </h2>
 
-  <p><?= $post['post_content'] ?></p>
+  <p id="id-<?= $post['postID'] ?>" class="postContent"><?= $post['post_content'] ?></p>
 
   <div class="contentMetaBox">
     <span>Posted on: <?= $post['posted_on'] ?></span>
@@ -29,8 +30,8 @@
     <p class="commentsLink"><a href="?postID=<?= $post['postID'] ?>"><?= $commentCount ?> Comments</a></p>
     <?php if (isset($_SESSION['currentUser']) && $user['uid'] === $_SESSION['currentUser']) { ?>
       <?php // TODO: Post edit and delete here ?>
-      <button class="postEdit">Edit post</button>
-      <button class="Remove post">Remove post</button>
+      <button class="postEdit" data-postid="<?= $post['postID'] ?>">Edit post</button>
+      <button class="Remove post" data-postid="<?= $post['postID'] ?>">Remove post</button>
     <?php } ?>
   </div>
 

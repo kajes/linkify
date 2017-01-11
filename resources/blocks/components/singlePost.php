@@ -5,10 +5,7 @@
   $post = $dbConnection->query("SELECT * FROM posts WHERE postID = {$postID}")->fetch(PDO::FETCH_ASSOC);
 
   // Get the user info about author
-  $userGet->execute([
-    ':authorID' => $post['authorID']
-  ]);
-  $user = $userGet->fetch(PDO::FETCH_ASSOC);
+  $user = $dbConnection->query("SELECT * FROM users WHERE uid = {$post['authorID']} LIMIT 1")->fetch(PDO::FETCH_ASSOC);
 
   if ($user['avatarID'] !== NULL) {
     $avatar = $user['avatarID'].'.'.$user['avatarImageType'];

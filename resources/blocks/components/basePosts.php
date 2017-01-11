@@ -1,7 +1,7 @@
 <section class="postContent">
 
   <?php
-    $posts = $dbConnection->query("SELECT * FROM posts WHERE parent_id = 0")->fetchAll(PDO::FETCH_ASSOC);
+    $posts = $dbConnection->query("SELECT * FROM posts WHERE parent_id = 0 ORDER BY voteCount DESC, posted_on DESC")->fetchAll(PDO::FETCH_ASSOC);
 
     foreach ($posts as $key => $post) {
 
