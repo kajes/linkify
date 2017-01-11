@@ -41,7 +41,7 @@
 
         <div class="voteBox">
           <i class="fa fa-thumbs-up voteUp" aria-hidden="true"></i>
-          <h4 class="voteCount"><?= $post['voteCount'] ?></h4>
+          <h4 class="voteCount" data-postID="<?= $post['postID'] ?>"><?= $post['voteCount'] ?></h4>
           <i class="fa fa-thumbs-down voteDown" aria-hidden="true"></i>
         </div>
 
@@ -62,11 +62,11 @@
             <span>| Updated on: <?= $updateDate ?></span>
           <?php } ?>
           <p class="commentsLink"><a href="?postID=<?= $post['postID'] ?>"><?= $commentCount ?> Comments</a></p>
-          <?php if ($user['uid'] === $_SESSION['currentUser']) { ?>
+          <!-- <?php if ($user['uid'] === $_SESSION['currentUser']) { ?>
             <?php // TODO: Post edit and delete here ?>
             <button class="postEdit">Edit post</button>
             <button class="Remove post">Remove post</button>
-          <?php } ?>
+          <?php } ?> -->
         </div>
 
       </div>

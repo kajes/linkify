@@ -162,7 +162,7 @@ function postDisplay($userQuery, $postQuery, $parentID=0, $level=0)
     $output .=
     '<div class="voteBox">
       <i class="fa fa-thumbs-up voteUp" aria-hidden="true"></i>
-      <h4 class="voteCount">'.$post['voteCount'].'</h4>
+      <h4 class="voteCount" data-postID="'.$post['postID'].'">'.$post['voteCount'].'</h4>
       <i class="fa fa-thumbs-down voteDown" aria-hidden="true"></i>
     </div>';
 

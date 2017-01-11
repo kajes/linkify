@@ -3,7 +3,6 @@
 // Todo list
 // TODO: Edit links and posts
 // TODO: Delete links and posts
-// TODO: Up and downvote posts
 
 // Extra features
 // TODO: Delete comments
@@ -38,6 +37,6 @@
       require_once 'resources/blocks/components/footer.php';
     ?>
   </main>
-  <script src="resources/js/main.js" charset="utf-8"></script>
+  <script src="/resources/js/main.js" charset="utf-8"></script>
 </body>
 </html>

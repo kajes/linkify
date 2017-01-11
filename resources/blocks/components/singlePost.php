@@ -33,7 +33,7 @@
 
     <div class="voteBox">
       <i class="fa fa-thumbs-up voteUp" aria-hidden="true"></i>
-      <h4 class="voteCount"><?= $basePost['voteCount'] ?></h4>
+      <h4 class="voteCount" data-postID="<?= $basePost['postID'] ?>"><?= $basePost['voteCount'] ?></h4>
       <i class="fa fa-thumbs-down voteDown" aria-hidden="true"></i>
     </div>
 

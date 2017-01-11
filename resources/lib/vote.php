@@ -7,8 +7,10 @@ if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
   die;
 }
 
+$output = [];
+
 if (!isset($_POST['vote']) || !in_array($_POST['vote'], ['1', '-1']) || !isset($_POST['postID'])) {
-  $error = "Sum Ting Wong";
+  $output['error'] = "Sum Ting Wong";
 }
 
 $vote = (int)$_POST['vote'];
@@ -20,6 +22,10 @@ try {
     ':postID' => $postID
   ]);
 } catch (PDOException $e) {
-  $error = "Failed to register vote.";
+  $output['error'] = "Failed to register vote.";
   logErrors($e->getMessage());
 }
+
+$output['newCount'] = (int)$dbConnection->query("SELECT voteCount FROM posts WHERE postID = {$postID} LIMIT 1")->fetch(PDO::FETCH_ASSOC)['voteCount'];
+
+echo json_encode($output);
