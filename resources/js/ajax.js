@@ -87,23 +87,42 @@ function postEdit(id)
 
   // Create input element with old content
   const contentInput = document.createElement('textarea');
-  contentInput.setAttribute('class', 'newContentEdit');
+  contentInput.classList.add('newContentEdit');
   contentInput.value = oldContent;
 
   // Create save button
   const saveButton = document.createElement('button');
   saveButton.innerHTML = 'Save changes';
-  saveButton.setAttribute('class', 'button editSaveButton for-'+id);
+  saveButton.classList.add('button', 'editSaveButton', 'for-'+id);
+
+  // Create cancel button
+  const cancelButton = document.createElement('button');
+  cancelButton.innerHTML = "Cancel changes";
+  cancelButton.classList.add('button', 'editCancelButton');
 
   // Execute remove and create elements
   elementParent.removeChild(contentElement);
   elementParent.insertBefore(contentInput, sibling);
   elementParent.insertBefore(saveButton, sibling);
+  elementParent.insertBefore(cancelButton, sibling);
 
   // Add event listener to new save button
   saveButton.addEventListener('click', function(){
     fetchEdit(id, contentInput, elementParent, sibling);
-  })
+  });
+
+  // Add event listener to cancel button
+  cancelButton.addEventListener('click', function(){
+
+    // Remove editing field and buttons
+    elementParent.removeChild(contentInput);
+    elementParent.removeChild(saveButton);
+    elementParent.removeChild(cancelButton);
+
+    // Add back the old element in unchanged state
+    elementParent.insertBefore(contentElement, sibling);
+
+  });
 
 }
 
