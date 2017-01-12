@@ -5,7 +5,7 @@
 //================================================================================================
 
 // Event function for voting
-function vote(value, voteCountElement)
+function vote(value, voteCountElement, parent)
 {
 
   // Data that goes into the post request body
@@ -35,8 +35,11 @@ function vote(value, voteCountElement)
           errorElement.classList.add('error');
           errorElement.textContent = data.error;
 
-          const voteBox = document.querySelector('.voteBox');
-          voteBox.appendChild(errorElement);
+          parent.appendChild(errorElement);
+
+          setTimeout(function(){
+            parent.removeChild(errorElement);
+          }, 3000);
 
         } else {
 
@@ -82,8 +85,8 @@ voteBox.forEach(function(singleBox){
   }
 
   // Seperate event listeners for up and down voting
-  voteUp.addEventListener('click', function(){ vote(1, voteCount) });
-  voteDown.addEventListener('click', function(){ vote(-1, voteCount) });
+  voteUp.addEventListener('click', function(){ vote(1, voteCount, singleBox) });
+  voteDown.addEventListener('click', function(){ vote(-1, voteCount, singleBox) });
 
 });
 
