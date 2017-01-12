@@ -67,9 +67,10 @@ $postEdit = $dbConnection->prepare($postEditQuery);
 // Voting update
 //================================================================================================
 $voteQuery = <<<EOT
-UPDATE posts
-SET voteCount = voteCount + (:vote)
-WHERE postID = :postID
+UPDATE posts, users
+SET posts.voteCount = posts.voteCount + (:vote), users.votedOn = :json
+WHERE posts.postID = :postID
+AND users.uid = :uid
 EOT;
 
 $registerVote = $dbConnection->prepare($voteQuery);

@@ -20,11 +20,8 @@ function returnDie()
   // TODO: Check for accept header for json ajax
   // TODO: If accept header is json, return json errors
 
-  if (strpos($_SERVER['HTTP_ACCEPT'], "application/json") !== FALSE) {
-    # code...
-  }
-
-  header('Location: /');
+  // Redirects back to the referer page
+  header("Location: " . $_SERVER['HTTP_REFERER']);
   die;
 }
 

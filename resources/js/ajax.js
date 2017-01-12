@@ -16,6 +16,7 @@ function vote(value, voteCountElement)
   fetch('/resources/lib/vote.php', {
     method: 'POST',
     header: {'Content-type': 'application/x-www-form-urlencoded; charset=UTF-8'},
+    credentials: 'same-origin',
     body: voteData
   })
   .then(
@@ -27,17 +28,32 @@ function vote(value, voteCountElement)
 
       response.json().then(function(data){
 
-        // Update vote count if successful
-        voteCountElement.innerHTML = data.newCount;
+        // Check for errors
+        if (data.error) {
 
-        // Change colors depending on value
-        if (data.newCount <= -1) {
-          voteCountElement.style.color = 'red';
-        } else if (data.newCount == 0) {
-          voteCountElement.style.color = 'black';
-        } else if (data.newCount >= 1) {
-          voteCountElement.style.color = 'green';
+          const errorElement = document.createElement('p');
+          errorElement.classList.add('error');
+          errorElement.textContent = data.error;
+
+          const voteBox = document.querySelector('.voteBox');
+          voteBox.appendChild(errorElement);
+
+        } else {
+
+          // Update vote count if successful
+          voteCountElement.innerHTML = data.newCount;
+
+          // Change colors depending on value
+          if (data.newCount <= -1) {
+            voteCountElement.style.color = 'red';
+          } else if (data.newCount == 0) {
+            voteCountElement.style.color = 'black';
+          } else if (data.newCount >= 1) {
+            voteCountElement.style.color = 'green';
+          }
+
         }
+
       });
     }
   )
