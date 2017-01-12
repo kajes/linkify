@@ -33,8 +33,8 @@
 
     <?php if (isset($_SESSION['currentUser']) && $user['uid'] === $_SESSION['currentUser']) { ?>
       <?php // TODO: Post edit and delete here ?>
-      <button class="postEdit" data-postid="<?= $post['postID'] ?>">Edit post</button>
-      <button class="Remove post" data-postid="<?= $post['postID'] ?>">Remove post</button>
+      <button class="button postEdit" data-postid="<?= $post['postID'] ?>">Edit post</button>
+      <button class="button postRemove" data-postid="<?= $post['postID'] ?>">Remove post</button>
     <?php } ?>
 
     <?php

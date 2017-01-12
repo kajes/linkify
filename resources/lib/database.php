@@ -46,7 +46,7 @@ EOT;
 $userVerify = $dbConnection->prepare($loginQuery);
 
 //================================================================================================
-// Post create and update prepares
+// Post CUD (Create, Update, Delete) prepares
 //================================================================================================
 $postCreateQuery = <<<EOT
 INSERT INTO posts (authorID, post_title, post_link, post_content, posted_on, updated_on, parent_id)
@@ -62,6 +62,14 @@ WHERE postID = :postID
 EOT;
 
 $postEdit = $dbConnection->prepare($postEditQuery);
+
+$postDeleteQuery = <<<EOT
+DELETE FROM posts
+WHERE postID = :postID
+AND authorID = :user
+EOT;
+
+$postDelete = $dbConnection->prepare($postDeleteQuery);
 
 //================================================================================================
 // Voting update

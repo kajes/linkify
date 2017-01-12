@@ -1,8 +1,6 @@
 <?php
 
 // Todo list
-// TODO: Delete links and posts
-
 // Extra features
 // TODO: Delete comments
 // TODO: Reset password with email
@@ -14,9 +12,6 @@
   // Get all the functions
   require_once 'resources/lib/functions.php';
 
-// echo "<pre>";
-// die(var_dump($_SESSION));
-// echo "</pre>";
   $currentUser = checkLogin($hand);
 
 ?>

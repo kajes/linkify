@@ -208,3 +208,53 @@ editButtons.forEach(function(button){
     postEdit(postID);
   })
 });
+
+//================================================================================================
+// Delete post feature
+//================================================================================================
+
+// Event listener for post delete button
+const delButtons = document.querySelectorAll('.postRemove');
+
+delButtons.forEach(function(button){
+
+  const contentBox = button.parentElement.parentElement;
+  const contentBoxParent = contentBox.parentElement;
+  const delPostId = button.dataset.postid;
+
+  button.addEventListener('click', function(){
+
+    const delData = new FormData();
+    delData.append('postID', delPostId);
+
+    fetch('resources/lib/removePost.php', {
+      method: 'POST',
+      header: {'Content-type': 'application/x-www-form-urlencoded; charset=UTF-8'},
+      credentials: 'same-origin',
+      body: delData
+    })
+    .then(
+      function(response){
+
+        if (response.status != 200) {
+          console.log('Sum Ting Wong Wit Wemove. Status code: '+response.status);
+          return;
+        }
+
+        response.json().then(function(data){
+
+          if (data.error) {
+            console.log(data.error);
+          } else if (data.message) {
+            console.log(data.message);
+            contentBoxParent.removeChild(contentBox);
+          }
+
+        });
+
+      }
+    )
+
+  });
+
+});
