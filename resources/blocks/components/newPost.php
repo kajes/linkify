@@ -1,4 +1,4 @@
-<section class="newPostWrap">
+<section class="newPostWrap hide">
   <form class="newPostForm" action="resources/lib/createPost.php" method="POST">
     <input type="hidden" name="parent_id" value="0">
     <input type="text" name="postTitle" placeholder="Title" required>

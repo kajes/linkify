@@ -6,7 +6,7 @@
   $avatar = ($user['avatarID'] !== NULL) ? $user['avatarID'].'.'.$user['avatarImageType'] : '0.jpg';
 
 ?>
-<section class="userSettingsWrapper">
+<section class="userSettingsWrapper hide">
 
   <h2 class="settingsHeader">User Settings</h2>
 
@@ -49,7 +49,7 @@
 
     <div class="fieldset avatar">
       <label for="avatarInput">Change avatar:</label>
-      <input type="file" name="avatar" accept="image/jpeg image/png">
+      <input class="avatarUpload" type="file" name="avatar" hidden accept="image/jpeg image/png">
       <div class="placeholder avatar" id="avatarPlaceholder" style="background: url(/resources/img/avatars/<?= $avatar ?>) no-repeat center center; background-size: cover; height: 75px; width: 75px;"></div>
       <?php
         if (isset($_SESSION['avatarError'])) {
