@@ -88,7 +88,7 @@ function postEdit(id)
   // Create input element with old content
   const contentInput = document.createElement('textarea');
   contentInput.setAttribute('class', 'newContentEdit');
-  contentInput.innerHTML = oldContent;
+  contentInput.value = oldContent;
 
   // Create save button
   const saveButton = document.createElement('button');
@@ -102,18 +102,17 @@ function postEdit(id)
 
   // Add event listener to new save button
   saveButton.addEventListener('click', function(){
-    fetchEdit(id, contentInput, newContent, elementParent, sibling);
+    fetchEdit(id, contentInput, elementParent, sibling);
   })
 
 }
 
-function fetchEdit(id, input, newContent, parent, sibling)
+function fetchEdit(id, input, parent, sibling)
 {
 
   // Variables to prepare for fetch call
-  const newContent = contentInput.innerHTML;
   const editData = new FormData();
-  editData.append('postEdit', newContent);
+  editData.append('postEdit', input.value);
   editData.append('postID', id);
 
   // Initiate fetch request
@@ -135,12 +134,12 @@ function fetchEdit(id, input, newContent, parent, sibling)
         const newContentElement = document.createElement('p');
         newContentElement.setAttribute('class', 'postContent');
         newContentElement.setAttribute('id', 'id-'+id);
-        newContentElement.innerHTML = response.newPost;
+        newContentElement.innerHTML = data.newPost.post_content;
 
         // Create response element that confirms change
         const editConfirm = document.createElement('p');
         editConfirm.setAttribute('class', 'message');
-        editConfirm.innerHTML = response.message;
+        editConfirm.innerHTML = data.message;
 
         // TODO: Error message handling on post edit
 
