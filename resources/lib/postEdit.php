@@ -15,6 +15,8 @@ if (!validateFields([$_POST['postEdit'], $_POST['postID']])) {
   die;
 }
 
+// TODO: Format new post date
+
 try {
   $postEdit->execute([
     ':post_content' => $newContent,
@@ -27,5 +29,7 @@ try {
   echo json_encode($response);
   die;
 }
+
+$response['newPost'] = $dbConnection->query("SELECT * FROM posts WHERE postID = {} LIMIT 1")->fetch(PDO::FETCH_ASSOC);
 
 echo json_encode($response);

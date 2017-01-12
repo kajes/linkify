@@ -86,7 +86,7 @@ function postEdit(id)
   const oldContent = contentElement.innerHTML;
 
   // Create input element with old content
-  let contentInput = document.createElement('textarea');
+  const contentInput = document.createElement('textarea');
   contentInput.setAttribute('class', 'newContentEdit');
   contentInput.innerHTML = oldContent;
 
@@ -102,12 +102,12 @@ function postEdit(id)
 
   // Add event listener to new save button
   saveButton.addEventListener('click', function(){
-    fetchEdit(id, newContent);
+    fetchEdit(id, contentInput, newContent, elementParent, sibling);
   })
 
 }
 
-function fetchEdit(id, newContent)
+function fetchEdit(id, input, newContent, parent, sibling)
 {
 
   // Variables to prepare for fetch call
@@ -131,7 +131,23 @@ function fetchEdit(id, newContent)
 
       response.json().then(function(data){
 
+        // Create new element with updated content
+        const newContentElement = document.createElement('p');
+        newContentElement.setAttribute('class', 'postContent');
+        newContentElement.setAttribute('id', 'id-'+id);
+        newContentElement.innerHTML = response.newPost;
 
+        // Create response element that confirms change
+        const editConfirm = document.createElement('p');
+        editConfirm.setAttribute('class', 'message');
+        editConfirm.innerHTML = response.message;
+
+        // TODO: Error message handling on post edit
+
+        // Execute new elements create
+        parent.removeChild(input);
+        parent.insertBefore(newContentElement, sibling);
+        parent.insertBefore(editConfirm, sibling);
 
       });
     }
