@@ -5,7 +5,7 @@ require_once 'functions.php';
 $output = [];
 
 if ($_SERVER['REQUEST_METHOD'] !== 'POST' || !isset($_SESSION['currentUser'])) {
-  $output['error'] = "Something went wrong";
+  $output['error'] = "You need to be logged in to vote";
   echo json_encode($output);
   die;
 }

@@ -8,14 +8,14 @@
 }
 
 .hide {
-  max-height: 0;
-  transition: max-height 50ms ease-in-out;
+  transform: translateY(-100%);
+  transition: transform 500ms ease-in-out;
   overflow: hidden;
 }
 
 .hide.clicked {
-  max-height: 500px;
-  transition: max-height 500ms ease-in-out;
+  transform: translateY(0);
+  transition: transform 500ms ease-in-out;
 }
 
 /*Element styles*/
@@ -61,43 +61,46 @@ button:hover, button:focus  {
   outline: none
 }
 
-input[type=submit] {
-  font-family: vt323, Montserrat, sans-serif;
-}
-
 input:hover, textarea:hover, input:focus, textarea:focus, input[type=submit]:hover, input[type=submit]:focus {
   background-color: var(--dark);
   color: var(--light);
 }
 
+
+
 /*Header styles*/
 header {
-  background-color: var(--dark);
   color: var(--main-green);
+  width: 100%;
   display: flex;
   justify-content: center;
   flex-wrap: wrap;
   position: fixed;
   height: auto;
+  transition: transform 200ms ease-in-out;
 }
 
 header.mainHeader h1 {
+  background-color: var(--dark);
   font-family: vt323, sans-serif;
   font-size: 3.5rem;
   text-align: center;
   flex-basis: 100%;
   margin: 0;
+  z-index: 100;
 }
 
 header section.userMenu {
   display: flex;
   justify-content: space-around;
   flex-basis: 100%;
+  z-index: 100;
 }
 
 header button.loginRegister, section.userMenu button {
   background-color: var(--dark);
   color: var(--main-green);
+  z-index: 100;
 }
 
 header button.loginRegister:hover, header button.loginRegister:focus, section.userMenu button:hover, section.userMenu button:focus {
@@ -108,11 +111,22 @@ header button.loginRegister:hover, header button.loginRegister:focus, section.us
 section.userSettingsWrapper, section.newPostWrap, section.loginRegisterWrapper {
   background-color: var(--main-green);
   flex-basis: 100%;
+  position: absolute;
+  width: 100%;
+  top: 117px;
 }
 
 section.loginRegisterWrapper form {
   padding: 0 2em;
   margin-bottom: 2em;
+}
+
+section.newPostWrap {
+  transform: translateY(-632px);
+}
+
+input[type=submit] {
+  font-family: vt323, Montserrat, sans-serif;
 }
 
 p.label, form h2 {

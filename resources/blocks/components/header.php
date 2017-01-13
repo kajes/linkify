@@ -1,20 +1,23 @@
 <header class="mainHeader">
+
   <h1><a href="/">LINKIFY</a></h1>
+
+  <section class="userMenu">
   <?php if ($currentUser) { ?>
-    <section class="userMenu">
-      <button class="userSettings">SETTINGS</button>
-      <button class="newPost">NEW POST</button>
-      <button type="submit" class="logout">LOG OUT</button>
-    </section>
+    <button class="userSettings">SETTINGS</button>
+    <button class="newPost">NEW POST</button>
+    <button type="submit" class="logout">LOG OUT</button>
   <?php } else { ?>
     <button class="loginRegister">SIGN IN OR REGISTER</button>
-  <?php }
+  <?php } ?>
+  </section>
 
+  <?php
     if (!$currentUser) {
       require_once 'authentication.php';
     } else {
       require_once 'userMenu.php';
     }
-
   ?>
+
 </header>

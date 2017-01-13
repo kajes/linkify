@@ -57,19 +57,16 @@ if (document.querySelector('button.newPost')) {
 // Fix position of main content relative to header
 const mainHeader = document.querySelector('.mainHeader');
 const mainContent = document.querySelector('.mainContent');
-mainContent.style.paddingTop = mainHeader.clientHeight+'px';
-
-let lastKnownPosition = 0;
-let ticking = false;
 const mainH1 = document.querySelector('.mainHeader h1');
+const menuBar = document.querySelector('section.userMenu');
+mainContent.style.paddingTop = mainH1.clientHeight+menuBar.clientHeight+'px';
 
 window.addEventListener('scroll', function(e){
 
-  if (window.scrollY >= 1) {
-    mainH1.classList.add('hide');
+  if (window.scrollY >= mainH1.clientHeight) {
+    mainHeader.style.transform = 'translateY('+-mainH1.clientHeight+'px)';
   } else {
-    mainH1.classList.remove('hide');
+    mainHeader.style.transform = 'translateY(0)';
   }
 
-  console.log(window.scrollY);
 });
