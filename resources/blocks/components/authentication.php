@@ -7,8 +7,10 @@
 
     <input type="password" class="login password" name="password" required placeholder="Password">
 
-    <p class="label rememberMe">Remember me</p>
-    <input type="checkbox" name="rememberMe" value="1">
+    <div class="rememberWrap">
+      <input class="rememberMe" type="checkbox" name="rememberMe" value="1">
+      <label for="rememberMe" class="label rememberMe">Remember me</label>
+    </div>
 
     <input type="submit" class="login submit" value="Sign in">
 

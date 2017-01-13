@@ -8,7 +8,7 @@
 
   <div class="authorBox">
     <img src="/resources/img/avatars/<?= $avatar ?>" class="userAvatar" height="75px" width="75px">
-    <p class="userName">By: <a href="/?userID='.$post['authorID'].'"><?= $user['name'] ?></a></p>
+    <p class="userName">By: <a href="/?userID=<?= $post['authorID'] ?>"><?= $user['name'] ?></a></p>
   </div>
 
   <h2 class="postTitle">

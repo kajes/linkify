@@ -9,13 +9,13 @@
 
 .hide {
   transform: translateY(-100%);
-  transition: transform 500ms ease-in-out;
+  transition: transform 300ms ease-in-out;
   overflow: hidden;
 }
 
 .hide.clicked {
   transform: translateY(0);
-  transition: transform 500ms ease-in-out;
+  transition: transform 300ms ease-in-out;
 }
 
 /*Element styles*/
@@ -25,12 +25,13 @@ a {
 }
 
 h1, h2, h3, h4, h5, h6 {
-  font-family: 'PT Mono', sans-serif;
+  font-family: VT323, sans-serif;
 }
 
 p {
   font-family: Montserrat, sans-serif;
   font-size: 1rem;
+  color: var(--dark);
 }
 
 button {
@@ -39,6 +40,38 @@ button {
   outline: none;
   font-family: vt323, Montserrat, sans-serif;
   font-size: 1.5rem;
+}
+
+form {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  padding: 0 4em;
+}
+
+label.rememberMe {
+	color: var(--dark);
+	align-self: center;
+	flex-grow: 1;
+	flex-basis: 70%;
+	margin: 10px 0 5px;
+	line-height: 1;
+}
+
+form input {
+  flex-basis: 100%;
+  margin: .3em;
+}
+
+div.rememberWrap {
+	display: flex;
+	flex-basis: 100%;
+	justify-content: flex-start;
+}
+
+input.rememberMe {
+	align-self: center;
+	flex-basis: 20%;
 }
 
 input, textarea {
@@ -66,8 +99,6 @@ input:hover, textarea:hover, input:focus, textarea:focus, input[type=submit]:hov
   color: var(--light);
 }
 
-
-
 /*Header styles*/
 header {
   color: var(--main-green);
@@ -91,6 +122,7 @@ header.mainHeader h1 {
 }
 
 header section.userMenu {
+  background-color: var(--dark);
   display: flex;
   justify-content: space-around;
   flex-basis: 100%;
@@ -114,11 +146,7 @@ section.userSettingsWrapper, section.newPostWrap, section.loginRegisterWrapper {
   position: absolute;
   width: 100%;
   top: 117px;
-}
-
-section.loginRegisterWrapper form {
-  padding: 0 2em;
-  margin-bottom: 2em;
+  left: 0;
 }
 
 section.newPostWrap {
@@ -129,7 +157,9 @@ input[type=submit] {
   font-family: vt323, Montserrat, sans-serif;
 }
 
-p.label, form h2 {
+form h2 {
   color: var(--dark);
   text-align: center;
+  margin: .3em 0 0 0;
+  font-size: 2rem;
 }
