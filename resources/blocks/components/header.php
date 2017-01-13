@@ -1,14 +1,20 @@
 <header class="mainHeader">
-  <h1><a href="/">Linkify</a></h1>
+  <h1><a href="/">LINKIFY</a></h1>
   <?php if ($currentUser) { ?>
     <section class="userMenu">
-      <button class="newPost">New post</button>
-      <button class="userSettings">Settings</button>
-      <form action="resources/lib/logout.php" method="POST">
-        <input type="submit" value="Log Out" class="logout">
-      </form>
+      <button class="userSettings">SETTINGS</button>
+      <button class="newPost">NEW POST</button>
+      <button type="submit" class="logout">LOG OUT</button>
     </section>
   <?php } else { ?>
-    <button class="loginRegister">Sign in or register</button>
-  <?php } ?>
+    <button class="loginRegister">SIGN IN OR REGISTER</button>
+  <?php }
+
+    if (!$currentUser) {
+      require_once 'authentication.php';
+    } else {
+      require_once 'userMenu.php';
+    }
+
+  ?>
 </header>

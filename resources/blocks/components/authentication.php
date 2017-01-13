@@ -1,13 +1,13 @@
-<section class="loginRegisterWrapper">
-  <form action="resources/lib/login.php" class="loginForm" method="POST">
+<section class="loginRegisterWrapper hide">
+  <form action="/resources/lib/login.php" class="loginForm" method="POST">
 
-    <h2>Sign in to Linkify:</h2>
+    <h2>Sign in to Linkify</h2>
 
     <input type="text" class="login email" name="email" required placeholder="Email">
 
     <input type="password" class="login password" name="password" required placeholder="Password">
 
-    <label for="rememberMe">Remember me</label>
+    <p class="label rememberMe">Remember me</p>
     <input type="checkbox" name="rememberMe" value="1">
 
     <input type="submit" class="login submit" value="Sign in">
@@ -23,7 +23,7 @@
 
   <form action="resources/lib/register.php" class="registerForm" method="POST">
 
-    <h2>Register here:</h2>
+    <h2>Register here</h2>
 
     <input type="text" class="register firstName" name="firstName" required placeholder="First Name">
 

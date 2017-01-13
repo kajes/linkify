@@ -127,7 +127,7 @@ function postEdit(id)
 
   // Add event listener to new save button
   saveButton.addEventListener('click', function(){
-    fetchEdit(id, contentInput, elementParent, sibling);
+    fetchEdit(id, contentInput, elementParent, sibling, saveButton, cancelButton);
   });
 
   // Add event listener to cancel button
@@ -145,7 +145,7 @@ function postEdit(id)
 
 }
 
-function fetchEdit(id, input, parent, sibling)
+function fetchEdit(id, input, parent, sibling, saveButton, cancelButton)
 {
 
   // Variables to prepare for fetch call
@@ -183,8 +183,15 @@ function fetchEdit(id, input, parent, sibling)
 
         // Execute new elements create
         parent.removeChild(input);
+        parent.removeChild(saveButton);
+        parent.removeChild(cancelButton);
         parent.insertBefore(newContentElement, sibling);
         parent.insertBefore(editConfirm, sibling);
+
+        // Timeout function for removing message
+        setTimeout(function(){
+          parent.removeChild(editConfirm);
+        }, 3000);
 
       });
     }

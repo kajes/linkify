@@ -14,7 +14,7 @@
   <h2 class="postTitle">
     <?php if ($post['post_link'] !== NULL) { ?>
       <a href="<?= $post['post_link'] ?>" target="_blank" rel="noopener"><?= $post['post_title'] ?></a>
-      <span>(<a href="<?= $post['post_link'] ?>" target="_blank" rel="noopener"><?= $post['post_link'] ?></a>)</span>
+      <p>(<a href="<?= $post['post_link'] ?>" target="_blank" rel="noopener"><?= $post['post_link'] ?></a>)</p>
     <?php } else {
       echo $post['post_title'];
     } ?>

@@ -1,14 +1,121 @@
 :root {
-  font-size: 14px;
+  box-sizing: border-box;
+  font-size: 13px;
+  line-height: 1.5;
+  --main-green: #00ff00;
+  --dark: #313131;
+  --light: #fff;
 }
 
 .hide {
   max-height: 0;
-  transition: max-height 1s ease-in-out;
+  transition: max-height 50ms ease-in-out;
   overflow: hidden;
 }
 
 .hide.clicked {
   max-height: 500px;
-  transition: max-height 1s ease-in-out;
+  transition: max-height 500ms ease-in-out;
+}
+
+/*Element styles*/
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: 'PT Mono', sans-serif;
+}
+
+p {
+  font-family: Montserrat, sans-serif;
+  font-size: 1rem;
+}
+
+button {
+  flex-grow: 1;
+  border: none;
+  outline: none;
+  font-family: vt323, Montserrat, sans-serif;
+  font-size: 1.5rem;
+}
+
+input, textarea {
+  border: .1rem solid var(--dark);
+}
+
+button, input, textarea {
+  overflow: visible;
+  padding: .5em;
+  color: var(--main-green);
+  background-color: var(--light);
+  color: var(--dark);
+  transition: color 300ms ease-in-out, background-color 300ms ease-in-out, border-color 300ms ease-in-out;
+  outline: none;
+}
+
+button:hover, button:focus  {
+  background-color: var(--main-green);
+  color: var(--light);
+  outline: none
+}
+
+input[type=submit] {
+  font-family: vt323, Montserrat, sans-serif;
+}
+
+input:hover, textarea:hover, input:focus, textarea:focus, input[type=submit]:hover, input[type=submit]:focus {
+  background-color: var(--dark);
+  color: var(--light);
+}
+
+/*Header styles*/
+header {
+  background-color: var(--dark);
+  color: var(--main-green);
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  position: fixed;
+  height: auto;
+}
+
+header.mainHeader h1 {
+  font-family: vt323, sans-serif;
+  font-size: 3.5rem;
+  text-align: center;
+  flex-basis: 100%;
+  margin: 0;
+}
+
+header section.userMenu {
+  display: flex;
+  justify-content: space-around;
+  flex-basis: 100%;
+}
+
+header button.loginRegister, section.userMenu button {
+  background-color: var(--dark);
+  color: var(--main-green);
+}
+
+header button.loginRegister:hover, header button.loginRegister:focus, section.userMenu button:hover, section.userMenu button:focus {
+  background-color: var(--main-green);
+  color: var(--dark);
+}
+
+section.userSettingsWrapper, section.newPostWrap, section.loginRegisterWrapper {
+  background-color: var(--main-green);
+  flex-basis: 100%;
+}
+
+section.loginRegisterWrapper form {
+  padding: 0 2em;
+  margin-bottom: 2em;
+}
+
+p.label, form h2 {
+  color: var(--dark);
+  text-align: center;
 }

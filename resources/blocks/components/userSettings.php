@@ -13,7 +13,7 @@
   <form action="/resources/lib/userUpdate.php" class="settingsForm" method="POST" enctype="multipart/form-data">
 
     <div class="fieldset email">
-      <label for="emailInput">Email:</label>
+      <p class="label emailInput">New email:</p>
       <input type="email" name="emailInput" value="<?= $user['email'] ?>">
       <?php
         if (isset($_SESSION['emailError'])) {
@@ -24,9 +24,9 @@
     </div>
 
     <div class="fieldset password">
-      <label for="newPassword">New password:</label>
+      <p class="label newPassword">New password:</p>
       <input type="password" name="newPassword">
-      <label for="oldPassword">Old password:</label>
+      <p class="label oldPassword">Old password:</p>
       <input type="password" name="oldPassword">
       <?php
         if (isset($_SESSION['passwordError'])) {
@@ -37,7 +37,7 @@
     </div>
 
     <div class="fieldset userBio">
-      <label for="userBio">Biography:</label>
+      <p class="label userBio">Biography:</p>
       <textarea name="userBio"><?= $userBio ?></textarea>
       <?php
         if (isset($_SESSION['bioError'])) {
@@ -48,7 +48,7 @@
     </div>
 
     <div class="fieldset avatar">
-      <label for="avatarInput">Change avatar:</label>
+      <p class="label avatarInput">Change avatar:</p>
       <input class="avatarUpload" type="file" name="avatar" hidden accept="image/jpeg image/png">
       <div class="placeholder avatar" id="avatarPlaceholder" style="background: url(/resources/img/avatars/<?= $avatar ?>) no-repeat center center; background-size: cover; height: 75px; width: 75px;"></div>
       <?php
