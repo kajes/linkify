@@ -105,3 +105,56 @@ LIMIT 1
 EOT;
 
 $hand = $dbConnection->prepare($plate);
+
+//================================================================================================
+// Main Post feed query
+//================================================================================================
+
+// Multiple posts
+$query = <<<EOT
+SELECT
+    posts.postID AS 'postID',
+    posts.post_title AS 'title',
+    posts.post_link AS 'link',
+    posts.post_content AS 'content',
+    posts.posted_on AS 'postDate',
+    posts.updated_on AS 'updateDate',
+    posts.voteCount AS 'voteCount',
+    posts.parent_id AS 'parent',
+    (SELECT COUNT(*) FROM posts WHERE parent_id = :parent) AS 'commentCount',
+    users.uid AS 'userID',
+    users.name AS 'author',
+    users.avatarID AS 'avatarID',
+    users.avatarImageType AS 'imgType'
+FROM posts
+INNER JOIN users
+ON users.uid = posts.authorID
+WHERE posts.parent_id = :parentID
+ORDER BY 	posts.voteCount DESC, posts.posted_on DESC
+EOT;
+
+$mainPosts = $dbConnection->prepare($query);
+
+// Single post query
+$singleQuery = <<<EOT
+SELECT
+    posts.postID AS 'postID',
+    posts.post_title AS 'title',
+    posts.post_link AS 'link',
+    posts.post_content AS 'content',
+    posts.posted_on AS 'postDate',
+    posts.updated_on AS 'updateDate',
+    posts.voteCount AS 'voteCount',
+    posts.parent_id AS 'parent',
+    (SELECT COUNT(*) FROM posts WHERE parent_id = :parent) AS 'commentCount',
+    users.uid AS 'userID',
+    users.name AS 'author',
+    users.avatarID AS 'avatarID',
+    users.avatarImageType AS 'imgType'
+FROM posts
+INNER JOIN users
+ON users.uid = posts.authorID
+WHERE posts.postID = :postID
+EOT;
+
+$singlePost = $dbConnection->prepare($singleQuery);

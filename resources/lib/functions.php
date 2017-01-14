@@ -131,31 +131,33 @@ function getImageContentType($image)
 //================================================================================================
 // Recursive function for presenting posts and comments
 //================================================================================================
-function postDisplay($dbConnection, $parentID=0, $level=0)
+function postDisplay($mainPosts, $parentID=0, $level=0)
 {
 
   // Get the base posts
-  $posts = $dbConnection->query("SELECT * FROM posts WHERE parent_id = {$parentID} ORDER BY voteCount DESC, posted_on DESC")->fetchAll(PDO::FETCH_ASSOC);
+  $mainPosts->execute([
+    ':parent' => $parentID,
+    ':parentID' => $parentID
+  ]);
+  $posts = $mainPosts->fetchAll(PDO::FETCH_ASSOC);
 
   echo '<div class="comment child">';
   foreach ($posts as $key => $post) {
 
-    $commentCount = count($dbConnection->query("SELECT * FROM posts WHERE parent_id = {$post['postID']}")->fetchAll(PDO::FETCH_ASSOC));
+    $commentCount = $post['commentCount'];
     $hasComments = ($commentCount >= 1) ? true:false;
 
-    // Get users from db
-    $user = $dbConnection->query("SELECT * FROM users WHERE uid = {$post['authorID']} LIMIT 1")->fetch(PDO::FETCH_ASSOC);
-
-    if ($user['avatarID'] === NULL) {
+    // User avatar url
+    if ($post['avatarID'] === NULL) {
       $avatar = '0.jpg';
     } else {
-      $avatar = $user['avatarID'].'.'.$user['avatarImageType'];
+      $avatar = $post['avatarID'].'.'.$post['imgType'];
     }
 
     require 'resources/blocks/components/post.php';
 
     if ($hasComments) {
-      postDisplay($dbConnection, (int)$post['postID'], $level+1);
+      postDisplay($mainPosts, (int)$post['postID'], $level+1);
     }
 
   }
