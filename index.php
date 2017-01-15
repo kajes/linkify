@@ -1,8 +1,8 @@
 <?php
 
 // Todo list
+// TODO: Responsive site
 // Extra features
-// TODO: Delete comments
 // TODO: Reset password with email
 
 ?>

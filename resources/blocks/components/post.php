@@ -28,7 +28,6 @@
     <p id="id-<?= $post['postID'] ?>" class="postContent"><?= $post['content'] ?></p>
 
     <?php if (isset($_SESSION['currentUser']) && $post['userID'] === $_SESSION['currentUser']) { ?>
-      <?php // TODO: Post edit and delete here ?>
       <button class="button postEdit" data-postid="<?= $post['postID'] ?>">Edit post</button>
       <button class="button postRemove" data-postid="<?= $post['postID'] ?>">Remove post</button>
       <?php } ?>

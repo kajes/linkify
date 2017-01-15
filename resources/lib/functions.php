@@ -17,9 +17,6 @@ function logErrors($error)
 //================================================================================================
 function returnDie()
 {
-  // TODO: Check for accept header for json ajax
-  // TODO: If accept header is json, return json errors
-
   // Redirects back to the referer page
   header("Location: " . $_SERVER['HTTP_REFERER']);
   die;

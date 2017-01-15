@@ -179,8 +179,6 @@ function fetchEdit(id, input, parent, sibling, saveButton, cancelButton)
         editConfirm.setAttribute('class', 'message');
         editConfirm.innerHTML = data.message;
 
-        // TODO: Error message handling on post edit
-
         // Execute new elements create
         parent.removeChild(input);
         parent.removeChild(saveButton);
