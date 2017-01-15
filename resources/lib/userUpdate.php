@@ -29,7 +29,7 @@ if ($_POST['newPassword'] !== "") {
   }
 
   // Check if old password field matches the current password
-  if ($_POST['oldPassword'] !== password_verify($user['password'])) {
+  if (!password_verify($_POST['oldPassword'], $user['password'])) {
     $_SESSION['passwordError'] = "Wrong password. Please try again.";
     returnDie();
   }
@@ -55,7 +55,7 @@ if ($_FILES['avatar']['name'] !== "") {
   }
 
   $type = getImageContentType($tmp);
-  $path = "../img/avatars/{$user['uid']}.$type";
+  $path = "../img/avatars/{$user['uid']}.{$type}";
   move_uploaded_file($tmp, $path);
 
 }
