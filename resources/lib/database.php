@@ -107,13 +107,13 @@ EOT;
 $hand = $dbConnection->prepare($plate);
 
 //================================================================================================
-// Main Post feed query
+// Main Post feed queries
 //================================================================================================
 
 // Multiple posts
 $query = <<<EOT
 SELECT
-    posts.postID AS 'postID',
+    @postID:=posts.postID AS 'postID',
     posts.post_title AS 'title',
     posts.post_link AS 'link',
     posts.post_content AS 'content',
@@ -121,7 +121,7 @@ SELECT
     posts.updated_on AS 'updateDate',
     posts.voteCount AS 'voteCount',
     posts.parent_id AS 'parent',
-    (SELECT COUNT(*) FROM posts WHERE parent_id = :parent) AS 'commentCount',
+    (SELECT COUNT(*) FROM posts WHERE parent_id = @postID) AS 'commentCount',
     users.uid AS 'userID',
     users.name AS 'author',
     users.avatarID AS 'avatarID',
