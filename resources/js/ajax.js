@@ -48,11 +48,11 @@ function vote(value, voteCountElement, parent)
 
           // Change colors depending on value
           if (data.newCount <= -1) {
-            voteCountElement.style.color = 'red';
+            voteCountElement.style.color = '#ff0000';
           } else if (data.newCount == 0) {
-            voteCountElement.style.color = 'black';
+            voteCountElement.style.color = '#313131';
           } else if (data.newCount >= 1) {
-            voteCountElement.style.color = 'green';
+            voteCountElement.style.color = '#00ff00';
           }
 
         }
@@ -77,11 +77,11 @@ voteBox.forEach(function(singleBox){
 
   // Color the vote count based on value
   if (voteCount.innerHTML <= -1) {
-    voteCount.style.color = 'red';
+    voteCount.style.color = '#ff0000';
   } else if (voteCount.innerHTML == 0) {
-    voteCount.style.color = 'black';
+    voteCount.style.color = '#313131';
   } else if (voteCount.innerHTML >= 1) {
-    voteCount.style.color = 'green';
+    voteCount.style.color = '#00ff00';
   }
 
   // Seperate event listeners for up and down voting

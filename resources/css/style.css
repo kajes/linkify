@@ -2,20 +2,21 @@
   box-sizing: border-box;
   font-size: 13px;
   line-height: 1.5;
-  --main-green: #00ff00;
+  --green: #00ff00;
+  --red: #ff0000;
   --dark: #313131;
   --light: #fff;
 }
 
 .hide {
   transform: translateY(-100%);
-  transition: transform 300ms ease-in-out;
+  transition: transform 400ms ease-in-out;
   overflow: hidden;
 }
 
 .hide.clicked {
   transform: translateY(0);
-  transition: transform 300ms ease-in-out;
+  transition: transform 400ms ease-in-out;
 }
 
 /*Element styles*/
@@ -24,22 +25,42 @@ a {
   color: inherit;
 }
 
+a:hover {
+  text-decoration: underline;
+}
+
+hr {
+  width: 100%;
+}
+
 h1, h2, h3, h4, h5, h6 {
   font-family: VT323, sans-serif;
+  color: var(--dark);
+  letter-spacing: 3px;
+  text-transform: uppercase;
 }
 
 p {
-  font-family: Montserrat, sans-serif;
+  font-family: 'Share Tech Mono', sans-serif;
   font-size: 1rem;
   color: var(--dark);
+  margin: 0;
+  flex-basis: 100%;
+}
+
+span {
+  font-family: 'Share Tech Mono', sans-serif;
+  font-size: .8rem;
 }
 
 button {
   flex-grow: 1;
   border: none;
   outline: none;
-  font-family: vt323, Montserrat, sans-serif;
+  font-family: vt323, 'Share Tech Mono', sans-serif;
   font-size: 1.5rem;
+  letter-spacing: 2px;
+  text-transform: uppercase;
 }
 
 form {
@@ -47,6 +68,10 @@ form {
   flex-wrap: wrap;
   justify-content: center;
   padding: 0 4em;
+}
+
+input, textarea, label {
+  font-family: 'Share Tech Mono', sans-serif;
 }
 
 label.rememberMe {
@@ -58,7 +83,7 @@ label.rememberMe {
 	line-height: 1;
 }
 
-form input {
+form input, form textarea {
   flex-basis: 100%;
   margin: .3em;
 }
@@ -71,17 +96,17 @@ div.rememberWrap {
 
 input.rememberMe {
 	align-self: center;
-	flex-basis: 20%;
+	flex-basis: 10%;
 }
 
 input, textarea {
-  border: .1rem solid var(--dark);
+  border: none;
 }
 
 button, input, textarea {
   overflow: visible;
   padding: .5em;
-  color: var(--main-green);
+  color: var(--green);
   background-color: var(--light);
   color: var(--dark);
   transition: color 300ms ease-in-out, background-color 300ms ease-in-out, border-color 300ms ease-in-out;
@@ -89,19 +114,14 @@ button, input, textarea {
 }
 
 button:hover, button:focus  {
-  background-color: var(--main-green);
+  background-color: var(--green);
   color: var(--light);
   outline: none
 }
 
-input:hover, textarea:hover, input:focus, textarea:focus, input[type=submit]:hover, input[type=submit]:focus {
-  background-color: var(--dark);
-  color: var(--light);
-}
-
 /*Header styles*/
 header {
-  color: var(--main-green);
+  color: var(--green);
   width: 100%;
   display: flex;
   justify-content: center;
@@ -113,6 +133,7 @@ header {
 
 header.mainHeader h1 {
   background-color: var(--dark);
+  color: var(--green);
   font-family: vt323, sans-serif;
   font-size: 3.5rem;
   text-align: center;
@@ -131,22 +152,28 @@ header section.userMenu {
 
 header button.loginRegister, section.userMenu button {
   background-color: var(--dark);
-  color: var(--main-green);
+  color: var(--green);
   z-index: 100;
 }
 
 header button.loginRegister:hover, header button.loginRegister:focus, section.userMenu button:hover, section.userMenu button:focus {
-  background-color: var(--main-green);
+  background-color: var(--green);
   color: var(--dark);
 }
 
 section.userSettingsWrapper, section.newPostWrap, section.loginRegisterWrapper {
-  background-color: var(--main-green);
+  background-color: var(--green);
   flex-basis: 100%;
   position: absolute;
   width: 100%;
   top: 117px;
   left: 0;
+  padding-bottom: 1em;
+}
+
+.settingsHeader, .newPostHeader {
+  flex-basis: 100%;
+  text-align: center;
 }
 
 section.newPostWrap {
@@ -154,12 +181,117 @@ section.newPostWrap {
 }
 
 input[type=submit] {
-  font-family: vt323, Montserrat, sans-serif;
+  font-family: vt323, 'Share Tech Mono', sans-serif;
 }
 
 form h2 {
   color: var(--dark);
   text-align: center;
   margin: .3em 0 0 0;
-  font-size: 2rem;
+  font-size: 1.3rem;
+  font-weight: normal;
+}
+
+/*Post styles*/
+.contentBox {
+	display: flex;
+	flex-wrap: wrap;
+  margin-bottom: 2em;
+}
+
+.authorBox {
+	display: flex;
+	flex-basis: 100%;
+	justify-content: flex-start;
+	flex-wrap: wrap;
+  align-items: baseline;
+}
+
+.avatarContainer {
+	display: flex;
+	justify-content: center;
+}
+
+.userAvatar {
+  height: 50px;
+  width: 50px;
+  border-radius: 50%;
+}
+
+.userName {
+	margin: .2em 0 0 0;
+}
+
+.voteBox {
+	flex-basis: 1em;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-around;
+	align-items: center;
+	flex-grow: 0;
+	flex-shrink: 0;
+	font-size: 2rem;
+	padding: .3em;
+	margin-right: .5em;
+}
+
+.voteUp, .voteDown {
+  cursor: pointer;
+  width: 100%;
+  height: 100%;
+  background-size: contain;
+  background-repeat: no-repeat;
+  min-width: 1em;
+  min-height: 1em;
+}
+
+.voteUp {
+	background-image: url('/resources/img/up.png');
+}
+
+.voteDown {
+  background-image: url('/resources/img/down.png');
+}
+
+.voteUp:hover {
+  background-image: url('/resources/img/up_green.png');
+}
+
+.voteDown:hover {
+  background-image: url('/resources/img/down_red.png');
+}
+
+.voteCount {
+	margin: 0;
+}
+
+.postContainer {
+	flex-basis: 75%;
+	display: flex;
+	flex-wrap: wrap;
+	flex-grow: 1;
+	flex-shrink: 1;
+}
+
+.postTitle {
+	font-weight: normal;
+	font-family: 'Share Tech Mono', sans-serif;
+	font-size: 1.2rem;
+	letter-spacing: 0.1px;
+	margin: .5em 0 0 0;
+  align-self: flex-end;
+  flex-basis: 100%;
+}
+
+.button.postEdit, .button.postRemove {
+	font-size: 1em;
+}
+
+.contentMetaBox {
+	flex-basis: 100%;
+	background-color: var(--green);
+	color: var(--dark);
+	padding: .5em 1em;
+	display: flex;
+	justify-content: space-between;
 }

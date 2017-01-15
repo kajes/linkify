@@ -136,13 +136,15 @@ function postDisplay($mainPosts, $parentID=0, $level=0)
 
   // Get the base posts
   $mainPosts->execute([
-    ':parent' => $parentID,
     ':parentID' => $parentID
   ]);
   $posts = $mainPosts->fetchAll(PDO::FETCH_ASSOC);
 
   echo '<div class="comment child">';
   foreach ($posts as $key => $post) {
+
+    // Format the date for each post
+    $postDate = date('jS \o\f F, Y', strtotime($post['postDate']));
 
     $commentCount = $post['commentCount'];
     $hasComments = ($commentCount >= 1) ? true:false;
