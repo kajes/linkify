@@ -26,12 +26,12 @@ $postID = (int)$_POST['postID'];
 
 $tmpArray = json_decode($user['votedOn']);
 
-// Need to check if user already voted on this post
-// if (in_array($postID, $tmpArray)) {
-//   $output['error'] = "You can only vote on a post once";
-//   echo json_encode($output);
-//   die;
-// }
+Need to check if user already voted on this post
+if (in_array($postID, $tmpArray)) {
+  $output['error'] = "You can only vote on a post once";
+  echo json_encode($output);
+  die;
+}
 
 $tmpArray[] = $postID;
 $votedOn = json_encode($tmpArray);
