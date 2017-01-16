@@ -41,6 +41,10 @@ h1, h2, h3, h4, h5, h6 {
   text-transform: uppercase;
 }
 
+h2 {
+  font-weight: normal;
+}
+
 p {
   font-family: 'Share Tech Mono', sans-serif;
   font-size: 1rem;
@@ -73,6 +77,16 @@ form {
 
 input, textarea, label {
   font-family: 'Share Tech Mono', sans-serif;
+}
+
+input[type=submit]:hover {
+  background-color: var(--dark);
+  color: var(--light);
+}
+
+input[type=submit] {
+  background-color: var(--light);
+  color: var(--dark);
 }
 
 label.rememberMe {
@@ -265,7 +279,7 @@ form h2 {
 	margin: .5em 0;
 }
 
-.voteCount {
+h4.voteCount {
 	margin: 0;
 	font-size: 2rem;
 	align-self: center;
@@ -312,7 +326,9 @@ form h2 {
 }
 
 .contentMetaBox span {
-  flex-basis: 33%;
+	flex-basis: 10%;
+	flex-grow: 1;
+	text-align: center;
 }
 
 /*Child styles*/
@@ -338,4 +354,23 @@ form h2 {
 	display: flex;
 	flex-basis: 100%;
   align-items: center;
+}
+
+/*Commenting field styles*/
+.callToAction {
+	flex-basis: 100%;
+	margin-top: .5em;
+	font-size: 1em;
+	background-color: var(--green);
+}
+
+.callToAction:hover {
+  background-color: var(--dark);
+  color: var(--light);
+}
+
+.newCommentWrap {
+	flex-basis: 100%;
+  background-color: var(--green);
+  padding: 1em 0 1em 0;
 }

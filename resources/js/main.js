@@ -28,7 +28,6 @@ if (document.querySelector('button.loginRegister')) {
   })
 }
 
-
 if (document.querySelector('button.newPost')) {
   // Show/hide new post form on click
   document.querySelector('button.newPost').addEventListener('click', function(){
@@ -52,7 +51,18 @@ if (document.querySelector('button.newPost')) {
   avatarPlaceholder.addEventListener('click', function(){
     avatarUpload.click();
   });
+
 }
+
+if (document.querySelector('.callToAction')) {
+  // Comment wrapper hide/show
+  const commentButton = document.querySelector('.callToAction');
+  const newCommentContainer = document.querySelector('.newCommentWrap');
+
+  commentButton.addEventListener('click', function(){
+    hideShow(newCommentContainer);
+  });
+};
 
 // Fix position of main content relative to header
 const mainHeader = document.querySelector('.mainHeader');

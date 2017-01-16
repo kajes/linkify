@@ -10,11 +10,11 @@ if ($_SERVER['REQUEST_METHOD'] !== 'POST' || !isset($_SESSION['currentUser'])) {
   die;
 }
 
-if (!isset($_POST['vote']) || !in_array($_POST['vote'], ['1', '-1']) || !isset($_POST['postID'])) {
-  $output['error'] = "Sum Ting Wong";
-  echo json_encode($output);
-  die;
-}
+// if (!isset($_POST['vote']) || !in_array($_POST['vote'], ['1', '-1']) || !isset($_POST['postID'])) {
+//   $output['error'] = "Sum Ting Wong";
+//   echo json_encode($output);
+//   die;
+// }
 
 $userID = (int)$_SESSION['currentUser'];
 
@@ -27,11 +27,11 @@ $postID = (int)$_POST['postID'];
 $tmpArray = json_decode($user['votedOn']);
 
 // Need to check if user already voted on this post
-if (in_array($postID, $tmpArray)) {
-  $output['error'] = "You can only vote on a post once";
-  echo json_encode($output);
-  die;
-}
+// if (in_array($postID, $tmpArray)) {
+//   $output['error'] = "You can only vote on a post once";
+//   echo json_encode($output);
+//   die;
+// }
 
 $tmpArray[] = $postID;
 $votedOn = json_encode($tmpArray);

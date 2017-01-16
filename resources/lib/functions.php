@@ -156,7 +156,7 @@ function commentDisplay($mainPosts, $parentID=0, $level=0)
     $output = '<div class="commentContainer"><div class="voteBox"><div class="voteThumb voteUp" alt="voteUp"></div><div class="voteThumb voteDown" alt="voteDown"></div></div>';
     $output .= sprintf('<div class="commentContentContainer"><small class="commentAuthor">By: %s</small>', $post['author']);
     $output .= sprintf('<p class="commentContent">%s</p>', $post['content']);
-    $output .= sprintf('<div class="commentMeta"><small class="commentVotes">voted: %s</small> | <small class="commentDate">%s</small> | <small class="commentLink"><a href="?postID=%s">permalink</a></small></div></div></div>', $post['voteCount'], $postDate, $post['postID']);
+    $output .= sprintf('<div class="commentMeta"><small class="voteCount commentVotes" data-postid="%s">voted: %s</small> | <small class="commentDate">%s</small> | <small class="commentLink"><a href="?postID=%s">permalink</a></small></div></div></div>', $post['postID'], $post['voteCount'], $postDate, $post['postID']);
 
     echo $output;
 

@@ -18,6 +18,11 @@
     } else {
       require_once 'userMenu.php';
     }
+
+    if ($currentUser && isset($_GET['postID'])) {
+      require 'newComment.php';
+    }
   ?>
+
 
 </header>
