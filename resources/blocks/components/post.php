@@ -41,7 +41,7 @@
       <span>(edited)</span>
     <?php } ?>
 
-    <?php if (isset($_GET['postID'])) { ?>
+    <?php if (isset($_SESSION['currentUser']) && isset($_GET['postID'])) { ?>
       <button class="callToAction">Say something about this!</button>
     <?php } ?>
   </div>

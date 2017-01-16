@@ -326,7 +326,6 @@ h4.voteCount {
 }
 
 .contentMetaBox span {
-	flex-basis: 10%;
 	flex-grow: 1;
 	text-align: center;
 }
