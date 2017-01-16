@@ -20,8 +20,8 @@
   $hasComments = ($commentCount >= 1) ? true:false;
 
   // Format the date for each post
-  $postDate = date('jS \o\f F, Y', strtotime($post['postDate']));
-  $updateDate = date('jS \o\f F, Y', strtotime($post['updateDate']));
+  $postDate = date('Y-m-d', strtotime($post['postDate']));
+  $updateDate = date('Y-m-d', strtotime($post['updateDate']));
 
 ?>
 <section class="postContent">

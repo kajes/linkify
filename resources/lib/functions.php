@@ -128,7 +128,7 @@ function getImageContentType($image)
 //================================================================================================
 // Recursive function for presenting posts and comments
 //================================================================================================
-function postDisplay($mainPosts, $parentID=0, $level=0)
+function commentDisplay($mainPosts, $parentID=0, $level=0)
 {
 
   // Get the base posts
@@ -137,11 +137,11 @@ function postDisplay($mainPosts, $parentID=0, $level=0)
   ]);
   $posts = $mainPosts->fetchAll(PDO::FETCH_ASSOC);
 
-  echo '<div class="comment child">';
+  printf('<div class="child level-%s">', $level);
   foreach ($posts as $key => $post) {
 
     // Format the date for each post
-    $postDate = date('jS \o\f F, Y', strtotime($post['postDate']));
+    $postDate = date('Y-m-d', strtotime($post['postDate']));
 
     $commentCount = $post['commentCount'];
     $hasComments = ($commentCount >= 1) ? true:false;
@@ -153,10 +153,15 @@ function postDisplay($mainPosts, $parentID=0, $level=0)
       $avatar = $post['avatarID'].'.'.$post['imgType'];
     }
 
-    require 'resources/blocks/components/post.php';
+    $output = '<div class="commentContainer"><div class="voteBox"><div class="voteThumb voteUp" alt="voteUp"></div><div class="voteThumb voteDown" alt="voteDown"></div></div>';
+    $output .= sprintf('<div class="commentContentContainer"><small class="commentAuthor">By: %s</small>', $post['author']);
+    $output .= sprintf('<p class="commentContent">%s</p>', $post['content']);
+    $output .= sprintf('<div class="commentMeta"><small class="commentVotes">voted: %s</small> | <small class="commentDate">%s</small> | <small class="commentLink"><a href="?postID=%s">permalink</a></small></div></div></div>', $post['voteCount'], $postDate, $post['postID']);
+
+    echo $output;
 
     if ($hasComments) {
-      postDisplay($mainPosts, (int)$post['postID'], $level+1);
+      commentDisplay($mainPosts, (int)$post['postID'], $level+1);
     }
 
   }

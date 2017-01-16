@@ -6,6 +6,7 @@
   --red: #ff0000;
   --dark: #313131;
   --light: #fff;
+  --grey: #adadad;
 }
 
 .hide {
@@ -196,7 +197,6 @@ form h2 {
 .contentBox {
 	display: flex;
 	flex-wrap: wrap;
-  margin-bottom: 2em;
 }
 
 .authorBox {
@@ -232,7 +232,6 @@ form h2 {
 	flex-shrink: 0;
 	font-size: 2rem;
 	padding: .3em;
-	margin-right: .5em;
 }
 
 .voteUp, .voteDown {
@@ -247,6 +246,7 @@ form h2 {
 
 .voteUp {
 	background-image: url('/resources/img/up.png');
+  margin-bottom: .5em;
 }
 
 .voteDown {
@@ -261,16 +261,24 @@ form h2 {
   background-image: url('/resources/img/down_red.png');
 }
 
+.voteBox, .postContainer, .voteCount {
+	margin: .5em 0;
+}
+
 .voteCount {
 	margin: 0;
+	font-size: 2rem;
+	align-self: center;
+	padding: 0 .5em;
 }
 
 .postContainer {
-	flex-basis: 75%;
+	flex-basis: 50%;
 	display: flex;
 	flex-wrap: wrap;
 	flex-grow: 1;
 	flex-shrink: 1;
+  padding-left: 1em;
 }
 
 .postTitle {
@@ -281,6 +289,11 @@ form h2 {
 	margin: .5em 0 0 0;
   align-self: flex-end;
   flex-basis: 100%;
+}
+
+.postLink {
+  color: var(--grey);
+  line-height: 1;
 }
 
 .button.postEdit, .button.postRemove {
@@ -294,4 +307,35 @@ form h2 {
 	padding: .5em 1em;
 	display: flex;
 	justify-content: space-between;
+  flex-wrap: wrap;
+  margin-bottom: 1.5em;
+}
+
+.contentMetaBox span {
+  flex-basis: 33%;
+}
+
+/*Child styles*/
+.child {
+	margin-left: 1em;
+	border-left: 1px dashed var(--grey);
+	padding-left: .5em;
+	display: flex;
+	flex-wrap: wrap;
+}
+
+.child .voteBox div {
+	min-width: auto;
+	min-height: .7em;
+}
+
+.child small {
+	font-weight: bold;
+	flex-basis: 100%;
+}
+
+.commentContainer {
+	display: flex;
+	flex-basis: 100%;
+  align-items: center;
 }

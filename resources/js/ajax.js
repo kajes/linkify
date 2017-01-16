@@ -71,7 +71,7 @@ const voteBox = document.querySelectorAll('.voteBox');
 // Loop through them and add event listeners
 voteBox.forEach(function(singleBox){
 
-  let voteCount = singleBox.querySelector('.voteCount');
+  let voteCount = singleBox.parentElement.children[2];
   const voteUp = singleBox.querySelector('.voteUp');
   const voteDown = singleBox.querySelector('.voteDown');
 

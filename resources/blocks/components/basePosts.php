@@ -10,7 +10,7 @@
     foreach ($posts as $key => $post) {
 
       // Format the date for each post
-      $postDate = date('jS \o\f F, Y', strtotime($post['postDate']));
+      $postDate = date('Y-m-d', strtotime($post['postDate']));
 
       $commentCount = $post['commentCount'];
       $hasComments = ($commentCount >= 1) ? true:false;
