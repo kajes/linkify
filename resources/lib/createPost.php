@@ -16,7 +16,7 @@ if ($parentID === 0) {
   if (!validateFields([$_POST['postTitle'], $_POST['postContent']])) {
     returnDie(false, 'All required fields must be entered before publishing');
   }
-} elseif ($parentID < 0) {
+} elseif ($parentID <= 1) {
   if (!validateFields([$_POST['postContent']])) {
     returnDie(false, 'All required fields must be entered before publishing');
   }

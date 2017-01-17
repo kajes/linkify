@@ -95,10 +95,12 @@ button {
 }
 
 form {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  padding: 0 4em;
+	display: flex;
+	flex-wrap: wrap;
+	justify-content: center;
+	padding: 0 4em;
+	max-width: 61em;
+	margin: 0 auto;
 }
 
 input, textarea, label {

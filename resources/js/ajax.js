@@ -92,7 +92,7 @@ function createPost()
   postData.append('postTitle', postTitle);
   postData.append('postLink', postLink);
   postData.append('postContent', postContent);
-  postData.append('parent_id', parentID)
+  postData.append('parent_id', parentID);
 
   fetch('/resources/lib/createPost.php', {
     method: 'POST',
@@ -122,11 +122,59 @@ function createPost()
 }
 
 const postSubmit = document.querySelector('.postSubmit');
+const commentSubmit = document.querySelector('.commentSubmit');
 
 if (postSubmit) {
   postSubmit.addEventListener('click', function(event){
     event.preventDefault();
     createPost();
+  })
+}
+
+//================================================================================================
+// Create Comment Function
+//================================================================================================
+function createComment()
+{
+  const commentContent = document.querySelector('.commentContent').value;
+  const commentParent = document.querySelector('.commentParent').value;
+
+  const commentData = new FormData();
+  commentData.append('postContent', commentContent);
+  commentData.append('parent_id', commentParent);
+
+  fetch('/resources/lib/createPost.php', {
+    method: 'POST',
+    header: {'Content-type': 'application/x-www-form-urlencoded; charset=UTF-8'},
+    credentials: 'same-origin',
+    body: commentData
+  })
+  .then(function(response){
+    if (response.status != 200) {
+      console.log('Something went wrong with the comment request. Status code: ' + response.status);
+      return;
+    }
+
+    response.json().then(function(data){
+
+      const openElement = document.querySelector('.hide.clicked');
+      openElement.classList.remove('clicked');
+      responseMessage(data);
+
+      setTimeout(function(){
+        location.reload();
+      }, 3000);
+
+    });
+
+  });
+
+}
+
+if (commentSubmit) {
+  commentSubmit.addEventListener('click', function(event){
+    event.preventDefault();
+    createComment();
   })
 }
 
