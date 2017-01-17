@@ -1,6 +1,7 @@
 <header class="mainHeader">
 
-  <h1><a href="/">LINKIFY</a></h1>
+
+  <h1><a href="/"><img src="resources/img/link.png" alt="logo" class="linkLogo">LINKIFY</a></h1>
 
   <section class="userMenu">
   <?php if ($currentUser) { ?>

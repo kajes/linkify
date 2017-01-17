@@ -219,22 +219,20 @@ form h2 {
 }
 
 .authorBox {
-	display: flex;
-	flex-basis: 100%;
-	justify-content: flex-start;
-	flex-wrap: wrap;
-  align-items: baseline;
-}
-
-.avatarContainer {
-	display: flex;
+	display: none;
+	flex-basis: 7em;
 	justify-content: center;
+	flex-wrap: wrap;
+	flex-grow: 0;
+	flex-shrink: 1;
+	padding: 1em;
 }
 
 .userAvatar {
-  height: 50px;
-  width: 50px;
-  border-radius: 50%;
+	height: 100%;
+	width: auto;
+	display: block;
+	border-radius: 50%;
 }
 
 .userName {
@@ -377,4 +375,10 @@ h4.voteCount {
 	flex-basis: 100%;
   background-color: var(--green);
   padding: 1em 0 1em 0;
+}
+
+@media screen and (min-width: 568px) {
+  .authorBox {
+    display: flex;
+  }
 }

@@ -5,8 +5,6 @@
     <div class="voteThumb voteDown" alt="voteDown"></div>
   </div>
 
-  <?php // TODO: Avatar Box here ?>
-
   <div class="postContainer">
 
       <h2 class="postTitle">
@@ -31,6 +29,11 @@
       <?php } ?>
 
   </div>
+
+  <div class="authorBox">
+    <img src="resources/img/avatars/<?= $avatar ?>" alt="<?= $post['author']; ?>" class="userAvatar">
+  </div>
+
   <h4 class="voteCount" data-postID="<?= $post['postID'] ?>"><?= $post['voteCount'] ?></h4>
   <div class="contentMetaBox">
     <span class="postDate"><?= $postDate ?></span>
