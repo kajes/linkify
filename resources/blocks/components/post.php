@@ -5,6 +5,8 @@
     <div class="voteThumb voteDown" alt="voteDown"></div>
   </div>
 
+  <?php // TODO: Avatar Box here ?>
+
   <div class="postContainer">
 
       <h2 class="postTitle">

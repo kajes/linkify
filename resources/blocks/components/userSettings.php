@@ -1,9 +1,11 @@
 <?php
 
-  $user = $dbConnection->query("SELECT * FROM users WHERE uid = {$_SESSION['currentUser']}")->fetch(PDO::FETCH_ASSOC);
+  if (isset($_SESSION['currentUser'])) {
+    $user = $dbConnection->query("SELECT * FROM users WHERE uid = {$_SESSION['currentUser']}")->fetch(PDO::FETCH_ASSOC);
 
-  $userBio = ($user['bio'] !== NULL) ? $user['bio'] : '';
-  $avatar = ($user['avatarID'] !== NULL) ? $user['avatarID'].'.'.$user['avatarImageType'] : '0.jpg';
+    $userBio = ($user['bio'] !== NULL) ? $user['bio'] : '';
+    $avatar = ($user['avatarID'] !== NULL) ? $user['avatarID'].'.'.$user['avatarImageType'] : '0.jpg';
+  }
 
 ?>
 <section class="userSettingsWrapper hide">

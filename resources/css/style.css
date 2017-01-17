@@ -208,6 +208,11 @@ form h2 {
 }
 
 /*Post styles*/
+.mainContent {
+	max-width: 60em;
+	margin: 0 auto;
+}
+
 .contentBox {
 	display: flex;
 	flex-wrap: wrap;
