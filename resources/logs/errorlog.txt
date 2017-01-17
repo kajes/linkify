@@ -1,0 +1,10 @@
+SQLSTATE[23000]: Integrity constraint violation: 1048 Column 'parent_id' cannot be null
+
+SQLSTATE[23000]: Integrity constraint violation: 1048 Column 'parent_id' cannot be null
+
+SQLSTATE[23000]: Integrity constraint violation: 1048 Column 'parent_id' cannot be null
+
+SQLSTATE[23000]: Integrity constraint violation: 1048 Column 'parent_id' cannot be null
+
+SQLSTATE[23000]: Integrity constraint violation: 1048 Column 'parent_id' cannot be null
+

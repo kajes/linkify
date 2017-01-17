@@ -1,6 +1,136 @@
 'use strict';
 
 //================================================================================================
+// Response Message Function
+//================================================================================================
+function responseMessage(data)
+{
+
+  const errorMessage = document.querySelector('header .errorMessage');
+  const messageSuccess = document.querySelector('header .messageSuccess');
+
+  if (data.error) {
+    errorMessage.innerHTML = data.error;
+    errorMessage.parentElement.classList.add('clicked');
+    setTimeout(function(){
+      errorMessage.parentElement.classList.remove('clicked')
+    }, 3000);
+  } else if (data.message) {
+    messageSuccess.innerHTML = data.message;
+    messageSuccess.parentElement.classList.add('clicked');
+    setTimeout(function(){
+      messageSuccess.parentElement.classList.remove('clicked');
+    }, 3000);
+  }
+}
+
+//================================================================================================
+// Login function
+//================================================================================================
+
+function login(event)
+{
+  event.preventDefault();
+
+  const username = document.querySelector('.login.email').value;
+  const password = document.querySelector('.login.password').value;
+  const rememberMe = document.querySelector('.rememberMe').checked;
+
+  const loginData = new FormData();
+  loginData.append('email', username);
+  loginData.append('password', password);
+  if (rememberMe == true) {
+    loginData.append('rememberMe', rememberMe);
+  }
+
+  fetch('/resources/lib/login.php', {
+    method: 'POST',
+    header: {'Content-type': 'application/x-www-form-urlencoded; charset=UTF-8'},
+    credentials: 'same-origin',
+    body: loginData
+  })
+  .then(function(response){
+    if (response.status != 200) {
+      console.log('Something went wrong with the login request. Status code: ' + response.status);
+      return;
+    }
+
+    response.json().then(function(data){
+
+      responseMessage(data);
+
+      if (data.message) {
+        setTimeout(function(){
+          location.reload();
+        }, 3000)
+      }
+
+    })
+  })
+
+}
+
+const loginSubmit = document.querySelector('.login.submit');
+
+if (loginSubmit) {
+  loginSubmit.addEventListener('click', function(event){
+    login(event);
+  })
+}
+
+//================================================================================================
+// Create Post Function
+//================================================================================================
+function createPost()
+{
+  const postTitle = document.querySelector('.postTitle').value;
+  const postLink = document.querySelector('.postLink').value;
+  const postContent = document.querySelector('.postContent').value;
+  const parentID = document.querySelector('.parentID').value;
+
+  const postData = new FormData();
+  postData.append('postTitle', postTitle);
+  postData.append('postLink', postLink);
+  postData.append('postContent', postContent);
+  postData.append('parent_id', parentID)
+
+  fetch('/resources/lib/createPost.php', {
+    method: 'POST',
+    header: {'Content-type': 'application/x-www-form-urlencoded; charset=UTF-8'},
+    credentials: 'same-origin',
+    body: postData
+  })
+  .then(function(response){
+    if (response.status != 200) {
+      console.log('Something went wrong with the login request. Status code: ' + response.status);
+      return;
+    }
+
+    response.json().then(function(data){
+
+      const openElement = document.querySelector('.hide.clicked');
+      openElement.classList.remove('clicked');
+      responseMessage(data);
+
+      setTimeout(function(){
+        location.reload();
+      }, 3000);
+
+    });
+
+  });
+}
+
+const postSubmit = document.querySelector('.postSubmit');
+
+if (postSubmit) {
+  postSubmit.addEventListener('click', function(event){
+    event.preventDefault();
+    createPost();
+  })
+}
+
+//================================================================================================
 // Voting system
 //================================================================================================
 
@@ -28,30 +158,19 @@ function vote(value, voteCountElement, parent)
 
       response.json().then(function(data){
 
-        // Check for errors
-        if (data.error) {
+        responseMessage(data);
 
-          const errorElement = document.createElement('p');
-          errorElement.classList.add('error');
-          errorElement.textContent = data.error;
-
-          parent.appendChild(errorElement);
-
-          setTimeout(function(){
-            parent.removeChild(errorElement);
-          }, 3000);
-
-        } else {
+        if (data.message) {
 
           // Update vote count if successful
-          voteCountElement.innerHTML = data.newCount;
+          voteCountElement.innerHTML = data.content.newCount;
 
           // Change colors depending on value
-          if (data.newCount <= -1) {
+          if (data.content.newCount <= -1) {
             voteCountElement.style.color = '#ff0000';
-          } else if (data.newCount == 0) {
+          } else if (data.content.newCount == 0) {
             voteCountElement.style.color = '#313131';
-          } else if (data.newCount >= 1) {
+          } else if (data.content.newCount >= 1) {
             voteCountElement.style.color = '#00ff00';
           }
 
@@ -71,7 +190,7 @@ const voteBox = document.querySelectorAll('.voteBox');
 // Loop through them and add event listeners
 voteBox.forEach(function(singleBox){
 
-  let voteCount = singleBox.parentElement.querySelector('.voteCount');
+  const voteCount = singleBox.parentElement.querySelector('.voteCount');
   const voteUp = singleBox.querySelector('.voteUp');
   const voteDown = singleBox.querySelector('.voteDown');
 
@@ -168,28 +287,21 @@ function fetchEdit(id, input, parent, sibling, saveButton, cancelButton)
 
       response.json().then(function(data){
 
+        console.log(data);
+
         // Create new element with updated content
         const newContentElement = document.createElement('p');
         newContentElement.setAttribute('class', 'postContent');
         newContentElement.setAttribute('id', 'id-'+id);
-        newContentElement.innerHTML = data.newPost.post_content;
-
-        // Create response element that confirms change
-        const editConfirm = document.createElement('p');
-        editConfirm.setAttribute('class', 'message');
-        editConfirm.innerHTML = data.message;
+        newContentElement.innerHTML = data.content.post_content;
 
         // Execute new elements create
         parent.removeChild(input);
         parent.removeChild(saveButton);
         parent.removeChild(cancelButton);
         parent.insertBefore(newContentElement, sibling);
-        parent.insertBefore(editConfirm, sibling);
 
-        // Timeout function for removing message
-        setTimeout(function(){
-          parent.removeChild(editConfirm);
-        }, 3000);
+        responseMessage(data);
 
       });
     }

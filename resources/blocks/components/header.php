@@ -13,6 +13,13 @@
   <?php } ?>
   </section>
 
+  <div class="errorMessageContainer hide">
+    <h3 class="errorMessage"></h3>
+  </div>
+  <div class="messageSuccessContainer hide">
+    <h3 class="messageSuccess"></h3>
+  </div>
+
   <?php
     if (!$currentUser) {
       require_once 'authentication.php';
