@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Värd: 127.0.0.1
--- Tid vid skapande: 09 jan 2017 kl 12:16
+-- Tid vid skapande: 17 jan 2017 kl 07:54
 -- Serverversion: 10.1.16-MariaDB
 -- PHP-version: 7.0.9
 
@@ -40,6 +40,23 @@ CREATE TABLE `posts` (
   `parent_id` int(11) NOT NULL DEFAULT '0'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
+--
+-- Dumpning av Data i tabell `posts`
+--
+
+INSERT INTO `posts` (`postID`, `authorID`, `post_title`, `post_link`, `post_content`, `posted_on`, `updated_on`, `voteCount`, `parent_id`) VALUES
+(22, 7, 'Dags att testa', 'http://nicolasgallagher.com/pure-css-speech-bubbles/', 'Här ska testas ordentligt. Vi får se om allt går som det borde.', '2017-01-16 20:10:43', '2017-01-16 20:10:43', 3, 0),
+(23, 8, 'Jag vill också', '', 'Jag skriver en extra post här med, för att det är roligt.', '2017-01-16 20:11:39', '2017-01-16 20:11:39', -1, 0),
+(24, 9, 'Här är en ball länk', 'https://thenounproject.com/ViconsDesign/uploads/', 'Måste ju länka någonting. Annars är det ju inget roligt här.', '2017-01-16 20:12:53', '2017-01-16 20:12:53', 0, 0),
+(25, 10, 'Konstigt först', '', 'Vet ni att det inte går att skrolla ner när det inte finns några inlägg?', '2017-01-16 20:14:30', '2017-01-16 20:14:30', 0, 0),
+(26, 11, 'Kommentarer?', '', 'Det verkar inte gå att kommentera. Det här måste undersökas nogrannt.', '2017-01-16 20:17:30', '2017-01-16 20:17:30', 2, 0),
+(27, 12, 'Rösta?', '', 'Varför går det inte att rösta helt plötsligt?', '2017-01-16 20:18:42', '2017-01-16 20:18:42', 1, 0),
+(29, 7, NULL, NULL, 'Let us see if commenting is working now!', '2017-01-16 20:42:36', '2017-01-16 20:42:36', 1, 27),
+(30, 8, NULL, NULL, 'The bugs are squashed hard!!!', '2017-01-16 20:51:02', '2017-01-16 20:51:02', 1, 22),
+(31, 8, NULL, NULL, 'Maybe I should migrate everything to doing fetch instead? At least I should fix the error messaging system.', '2017-01-16 20:51:57', '2017-01-16 20:51:57', 0, 24),
+(32, 9, NULL, NULL, 'Det borde går att kommentera här också nu.', '2017-01-16 20:52:51', '2017-01-16 20:52:51', 0, 30),
+(33, 10, NULL, NULL, 'Nu går det att kommentera igen!!!!', '2017-01-16 20:55:54', '2017-01-16 20:55:54', 1, 26);
+
 -- --------------------------------------------------------
 
 --
@@ -53,6 +70,17 @@ CREATE TABLE `tokens` (
   `second` varchar(256) DEFAULT NULL,
   `expire` datetime DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Dumpning av Data i tabell `tokens`
+--
+
+INSERT INTO `tokens` (`cookieID`, `uid`, `first`, `second`, `expire`) VALUES
+(14, 7, '0a3c7586d98550134767518d1cf318e83b5e6effeccd231209751183707ccf87c01e58f29f2182a1d3d17607800dfb254dcca1762fea751544a14a1e5048c167', '351ae4efeabf4c795a2e7275888c0a97da8c4bb9dda4e030c423d6df2714a22c38b6153d0c8917b829a5662861bdf5e7c98d71d8bf0c7bd755dc2467e433c2673fafd39a9730f2c558c59fdd143aced024454d6f6244bd733a0d0e6a6ef7fbdd90c4cb3ea890883bce79242660fa224fe80c10400eba25b09210c8e7b3cbea26', '2017-02-15 20:24:56'),
+(15, 8, '3095ccc914b0b07befe7f3ad8a685277598e48f625622eee8eff1bb1121b483b22c5e4c4c1b355aea9d7989607df67f39a5930690a171b3e71fc36be8532f25c', '313396eae81179ed65c57a10bf47ebba3341a7b7d298a3745fd41ec21fd78de94d85524952a121c927aa90c9cf87e5692f5a5f52f2e29e256646cbbdd090ddc23cb5ac57ab041f08a4bd866031e024553929f67a4884049ecb5ccecfd9efba603d15a55bbe1a50ee181042317f7865aeaf4ccff2e2bf4f41c90812337bdc3371', '2017-02-15 20:50:35'),
+(16, 9, '6d7734fa4f5f881fd67e1dca3d6c469b6150603f1a8cdb26e830cf2db70fcbb31c82cf60e0014a1f0a71f6510388c8cae15fde0a49805446e31c03828cabc7be', '992d3e67f951ea82e7d477a6357efee4c46e0f1b3f7aad84362c451a6309e812c7e2d93fdc66347ba325a32d5903fd0e0ce736634cacdd6a92b4e6d8bae198b5267b9a9b07fa5ada2df8fb9407f91bedc37b62d279f08ca90e5ee45c25f8c6c2044204a23f5b1108a52e1db6ec7efb90f1ec47930a4d12bfda9d6b37c64011ba', '2017-02-15 20:52:26'),
+(17, 10, 'ab767a9d20d758bfc7f2e117ee6515e2451afb28caf332b78410619ec01c791b9fb18c002101379920e6b55342d0232a4f1434bd937df859b2a780585b5d65a9', '30aa59be2052278f26b3054219c5922b29e33d1c86f76e419f6b45b20123eab63431dc41441c7686f46c14b1f51486524eaf86d62b09f54fe4d3796bbc84ea262eb743527e43ccccc41119422c18a39d884fda0cfd6148477cfd580ba7dfea9f932b0ed3b0dfd7f48023137f3b78e403ae825adab30758694768eff0b422988d', '2017-02-15 20:55:39'),
+(18, 7, 'cdcbaf1497c46ab7c0b42c59a337b38810367fab00a67e6235a3345a7bab937befe16eef86c728645fce435297d3b1006a8e60f36d017304a8b20f9f37809055', '2a890a17bd22cf468266183229daab35cd370a9f99c5b4d58b14bc146f53343f56e303fa249e13140f28a7521324ceb159f7de7cf082ae895bc571b50c748fbce47f1c202f3b9cf0ac7e59dad55b87d24c346871d31684abe0ba8e60d9f5f8e49ff1c5572d20a8db0b38efecab5c5acba2207ac474064a8b1740cfb1b8479357', '2017-02-15 21:20:16');
 
 -- --------------------------------------------------------
 
@@ -68,8 +96,21 @@ CREATE TABLE `users` (
   `password` varchar(60) NOT NULL,
   `bio` mediumtext,
   `avatarID` varchar(100) DEFAULT NULL,
-  `votedOn` text
+  `avatarImageType` varchar(4) DEFAULT NULL,
+  `votedOn` varchar(1000) NOT NULL DEFAULT '[]'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Dumpning av Data i tabell `users`
+--
+
+INSERT INTO `users` (`uid`, `name`, `username`, `email`, `password`, `bio`, `avatarID`, `avatarImageType`, `votedOn`) VALUES
+(7, 'Lars Kajes', NULL, 'lars@kajes.se', '$2y$10$FunNZtoKnRNpWNUoRt.vA.pApvvjfBNR7eRxJlcOYgblYT6lYgl02', NULL, NULL, NULL, '[22,29]'),
+(8, 'Rakel Karlsson', NULL, 'rakel@karlsson.se', '$2y$10$GrhvtJCOv9Nf3u9lfFAGD.x7zD4YI4vkcZQkMGONXsjQYxTqM6QD.', NULL, NULL, NULL, '[22]'),
+(9, 'Emmali Jansson', NULL, 'emmali@jansson.se', '$2y$10$v6ewImMD2pK8MvzQ8fonmOoxB3NikGTsEwpnGyXTHRwjEJyqHRqsW', NULL, '9', 'jpg', '[22,30]'),
+(10, 'Jeb Kerman', NULL, 'jeb@kerman.se', '$2y$10$MG0qpsBFBeXnFZWeWeqJCObgHmMKH9VDCu31E8WY/wrhVF4sftpmO', NULL, NULL, NULL, '[26,33,23]'),
+(11, 'Bill Kerman', NULL, 'bill@kerman.se', '$2y$10$azydPgDmndS/F6M41BKy1.h999B5wwOpIfaJpDTQ3dgU0VBpjJVsC', NULL, NULL, NULL, '[]'),
+(12, 'Valentina Kerman', NULL, 'valentina@kerman.se', '$2y$10$PZfBxwMpm7wCl0py7CqHx.57r1FekaUKJoOgIjy9Ij3euJHwJgF/G', NULL, NULL, NULL, '[26]');
 
 --
 -- Index för dumpade tabeller
