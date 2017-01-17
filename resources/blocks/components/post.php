@@ -9,7 +9,7 @@
 
       <h2 class="postTitle">
         <?php
-        if ($post['link'] !== NULL) {
+        if ($post['link'] !== "") {
           echo '<a href="'.$post['link'].'" target="_blank" rel="noopener">'.$post['title'].'</a>';
         } else {
           echo $post['title'];
