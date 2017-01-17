@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Värd: 127.0.0.1
--- Tid vid skapande: 17 jan 2017 kl 11:40
+-- Tid vid skapande: 17 jan 2017 kl 11:58
 -- Serverversion: 10.1.16-MariaDB
 -- PHP-version: 7.0.9
 
@@ -19,6 +19,8 @@ SET time_zone = "+00:00";
 --
 -- Databas: `kajes_linkify`
 --
+CREATE DATABASE IF NOT EXISTS `kajes_linkify` DEFAULT CHARACTER SET utf8 COLLATE utf8_general_ci;
+USE `kajes_linkify`;
 
 -- --------------------------------------------------------
 
