@@ -1,6 +1,7 @@
-[logo]: https://raw.githubusercontent.com/kajes/linkify/master/cover.jpg "Linkify Sample"
 # Linkify - a Reddit Clone for retro gamers
 A Reddit clone for school project with a retro gaming theme. This project is written in plain non-object oriented PHP and vanilla Javascript.
+
+<img src="https://raw.githubusercontent.com/kajes/linkify/master/cover.jpg" width="100%" alt="01 - Linkify">
 
 ## Dependencies
 - PHP 7.0.9^ (built on this version, but untested on previous versions)
