@@ -330,7 +330,14 @@ h4.voteCount {
 
 .contentMetaBox span {
 	flex-grow: 1;
+}
+
+span.commentsLink {
 	text-align: center;
+}
+
+span.authorName {
+  text-align: right;
 }
 
 /*Child styles*/
@@ -380,5 +387,9 @@ h4.voteCount {
 @media screen and (min-width: 568px) {
   .authorBox {
     display: flex;
+  }
+
+  .contentMetaBox span {
+    font-size: 1.2rem;
   }
 }
