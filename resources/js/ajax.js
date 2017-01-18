@@ -25,6 +25,60 @@ function responseMessage(data)
 }
 
 //================================================================================================
+// Register Function
+//================================================================================================
+function userRegister()
+{
+  const firstName = document.querySelector('.register.firstName').value;
+  const lastName = document.querySelector('.register.lastName').value;
+  const email = document.querySelector('.register.email').value;
+  const password = document.querySelector('.register.password').value;
+  const passwordVerify = document.querySelector('.register.passwordReenter').value;
+
+  const registerData = new FormData();
+  registerData.append('firstName', firstName);
+  registerData.append('lastName', lastName);
+  registerData.append('email', email);
+  registerData.append('password', password);
+  registerData.append('password_reenter', passwordVerify);
+
+  fetch('/resources/lib/register.php', {
+    method: 'POST',
+    header: {'Content-type': 'application/x-www-form-urlencoded; charset=UTF-8'},
+    credentials: 'same-origin',
+    body: registerData
+  })
+  .then(function(response){
+    if (response.status != 200) {
+      console.log('Something went wrong with the register request. Status code: ' + response.status);
+      return;
+    }
+
+    response.json().then(function(data){
+
+      responseMessage(data);
+
+      if (data.message) {
+        setTimeout(function(){
+          location.reload();
+        }, 3000)
+      }
+
+    })
+
+  })
+}
+
+const registerSubmit = document.querySelector('.register.registerSubmit');
+
+if (registerSubmit) {
+  registerSubmit.addEventListener('click', function(event){
+    event.preventDefault();
+    userRegister();
+  })
+}
+
+//================================================================================================
 // Login function
 //================================================================================================
 
