@@ -3,7 +3,8 @@
 require_once 'functions.php';
 
 if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
-  returnDie();
+  header('Location: /');
+  die;
 }
 
 // Get the current user
@@ -13,10 +14,12 @@ $emailError = "You have not entered a valid email. Please check your email setti
 
 if (!isset($_POST['emailInput'])) {
   $_SESSION['emailError'] = $emailError;
-  returnDie();
+  header('Location: /');
+  die;
 } elseif (!filter_var($_POST['emailInput'], FILTER_VALIDATE_EMAIL)) {
   $_SESSION['emailError'] = $emailError;
-  returnDie();
+  header('Location: /');
+  die;
 }
 
 // Check if user is trying to change password
@@ -25,13 +28,15 @@ if ($_POST['newPassword'] !== "") {
   // Check if user has entered the old password field
   if ($_POST['oldPassword'] === "") {
     $_SESSION['passwordError'] = "You need to verify password by typing in the current password before saving the new password.";
-    returnDie();
+    header('Location: /');
+    die;
   }
 
   // Check if old password field matches the current password
   if (!password_verify($_POST['oldPassword'], $user['password'])) {
     $_SESSION['passwordError'] = "Wrong password. Please try again.";
-    returnDie();
+    header('Location: /');
+    die;
   }
 
 }
@@ -44,14 +49,16 @@ if ($_FILES['avatar']['name'] !== "") {
   // Check if image type is valid
   if (!getImageContentType($tmp)) {
     $_SESSION['avatarError'] = "Invalid file type. Site only accepts jpg/jpeg or png files.";
-    returnDie();
+    header('Location: /');
+    die;
   }
 
   // Set size limit for image
   $size = getImageSize($tmp);
   if ($size[0] > 250 || $size[1] > 250) {
     $_SESSION['avatarError'] = "Image is too big. Max height and width is 250px.";
-    returnDie();
+    header('Location: /');
+    die;
   }
 
   $type = getImageContentType($tmp);
@@ -85,4 +92,5 @@ try {
   die($e->getMessage());
   logErrors($e->getMessage());
 }
-returnDie();
+header('Location: /');
+die;

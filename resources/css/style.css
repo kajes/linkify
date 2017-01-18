@@ -20,6 +20,32 @@
   transition: transform 400ms ease-in-out;
 }
 
+.errorMessageContainer, .messageSuccessContainer {
+	position: absolute;
+	top: 117px;
+	width: 100%;
+	text-align: center;
+	padding: .5em;
+	z-index: 99;
+	height: auto;
+}
+
+.errorMessageContainer {
+	background-color: var(--red);
+}
+
+.errorMessageContainer .errorMessage {
+  color: var(--light);
+}
+
+.messageSuccessContainer {
+  background-color: var(--green);
+}
+
+.messageSuccessContainer .messageSuccess {
+  color: var(--dark);
+}
+
 /*Element styles*/
 a {
   text-decoration: none;
@@ -69,10 +95,12 @@ button {
 }
 
 form {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  padding: 0 4em;
+	display: flex;
+	flex-wrap: wrap;
+	justify-content: center;
+	padding: 0 4em;
+	max-width: 61em;
+	margin: 0 auto;
 }
 
 input, textarea, label {
@@ -168,12 +196,12 @@ header section.userMenu {
 header button.loginRegister, section.userMenu button {
   background-color: var(--dark);
   color: var(--green);
-  z-index: 100;
+  z-index: 98;
 }
 
 header button.loginRegister:hover, header button.loginRegister:focus, section.userMenu button:hover, section.userMenu button:focus {
   background-color: var(--green);
-  color: var(--dark);
+  color: var(--light);
 }
 
 section.userSettingsWrapper, section.newPostWrap, section.loginRegisterWrapper {
@@ -184,6 +212,7 @@ section.userSettingsWrapper, section.newPostWrap, section.loginRegisterWrapper {
   top: 117px;
   left: 0;
   padding-bottom: 1em;
+  z-index: 98;
 }
 
 .settingsHeader, .newPostHeader {

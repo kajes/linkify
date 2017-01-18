@@ -14,13 +14,6 @@
 
     <input type="submit" class="login submit" value="Sign in">
 
-    <?php
-    if (isset($_SESSION['loginError'])) {
-      echo '<h5 class="error">'.$_SESSION['loginError'].'</h5>';
-      $_SESSION = [];
-    }
-    ?>
-
   </form>
 
   <form action="resources/lib/register.php" class="registerForm" method="POST">
@@ -38,13 +31,6 @@
     <input type="password" class="register passwordReenter" name="password_reenter" required placeholder="Re-enter password">
 
     <input type="submit" class="register registerSubmit" value="Sign up">
-
-    <?php
-    if (isset($_SESSION['registerError'])) {
-      echo '<h5 class="error">'.$_SESSION['registerError'].'</h5>';
-      $_SESSION = [];
-    }
-    ?>
 
   </form>
 </section>
