@@ -42,7 +42,7 @@ if ($_POST['newPassword'] !== "") {
 }
 
 // User avatar change
-if ($_FILES['avatar']['name'] !== "") {
+if ($_FILES['avatar']['tmp_name'] !== "") {
 
   $tmp = $_FILES['avatar']['tmp_name'];
 
@@ -75,7 +75,8 @@ $email = ($_POST['emailInput'] !== "") ? $_POST['emailInput'] : $user['email'];
 $newPassword = password_hash($_POST['newPassword'], PASSWORD_BCRYPT);
 $password = ($_POST['newPassword'] !== "") ? $newPassword : $user['password'];
 $userBio = ($_POST['userBio'] !== "") ? $_POST['userBio'] : NULL;
-$imgExt = ($type) ? $type : NULL;
+$avatarID = ($_FILES['avatar']['tmp_name'] !== "") ? $user['uid'] : $user['avatarID'];
+$imgExt = ($type) ? $type : $user['avatarImageType'];
 
 // Try to update user row with new information
 try {
@@ -83,7 +84,7 @@ try {
     ':email' => $email,
     ':password' => $password,
     ':userBio' => $userBio,
-    ':avatarID' => $user['uid'],
+    ':avatarID' => $avatarID,
     ':avatarImageType' => $imgExt,
     ':uid' => $user['uid']
   ]);
