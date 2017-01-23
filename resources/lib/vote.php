@@ -1,6 +1,6 @@
 <?php
 
-require_once __DIR__.'functions.php';
+require_once __DIR__.'/functions.php';
 
 if ($_SERVER['REQUEST_METHOD'] !== 'POST' || !isset($_SESSION['currentUser'])) {
   returnDie(false, "You need to be logged in to vote");
