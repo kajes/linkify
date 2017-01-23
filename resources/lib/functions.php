@@ -1,8 +1,8 @@
 <?php
 
-require_once 'database.php';
-
 session_start();
+
+require_once 'database.php';
 
 //================================================================================================
 // Log exception errors of unknown cause to log file
