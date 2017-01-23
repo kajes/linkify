@@ -255,11 +255,13 @@ form h2 {
 	flex-grow: 0;
 	flex-shrink: 1;
 	padding: 1em;
+  max-height: 8rem;
+  max-width: 8rem;
 }
 
 .userAvatar {
 	height: 100%;
-	width: auto;
+	width: 100%;
 	display: block;
 	border-radius: 50%;
 }
@@ -340,6 +342,7 @@ h4.voteCount {
 .postLink {
   color: var(--grey);
   line-height: 1;
+  max-width: 100%;
 }
 
 .button.postEdit, .button.postRemove {
