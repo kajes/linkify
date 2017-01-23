@@ -1,6 +1,6 @@
 <?php
 
-require_once 'functions.php';
+require_once __DIR__.'/functions.php';
 
 // Check if post request has been made, else send back to home
 if ($_SERVER['REQUEST_METHOD'] !== 'POST') {

@@ -22,7 +22,7 @@
         $avatar = $post['avatarID'].'.'.$post['imgType'];
       }
 
-      require 'post.php';
+      require __DIR__.'/post.php';
 
     } // End Foreach
 

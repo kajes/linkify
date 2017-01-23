@@ -1,5 +1,5 @@
 <?php
 
-require_once 'userSettings.php';
+require_once __DIR__.'/userSettings.php';
 
-require_once 'newPost.php';
+require_once __DIR__.'/newPost.php';

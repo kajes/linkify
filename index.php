@@ -10,7 +10,7 @@
 <?php
 
   // Get all the functions
-  require_once 'resources/lib/functions.php';
+  require_once __DIR__.'/resources/lib/functions.php';
 
   $currentUser = checkLogin($hand);
 
@@ -21,17 +21,17 @@
 <head>
   <?php
     $pageTitle = 'HOME | Linkify';
-    require_once 'resources/blocks/head.php';
+    require_once __DIR__.'/resources/blocks/head.php';
   ?>
 </head>
 <body>
   <main class="mainWrapper">
     <?php
-      require_once 'resources/blocks/components/header.php';
+      require_once __DIR__.'/resources/blocks/components/header.php';
 
-      require_once 'resources/blocks/home.php';
+      require_once __DIR__.'/resources/blocks/home.php';
 
-      require_once 'resources/blocks/components/footer.php';
+      require_once __DIR__.'/resources/blocks/components/footer.php';
     ?>
   </main>
   <script src="/resources/js/ajax.js" charset="utf-8"></script>

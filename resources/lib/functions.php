@@ -2,7 +2,7 @@
 
 session_start();
 
-require_once 'database.php';
+require_once __DIR__.'/database.php';
 
 //================================================================================================
 // Log exception errors of unknown cause to log file

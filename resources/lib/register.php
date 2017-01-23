@@ -1,6 +1,6 @@
 <?php
 
-require_once 'functions.php';
+require_once __DIR__.'/functions.php';
 
 //================================================================================================
 // Check for errors in field input request

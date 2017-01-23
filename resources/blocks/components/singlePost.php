@@ -26,6 +26,6 @@
 ?>
 <section class="postContent">
 
-<?php require 'post.php'; ?>
+<?php require __DIR__.'/post.php'; ?>
 
 </section>

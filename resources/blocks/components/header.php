@@ -22,13 +22,13 @@
 
   <?php
     if (!$currentUser) {
-      require_once 'authentication.php';
+      require_once __DIR__.'/authentication.php';
     } else {
-      require_once 'userMenu.php';
+      require_once __DIR__.'/userMenu.php';
     }
 
     if ($currentUser && isset($_GET['postID'])) {
-      require 'newComment.php';
+      require __DIR__.'/newComment.php';
     }
   ?>
 
