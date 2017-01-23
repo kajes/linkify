@@ -9,4 +9,5 @@ A Reddit clone for school project with a retro gaming theme. This project is wri
 ## Install instructions
 1. Clone the [repository](https://github.com/kajes/linkify.git) from Github.
 2. Import the kajes_linkify.sql database dump into your MySQL instance. The database should create itself, so no need for manually creating any database before import. Dump also contains example content, which could be dropped if so wishes.
-3. Navigate your browser to the projects root folder and you should be set.
+3. Make sure you have the correct ports and credentials for your database in the resources/lib/database.php file at the top.
+4. Navigate your browser to the projects root folder and you should be set.
