@@ -18,7 +18,8 @@
       </h2>
       <?php
       if ($post['link']) {
-        echo '<small class="postLink">(<a href="'.$post['link'].'" target="_blank" rel="noopener">'.$post['link'].'</a>)</small>';
+        $parsedUrl = parse_url($post['link'], PHP_URL_HOST);
+        echo '<small class="postLink">(<a href="'.$post['link'].'" target="_blank" rel="noopener">'.$parsedUrl.'</a>)</small>';
       }
       ?>
       <p id="id-<?= $post['postID'] ?>" class="postContent"><?= $post['content'] ?></p>
