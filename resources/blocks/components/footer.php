@@ -1,3 +1,1 @@
-<footer class="mainFooter">
-
-</footer>
+<footer class="mainFooter"></footer>

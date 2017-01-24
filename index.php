@@ -1,13 +1,9 @@
 <?php
 
-// Todo list
-// TODO: Responsive site
-// Extra features
-// TODO: Reset password with email
-
-?>
-
-<?php
+  // Todo list
+  // TODO: Responsive site
+  // Extra features
+  // TODO: Reset password with email
 
   // Get all the functions
   require_once __DIR__.'/resources/lib/functions.php';
