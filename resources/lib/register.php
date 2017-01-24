@@ -46,7 +46,6 @@ try {
     ':email' => $email,
     ':password' => password_hash($password, PASSWORD_BCRYPT)
   ]);
-  $_SESSION['currentUser'] = (int)$dbConnection->query("SELECT uid FROM users WHERE email = '{$email}' LIMIT 1")->fetch(PDO::FETCH_ASSOC)['uid'];
   returnDie(true, "User register successful!");
 } catch (PDOException $e) {
   returnDie(false, 'Failed to register user. Please contact the site administrator for help registering.');
