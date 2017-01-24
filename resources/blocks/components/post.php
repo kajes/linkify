@@ -17,7 +17,7 @@
         ?>
       </h2>
       <?php
-      if ($post['link']) {
+      if ($post['link'] !== "") {
         $parsedUrl = parse_url($post['link'], PHP_URL_HOST);
         echo '<small class="postLink">(<a href="'.$post['link'].'" target="_blank" rel="noopener">'.$parsedUrl.'</a>)</small>';
       }
