@@ -55,7 +55,7 @@ if ($_FILES['avatar']['tmp_name'] !== "") {
 
   // Set size limit for image
   $size = getImageSize($tmp);
-  if ($size[0] > 250 || $size[1] > 250) {
+  if ($size[0] > 300 || $size[1] > 300) {
     $_SESSION['avatarError'] = "Image is too big. Max height and width is 250px.";
     header('Location: /');
     die;
@@ -76,7 +76,7 @@ $newPassword = password_hash($_POST['newPassword'], PASSWORD_BCRYPT);
 $password = ($_POST['newPassword'] !== "") ? $newPassword : $user['password'];
 $userBio = ($_POST['userBio'] !== "") ? $_POST['userBio'] : NULL;
 $avatarID = ($_FILES['avatar']['tmp_name'] !== "") ? $user['uid'] : $user['avatarID'];
-$imgExt = ($type) ? $type : $user['avatarImageType'];
+$imgExt = (isset($type)) ? $type : $user['avatarImageType'];
 
 // Try to update user row with new information
 try {
@@ -88,10 +88,11 @@ try {
     ':avatarImageType' => $imgExt,
     ':uid' => $user['uid']
   ]);
+  header('Location: /');
+  die;
 } catch (PDOException $e) {
   $_SESSION['updateUserError'] = "Failed to update account information. Please contact the site administrator.";
-  die($e->getMessage());
   logErrors($e->getMessage());
+  header('Location: /');
+  die;
 }
-header('Location: /');
-die;
