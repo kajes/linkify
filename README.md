@@ -1,3 +1,4 @@
+![](https://styleci.io/repos/7548986/shield?style=plastic&branch=5.1)
 # Linkify - a Reddit Clone for retro gamers
 A Reddit clone for school project with a retro gaming theme. This project is written in plain non-object oriented PHP and vanilla Javascript.
 
