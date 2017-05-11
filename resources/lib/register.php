@@ -42,11 +42,11 @@ if ($password !== $passwordReenter) {
 //================================================================================================
 try {
     $registerUser->execute([
-    ':name' => $fullName,
-    ':email' => $email,
-    ':password' => password_hash($password, PASSWORD_BCRYPT)
+    ':name'     => $fullName,
+    ':email'    => $email,
+    ':password' => password_hash($password, PASSWORD_BCRYPT),
   ]);
-    returnDie(true, "User register successful!");
+    returnDie(true, 'User register successful!');
 } catch (PDOException $e) {
     returnDie(false, 'Failed to register user. Please contact the site administrator for help registering.');
     logErrors($e->getMessage());

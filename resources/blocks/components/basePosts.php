@@ -3,7 +3,7 @@
   <?php
 
     $mainPosts->execute([
-      ':parentID' => 0
+      ':parentID' => 0,
     ]);
     $posts = $mainPosts->fetchAll(PDO::FETCH_ASSOC);
 
@@ -13,7 +13,7 @@
       $postDate = date('Y-m-d', strtotime($post['postDate']));
 
         $commentCount = $post['commentCount'];
-        $hasComments = ($commentCount >= 1) ? true:false;
+        $hasComments = ($commentCount >= 1) ? true : false;
 
       // Set the avatar path
       if ($post['avatarID'] === null) {

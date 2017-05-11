@@ -8,7 +8,7 @@ require_once __DIR__.'/functions.php';
 
 // Check if user made post request, otherwise send back to landing page
 if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
-    returnDie(false, "Something went wrong. Please try again.");
+    returnDie(false, 'Something went wrong. Please try again.');
 }
 
 // Check if all required fields are entered, otherwise display errormessage
@@ -29,7 +29,7 @@ $loginError = 'Wrong email or password';
 
 // Execute prepared query (see 32-41 in database)
 $userVerify->execute([
-  ':email' => $email
+  ':email' => $email,
 ]);
 $userData = $userVerify->fetch(PDO::FETCH_ASSOC);
 

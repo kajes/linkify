@@ -9,18 +9,18 @@ require_once __DIR__.'/database.php';
 //================================================================================================
 function logErrors($error)
 {
-    file_put_contents($_SERVER['DOCUMENT_ROOT']."resources/logs/errorlog.txt", $error."\n\n", FILE_APPEND);
+    file_put_contents($_SERVER['DOCUMENT_ROOT'].'resources/logs/errorlog.txt', $error."\n\n", FILE_APPEND);
 }
 
 //================================================================================================
 // Return and error handling function
 //================================================================================================
-function returnDie(bool $type, string $message, array $content=[])
+function returnDie(bool $type, string $message, array $content = [])
 {
     $output = [];
-    $output['error'] = ($type === false) ? $message:null;
-    $output['message'] = ($type === true) ? $message:null;
-    $output['content'] = (count($content) >= 1) ? $content:null;
+    $output['error'] = ($type === false) ? $message : null;
+    $output['message'] = ($type === true) ? $message : null;
+    $output['content'] = (count($content) >= 1) ? $content : null;
     echo json_encode($output);
     die;
 }
@@ -30,7 +30,7 @@ function returnDie(bool $type, string $message, array $content=[])
 //================================================================================================
 function validateFields(array $array): bool
 {
-    if (in_array("", $array)) {
+    if (in_array('', $array)) {
         return false;
     }
 
@@ -52,10 +52,10 @@ function bakeCookie($uid, $query)
   // Put in cookie oven
   try {
       $query->execute([
-      ':uid' => $uid,
-      ':first' => $first,
+      ':uid'    => $uid,
+      ':first'  => $first,
       ':second' => $second,
-      ':expire' => $expire
+      ':expire' => $expire,
     ]);
   } catch (PDOException $e) {
       logErrors('/', $e->getMessage());
@@ -73,9 +73,9 @@ function eatCookie($query)
     $values = explode('|', $_COOKIE['kajes_linkify']);
 
     $query->execute([
-    ':uid' => $values[1],
-    ':first' => $values[0],
-    ':second' => $values[2]
+    ':uid'    => $values[1],
+    ':first'  => $values[0],
+    ':second' => $values[2],
   ]);
     $entry = $query->fetch(PDO::FETCH_ASSOC);
 
@@ -85,7 +85,6 @@ function eatCookie($query)
 
     return $entry['uid'];
 }
-
 
 //================================================================================================
 // Check user login status
@@ -119,19 +118,19 @@ function getImageContentType($image)
   if (!in_array(exif_imagetype($image), [2, 3])) {
       return false;
   } else {
-      return (exif_imagetype($image) == 2) ? "jpg" : "png";
+      return (exif_imagetype($image) == 2) ? 'jpg' : 'png';
   }
 }
 
 //================================================================================================
 // Recursive function for presenting posts and comments
 //================================================================================================
-function commentDisplay($mainPosts, $parentID=0, $level=0)
+function commentDisplay($mainPosts, $parentID = 0, $level = 0)
 {
 
   // Get the base posts
   $mainPosts->execute([
-    ':parentID' => $parentID
+    ':parentID' => $parentID,
   ]);
     $posts = $mainPosts->fetchAll(PDO::FETCH_ASSOC);
 
@@ -142,7 +141,7 @@ function commentDisplay($mainPosts, $parentID=0, $level=0)
     $postDate = date('Y-m-d', strtotime($post['postDate']));
 
         $commentCount = $post['commentCount'];
-        $hasComments = ($commentCount >= 1) ? true:false;
+        $hasComments = ($commentCount >= 1) ? true : false;
 
     // User avatar url
     if ($post['avatarID'] === null) {
@@ -163,8 +162,8 @@ function commentDisplay($mainPosts, $parentID=0, $level=0)
         echo $output;
 
         if ($hasComments) {
-            commentDisplay($mainPosts, (int)$post['postID'], $level+1);
+            commentDisplay($mainPosts, (int) $post['postID'], $level + 1);
         }
     }
-    echo "</div>";
+    echo '</div>';
 }
