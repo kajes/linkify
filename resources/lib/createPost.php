@@ -4,11 +4,11 @@ require_once __DIR__.'/functions.php';
 
 // Check if post request has been made, else send back to home
 if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
-    returnDie(false, "Something went wrong. Please try again.");
+    returnDie(false, 'Something went wrong. Please try again.');
 }
 
 // Typecast the parentID because it makes sense
-$parentID = (int)$_POST['parent_id'];
+$parentID = (int) $_POST['parent_id'];
 
 // Do check to see if post is comment or a base level post. Other fields are required depending on which
 if ($parentID === 0) {
@@ -29,13 +29,13 @@ $postTitle = (isset($_POST['postTitle'])) ? $_POST['postTitle'] : null;
 // All seems fine, so trying to input post into database
 try {
     $createPost->execute([
-    ':authorID' => $_SESSION['currentUser'],
-    ':post_title' => $postTitle,
-    ':post_link' => $postLink,
+    ':authorID'     => $_SESSION['currentUser'],
+    ':post_title'   => $postTitle,
+    ':post_link'    => $postLink,
     ':post_content' => $_POST['postContent'],
-    ':posted_on' => date('Y-m-d H:i:s'),
-    ':updated_on' => date('Y-m-d H:i:s'),
-    ':parent_id' => $_POST['parent_id']
+    ':posted_on'    => date('Y-m-d H:i:s'),
+    ':updated_on'   => date('Y-m-d H:i:s'),
+    ':parent_id'    => $_POST['parent_id'],
   ]);
     $lastID = $dbConnection->lastInsertId();
     $content = $dbConnection->query("SELECT * FROM posts WHERE postID = {$lastID}")->fetch(PDO::FETCH_ASSOC);
