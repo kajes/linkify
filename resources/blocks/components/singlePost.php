@@ -1,10 +1,10 @@
 <?php
 
   // Get post based on GET request
-  $postID = (int)$_GET['postID'];
+  $postID = (int) $_GET['postID'];
   $singlePost->execute([
     ':parent' => $postID,
-    ':postID' => $postID
+    ':postID' => $postID,
   ]);
   $post = $singlePost->fetch(PDO::FETCH_ASSOC);
 
@@ -17,7 +17,7 @@
 
   // Get the number of comments on post
   $commentCount = $post['commentCount'];
-  $hasComments = ($commentCount >= 1) ? true:false;
+  $hasComments = ($commentCount >= 1) ? true : false;
 
   // Format the date for each post
   $postDate = date('Y-m-d', strtotime($post['postDate']));

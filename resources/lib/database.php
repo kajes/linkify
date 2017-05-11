@@ -13,20 +13,20 @@ try {
     $dbConnection->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 } catch (PDOException $e) {
     echo '<h1 style="text-align: center;">Unable to connect to database.</h1>';
-    file_put_contents($_SERVER['DOCUMENT_ROOT']."resources/logs/errorlog.txt", $e->getMessage()."\n", FILE_APPEND);
+    file_put_contents($_SERVER['DOCUMENT_ROOT'].'resources/logs/errorlog.txt', $e->getMessage()."\n", FILE_APPEND);
 }
 
 //================================================================================================
 // Register and change user data
 //================================================================================================
-$registerUserQuery = <<<EOT
+$registerUserQuery = <<<'EOT'
 INSERT INTO users (name, email, password)
 VALUES (:name, :email, :password)
 EOT;
 
 $registerUser = $dbConnection->prepare($registerUserQuery);
 
-$updateUserQuery = <<<EOT
+$updateUserQuery = <<<'EOT'
 UPDATE users
 SET email = :email, password = :password, bio = :userBio, avatarID = :avatarID, avatarImageType = :avatarImageType
 WHERE uid = :uid
@@ -37,7 +37,7 @@ $updateUser = $dbConnection->prepare($updateUserQuery);
 //================================================================================================
 // User sign in
 //================================================================================================
-$loginQuery = <<<EOT
+$loginQuery = <<<'EOT'
 SELECT * FROM users
 WHERE email = :email
 LIMIT 1
@@ -48,14 +48,14 @@ $userVerify = $dbConnection->prepare($loginQuery);
 //================================================================================================
 // Post CUD (Create, Update, Delete) prepares
 //================================================================================================
-$postCreateQuery = <<<EOT
+$postCreateQuery = <<<'EOT'
 INSERT INTO posts (authorID, post_title, post_link, post_content, posted_on, updated_on, parent_id)
 VALUES (:authorID, :post_title, :post_link, :post_content, :posted_on, :updated_on, :parent_id)
 EOT;
 
 $createPost = $dbConnection->prepare($postCreateQuery);
 
-$postEditQuery = <<<EOT
+$postEditQuery = <<<'EOT'
 UPDATE posts
 SET post_content = :post_content, updated_on = :updated_on
 WHERE postID = :postID
@@ -63,7 +63,7 @@ EOT;
 
 $postEdit = $dbConnection->prepare($postEditQuery);
 
-$postDeleteQuery = <<<EOT
+$postDeleteQuery = <<<'EOT'
 DELETE FROM posts
 WHERE postID = :postID
 AND authorID = :user
@@ -74,7 +74,7 @@ $postDelete = $dbConnection->prepare($postDeleteQuery);
 //================================================================================================
 // Voting update
 //================================================================================================
-$voteQuery = <<<EOT
+$voteQuery = <<<'EOT'
 UPDATE posts, users
 SET posts.voteCount = posts.voteCount + (:vote), users.votedOn = :json
 WHERE posts.postID = :postID
@@ -86,7 +86,7 @@ $registerVote = $dbConnection->prepare($voteQuery);
 //================================================================================================
 // Prepare ingredients for baking cookie
 //================================================================================================
-$bowl = <<<EOT
+$bowl = <<<'EOT'
 INSERT INTO tokens (uid, first, second, expire)
 VALUES (:uid, :first, :second, :expire)
 EOT;
@@ -96,7 +96,7 @@ $oven = $dbConnection->prepare($bowl);
 //================================================================================================
 // Set table for eating cookie
 //================================================================================================
-$plate = <<<EOT
+$plate = <<<'EOT'
 SELECT * FROM tokens
 WHERE uid = :uid
 AND first = :first
@@ -111,7 +111,7 @@ $hand = $dbConnection->prepare($plate);
 //================================================================================================
 
 // Multiple posts
-$query = <<<EOT
+$query = <<<'EOT'
 SELECT
     @postID:=posts.postID AS 'postID',
     posts.post_title AS 'title',
@@ -136,7 +136,7 @@ EOT;
 $mainPosts = $dbConnection->prepare($query);
 
 // Single post query
-$singleQuery = <<<EOT
+$singleQuery = <<<'EOT'
 SELECT
     posts.postID AS 'postID',
     posts.post_title AS 'title',
