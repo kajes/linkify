@@ -4,13 +4,17 @@
   <h1><a href="/"><img src="resources/img/link.png" alt="logo" class="linkLogo">LINKIFY</a></h1>
 
   <section class="userMenu">
-  <?php if ($currentUser) { ?>
+  <?php if ($currentUser) {
+    ?>
     <button class="userSettings">SETTINGS</button>
     <button class="newPost">NEW POST</button>
     <button type="submit" class="logout">LOG OUT</button>
-  <?php } else { ?>
+  <?php 
+} else {
+    ?>
     <button class="loginRegister">SIGN IN OR REGISTER</button>
-  <?php } ?>
+  <?php 
+} ?>
   </section>
 
   <div class="errorMessageContainer hide">
@@ -22,13 +26,13 @@
 
   <?php
     if (!$currentUser) {
-      require_once __DIR__.'/authentication.php';
+        require_once __DIR__.'/authentication.php';
     } else {
-      require_once __DIR__.'/userMenu.php';
+        require_once __DIR__.'/userMenu.php';
     }
 
     if ($currentUser && isset($_GET['postID'])) {
-      require __DIR__.'/newComment.php';
+        require __DIR__.'/newComment.php';
     }
   ?>
 

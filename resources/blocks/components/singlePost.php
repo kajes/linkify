@@ -9,10 +9,10 @@
   $post = $singlePost->fetch(PDO::FETCH_ASSOC);
 
   // Get the users avatar url
-  if ($post['avatarID'] !== NULL) {
-    $avatar = $post['avatarID'].'.'.$post['imgType'];
+  if ($post['avatarID'] !== null) {
+      $avatar = $post['avatarID'].'.'.$post['imgType'];
   } else {
-    $avatar = '0.jpg';
+      $avatar = '0.jpg';
   }
 
   // Get the number of comments on post

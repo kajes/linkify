@@ -5,15 +5,15 @@
 //================================================================================================
 $dbConnectString = 'mysql:host=localhost;port=3306;dbname=kajes_linkify;charset=utf8';
 $dbUser = 'root';
-$dbPassword = '';
+$dbPassword = 'root';
 // FIXME: Change db user to something else than root
 
 try {
-  $dbConnection = new PDO($dbConnectString, $dbUser, $dbPassword);
-  $dbConnection->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+    $dbConnection = new PDO($dbConnectString, $dbUser, $dbPassword);
+    $dbConnection->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 } catch (PDOException $e) {
-  echo '<h1 style="text-align: center;">Unable to connect to database.</h1>';
-  file_put_contents($_SERVER['DOCUMENT_ROOT']."resources/logs/errorlog.txt", $e->getMessage()."\n", FILE_APPEND);
+    echo '<h1 style="text-align: center;">Unable to connect to database.</h1>';
+    file_put_contents($_SERVER['DOCUMENT_ROOT']."resources/logs/errorlog.txt", $e->getMessage()."\n", FILE_APPEND);
 }
 
 //================================================================================================

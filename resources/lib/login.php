@@ -8,12 +8,12 @@ require_once __DIR__.'/functions.php';
 
 // Check if user made post request, otherwise send back to landing page
 if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
-  returnDie( false, "Something went wrong. Please try again.");
+    returnDie(false, "Something went wrong. Please try again.");
 }
 
 // Check if all required fields are entered, otherwise display errormessage
 if (!validateFields([$_POST['email'], $_POST['password']])) {
-  returnDie(false, 'Please enter all required fields.');
+    returnDie(false, 'Please enter all required fields.');
 }
 
 // Addign variables to form inputs and sanitize the password
@@ -35,17 +35,17 @@ $userData = $userVerify->fetch(PDO::FETCH_ASSOC);
 
 // Return error message if user does not exist
 if (!$userData) {
-  returnDie(false, 'Please enter all required fields.');
+    returnDie(false, 'Please enter all required fields.');
 }
 
 // Verify the password if user exists
 if (!password_verify($password, $userData['password'])) {
-  returnDie(false, $loginError);
+    returnDie(false, $loginError);
 }
 
 // Bake cookie if remember me option is checked
 if (isset($_POST['rememberMe'])) {
-  bakeCookie($userData['uid'], $oven);
+    bakeCookie($userData['uid'], $oven);
 }
 
 // Remember user in session and redirect to landing page

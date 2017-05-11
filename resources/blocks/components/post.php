@@ -10,24 +10,26 @@
       <h2 class="postTitle">
         <?php
         if ($post['link'] !== "") {
-          echo '<a href="'.$post['link'].'" target="_blank" rel="noopener">'.$post['title'].'</a>';
+            echo '<a href="'.$post['link'].'" target="_blank" rel="noopener">'.$post['title'].'</a>';
         } else {
-          echo $post['title'];
+            echo $post['title'];
         }
         ?>
       </h2>
       <?php
       if ($post['link'] !== "") {
-        $parsedUrl = parse_url($post['link'], PHP_URL_HOST);
-        echo '<small class="postLink">(<a href="'.$post['link'].'" target="_blank" rel="noopener">'.$parsedUrl.'</a>)</small>';
+          $parsedUrl = parse_url($post['link'], PHP_URL_HOST);
+          echo '<small class="postLink">(<a href="'.$post['link'].'" target="_blank" rel="noopener">'.$parsedUrl.'</a>)</small>';
       }
       ?>
       <p id="id-<?= $post['postID'] ?>" class="postContent"><?= $post['content'] ?></p>
 
-      <?php if (isset($_SESSION['currentUser']) && $post['userID'] === $_SESSION['currentUser']) { ?>
+      <?php if (isset($_SESSION['currentUser']) && $post['userID'] === $_SESSION['currentUser']) {
+          ?>
         <button class="button postEdit" data-postid="<?= $post['postID'] ?>">Edit post</button>
         <button class="button postRemove" data-postid="<?= $post['postID'] ?>">Remove post</button>
-      <?php } ?>
+      <?php 
+      } ?>
 
   </div>
 
@@ -43,18 +45,22 @@
 
     <span class="authorName">By: <?= $post['author'] ?></span>
 
-    <?php if ($post['postDate'] !== $post['updateDate']) { ?>
+    <?php if ($post['postDate'] !== $post['updateDate']) {
+          ?>
       <span>(edited)</span>
-    <?php } ?>
+    <?php 
+      } ?>
 
-    <?php if (isset($_SESSION['currentUser']) && isset($_GET['postID'])) { ?>
+    <?php if (isset($_SESSION['currentUser']) && isset($_GET['postID'])) {
+          ?>
       <button class="callToAction">Say something about this!</button>
-    <?php } ?>
+    <?php 
+      } ?>
   </div>
 
   <?php
     if (isset($_GET['postID']) && $_GET['postID'] === $post['postID'] && $hasComments) {
-      commentDisplay($mainPosts, (int)$post['postID']);
+        commentDisplay($mainPosts, (int)$post['postID']);
     }
   ?>
 

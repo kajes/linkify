@@ -1,10 +1,10 @@
 <?php
 
   if (isset($_SESSION['currentUser'])) {
-    $user = $dbConnection->query("SELECT * FROM users WHERE uid = {$_SESSION['currentUser']}")->fetch(PDO::FETCH_ASSOC);
+      $user = $dbConnection->query("SELECT * FROM users WHERE uid = {$_SESSION['currentUser']}")->fetch(PDO::FETCH_ASSOC);
 
-    $userBio = ($user['bio'] !== NULL) ? $user['bio'] : '';
-    $avatar = ($user['avatarID'] !== NULL) ? $user['avatarID'].'.'.$user['avatarImageType'] : '0.jpg';
+      $userBio = ($user['bio'] !== null) ? $user['bio'] : '';
+      $avatar = ($user['avatarID'] !== null) ? $user['avatarID'].'.'.$user['avatarImageType'] : '0.jpg';
   }
 
 ?>
@@ -19,8 +19,8 @@
       <input type="email" name="emailInput" value="<?= $user['email'] ?>">
       <?php
         if (isset($_SESSION['emailError'])) {
-          echo '<h5 class="error">'.$_SESSION['emailError'].'</h5>';
-          unset($_SESSION['emailError']);
+            echo '<h5 class="error">'.$_SESSION['emailError'].'</h5>';
+            unset($_SESSION['emailError']);
         }
       ?>
     </div>
@@ -32,8 +32,8 @@
       <input type="password" name="oldPassword">
       <?php
         if (isset($_SESSION['passwordError'])) {
-          echo '<h5 class="error">'.$_SESSION['passwordError'].'</h5>';
-          unset($_SESSION['passwordError']);
+            echo '<h5 class="error">'.$_SESSION['passwordError'].'</h5>';
+            unset($_SESSION['passwordError']);
         }
       ?>
     </div>
@@ -43,8 +43,8 @@
       <textarea name="userBio"><?= $userBio ?></textarea>
       <?php
         if (isset($_SESSION['bioError'])) {
-          echo '<h5 class="error">'.$_SESSION['bioError'].'</h5>';
-          unset($_SESSION['bioError']);
+            echo '<h5 class="error">'.$_SESSION['bioError'].'</h5>';
+            unset($_SESSION['bioError']);
         }
       ?>
     </div>
@@ -55,8 +55,8 @@
       <div class="placeholder avatar" id="avatarPlaceholder" style="background: url(/resources/img/avatars/<?= $avatar ?>) no-repeat center center; background-size: cover; height: 75px; width: 75px;"></div>
       <?php
         if (isset($_SESSION['avatarError'])) {
-          echo '<h5 class="error">'.$_SESSION['avatarError'].'</h5>';
-          unset($_SESSION['avatarError']);
+            echo '<h5 class="error">'.$_SESSION['avatarError'].'</h5>';
+            unset($_SESSION['avatarError']);
         }
       ?>
     </div>
